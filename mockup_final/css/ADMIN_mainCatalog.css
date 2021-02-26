@@ -248,6 +248,16 @@ form.search-bar button:hover {
     max-width: 100%;
 }
 
+/* Button that deletes item */
+.deleteButton {
+    cursor: pointer;
+    float: right;
+    
+
+
+}
+
+
 /* At 1400px and above, set flex-shrink/grow to 0 */
 @media screen and (max-width: 1400px) {
     .bottomCatalogItems {flex-shrink: 0; flex-grow: 0;}
