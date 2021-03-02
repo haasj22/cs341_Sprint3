@@ -241,20 +241,47 @@ form.search-bar button:hover {
     flex-grow: 1;
     padding: 4%;
     cursor: pointer;
+    position: relative;
 }
 
 /* Bottom catalog item images */
 .bottomImage {
     max-width: 100%;
+    
+}
+
+/* overlay enabled when item is marked for deletion */
+.deletionOverlay {
+    visibility: hidden;
+    background: rgba(200,200,200, .9);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 3vh;
+    font-family: 'Hattori Hanzo Light', arial;
+}
+
+/* message displayed when item is marked for deletion */
+.deletionMessage {
+    color: black;
+}
+
+/* undo option available once item is marked for deletion */
+.undoDeletionMessage {
+    color: rgb(88, 20, 151);
+    cursor: pointer;
 }
 
 /* Button that deletes item */
 .deleteButton {
     cursor: pointer;
     float: right;
-    
-
-
 }
 
 
