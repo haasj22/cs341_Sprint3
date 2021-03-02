@@ -19,7 +19,7 @@
     border-top: solid black 2px;
     width: 100%;
     text-align: right;
-    background-color: gray;
+    background-color: #9A00F5;
     z-index: 10;
 }
 
@@ -29,7 +29,7 @@ h1 {
 }
 
 #request {
-    background-color: yellow;
+    background-color: #D2B48C;
     margin-right: 30px;
     margin-bottom: 40px;
     cursor: pointer;

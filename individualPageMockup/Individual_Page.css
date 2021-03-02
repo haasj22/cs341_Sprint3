@@ -31,13 +31,14 @@
     font-size: 1.0em;
     border: solid black 2px;
     cursor: pointer;
+    background-color: #D2B48C;
 }
 
 #request {
     margin-right: 30px;
     margin-bottom: 10px;
     font-size: 1.0em;
-    background-color: #D7F80D;
+    background-color: #D2B48C;
     border: solid black 2px;
     cursor: pointer;
 }
