@@ -4,6 +4,11 @@
 
   <head>
     <link rel="stylesheet" href="ADMIN_Individual_Page.css">
+
+    <!-- Scripts -->
+    <script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"/></script>
+    <script src="javascripts/ADMIN_Individual_Page.js"></script>
+
   </head>
 
   <div id="back">
@@ -17,10 +22,20 @@
     <button id="request">Add Item to Request</button>
   </div>
 
-  
-  <div id="main_image_div">
+  <!--Main item image-->
+  <div class ="mainImageDiv" id="main_image_div">
     <img src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg"
 alt="dslr_camera" class="main_image">
+    <button class="edit_main_photo_button" type="button">+</button>
+  </div>
+
+  <!--Form to edit equipment page photo-->
+  <div class="edit_main_photo_form" id="editMainPhotoForm">
+    <form action="/action_page.php" class="edit_main_photo_form_container">
+      <h1>Edit Equipment Photo</h1>
+      <button type="submit" class="upload_image_button">Upload Image</button>
+      <button type="button" class="close_edit_main_photo_button">Close</button>
+    </form>
   </div>
 
 <!--Info about the products - includes images and text in 2 columns-->
