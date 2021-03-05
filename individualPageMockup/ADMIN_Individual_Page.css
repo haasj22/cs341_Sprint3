@@ -198,3 +198,7 @@
     clear: both;
     display: table;
 }
+
+h1 {
+    display: inline;
+}
