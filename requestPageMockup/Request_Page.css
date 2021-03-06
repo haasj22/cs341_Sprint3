@@ -47,7 +47,8 @@ li {
 .items {
     position: relative;
     z-index: 99; /*for testing location*/
-    margin-top: 100px;
+    margin-top: 50px;
+    top: 8.5%;
 }
 
 button {
