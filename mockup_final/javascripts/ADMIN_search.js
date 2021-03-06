@@ -172,11 +172,16 @@
         const htmlString = items
             .map((item) => {
                 return `                
+            
             <figure class="bottomIndividualItem">
+                <div class="deletionOverlay">
+                    <p class="deletionMessage">This item is set for deletion.</p>
+                    <a class="undoDeletionMessage">undo?</a> 
+                </div> 
+                <button class="deleteButton" type="button">X</button>
                 <img class="bottomImage" src="${item.image}" alt="camera">
                 <figcaption>${item.name}</figcaption>
             </figure>
-            
             
         `;
             })

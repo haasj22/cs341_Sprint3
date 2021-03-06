@@ -44,34 +44,34 @@
             <h2 id="primaryHeader">Audio Visual Services Rental Catalog</h2>
         </div>
         <div class="searchBar">
-            <form class="search-bar" action="/action_page.php" style="margin:auto,max-width:800px;alignment:center">
+            <form class="search-bar" action="/action_page.php" style="margin:auto,max-width:800px;alignment:center" id="searchBar">
                 <input type="text" placeholder="Search..." name="search2">
                 <button type="search-button"><i class="fa fa-search"></i></button>
             </form>
         </div>
         <div id="categories">
             
-            <div class="itemCategory">
+            <div class="itemCategory" id="allSort">
                 <img class="categoryImage" src="https://www.dacast.com/wp-content/uploads/2019/09/Blog-pics-8.png" alt="camera">
                 <span class="categoryTitle">View All</span>
             </div>
-            <div class="itemCategory">
+            <div class="itemCategory" id="conferencingSort">
                 <img class="categoryImage" src="https://mediaserver.goepson.com/ImConvServlet/imconv/c85a3ea7a74fb183d6d7d56dcccc41eb7c1fa7df/1200Wx1200H?use=banner&assetDescr=1830_fla-our_690x460" alt="camera">
                 <span class="categoryTitle">Conferencing</span>
             </div>
-            <div class="itemCategory">
+            <div class="itemCategory" id="streamingSort">
                 <img class="categoryImage" src="https://c1.neweggimages.com/ProductImage/36-431-022-06.jpg" alt="camera">
                 <span class="categoryTitle">Streaming</span>
             </div>
-            <div class="itemCategory">
+            <div class="itemCategory" id="recordingSort">
                 <img class="categoryImage" src="https://2.img-dpreview.com/files/p/E~C648x0S2592x2592T1200x1200~articles/4018210779/Nikon_D850_with_Mic.jpeg" alt="camera">
                 <span class="categoryTitle">Recording</span>
             </div>
-            <div class="itemCategory">
+            <div class="itemCategory" id="presentationSort">
                 <img class="categoryImage" src="https://images-na.ssl-images-amazon.com/images/I/61VhYuoE7lL._AC_SL1500_.jpg" alt="camera">
                 <span class="categoryTitle">Presentation</span>
             </div>
-            <div class="itemCategory">
+            <div class="itemCategory" id="audioSort" id="computerSort">
                 <img class="categoryImage" src="https://ak1.ostkcdn.com/images/products/10602083/Pyle-PWMA1080IBT-800-watt-Wireless-Rechargeable-Portable-Bluetooth-PA-Speaker-System-with-Wireless-Microphone-and-iPod-Dock-53440122-5a78-4af3-9a60-c0b8eaea4df9.jpg" alt="camera">
                 <span class="categoryTitle">Audio</span>
             </div>
@@ -85,10 +85,10 @@
     <div class="bottomCatalog">
         <div class="bottomCatalogHeader">
             <!-- Temporary results count -->
-            <p>8 results</p>
+            <p id="resultCount">8 results</p>
         </div>
         <!-- Item imgs for catalog -->
-        <div class="bottomCatalogItems">
+        <div class="bottomCatalogItems" id="bottomCatalogItems">
             <figure class="bottomIndividualItem">
                 <div class="deletionOverlay">
                     <p class="deletionMessage">This item is set for deletion.</p>
@@ -168,5 +168,7 @@
     <footer>
         <p>Copyright 2021</p>
     </footer>
+
+    <script src="javascripts/ADMIN_search.js"></script>
 </body>
 </html>
