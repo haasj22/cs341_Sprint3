@@ -1,5 +1,7 @@
+/*request page CSS
+  authors Ethan Figueredo, William Lau, Haley Welliver, Malia Lundstrom, Trey Dettmer, Jarren Calizo */
 
-
+/*formats the header of the page including color and positioning*/
 .headCard{
     text-align:left;
     height: 8.5%;
@@ -12,6 +14,7 @@
     border-bottom: solid black 2px;
 }
 
+/*formats the footer of the page*/
 .endCard{
     position:fixed;
     bottom: 0;
@@ -23,6 +26,7 @@
     z-index: 10;
 }
 
+/*formats the "request" button*/
 #request {
     background-color: #D2B48C;
     margin-right: 30px;
@@ -30,12 +34,14 @@
     cursor: pointer;
 }
 
+/*formats the "Total Items:" text*/
 h2 {
     margin-right: 30px;
     color: white;
     font-family: 'Open Sans Bold', arial;
 }
 
+/*formats the list of items in the user's cart*/
 li {
     border: solid black 1px;
     width: 100%;
@@ -44,6 +50,7 @@ li {
 
 }
 
+/*formats individual items in the user's cart*/
 .items {
     position: relative;
     z-index: 99; /*for testing location*/
@@ -51,10 +58,12 @@ li {
     top: 8.5%;
 }
 
+/*formats the "Remove Item" buttons within the list of items in the user's cart*/
 button {
     float: right;
 }
 
+/*formats the page's main title, "Your Request"*/
 h1 {
     text-align: center;
     margin-bottom: 50px;
