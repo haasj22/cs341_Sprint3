@@ -48,6 +48,7 @@ li {
     position: relative;
     z-index: 99; /*for testing location*/
     margin-top: 100px;
+    margin-left: -10px;
 }
 
 button {
@@ -92,4 +93,71 @@ textarea {
 
 label {
     float: right;
+}
+
+.main_image {
+    height: auto;
+    width: 5%;
+    position: absolute;
+    margin-left: 75px;
+    border: black 2px solid;
+    margin-top: -50px;
+    z-index: 2;
+}
+
+#main_image_div {
+    height: 150px;
+}
+
+.computer_image {
+    height: auto;
+    width: 5%;
+    position: absolute;
+    margin-left: 75px;
+    border: black 2px solid;
+    margin-top: -50px;
+    z-index: 2;
+}
+
+#computer_image_div {
+    height: 1px;
+}
+
+/* Remove Page Margin */
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    /*These two lines remove weird gap on right of page */
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+
+/* add space for footer */
+body::after {
+    content: '';
+    display: block;
+    height: 4%;
+}
+
+
+/* footer */
+footer {
+    background-color: #1e1656;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 4%;
+    text-align: center;
+    display: table;
+}
+
+/* footer text */
+footer p {
+    margin: 0;
+    padding: 0 0;
+    color: #F5F5F5;
+    display: table-cell;
+    vertical-align: middle;
 }
