@@ -2,11 +2,11 @@
 
 .headCard{
     text-align:left;
-    height: 20%;
+    height: 8.5%;
     width: 100%;
     left: 0;
     top: 0;
-    background-color: #9A00F5;
+    background-color: #1e1656;
     position: fixed;
     z-index: 10;
     border-bottom: solid black 2px;
@@ -19,13 +19,8 @@
     border-top: solid black 2px;
     width: 100%;
     text-align: right;
-    background-color: #9A00F5;
+    background-color: #1e1656;
     z-index: 10;
-}
-
-h1 {
-    vertical-align: bottom;
-    margin-left: 30px;
 }
 
 #request {
@@ -40,6 +35,8 @@ h1 {
 
 h2 {
     margin-right: 30px;
+    color: white;
+    font-family: 'Open Sans Bold', arial;
 }
 
 li {
@@ -64,5 +61,117 @@ li {
 .items {
     position: relative;
     z-index: 99; /*for testing location*/
-    margin-top: 200px;
+    margin-top: 100px;
+    margin-left: -10px;
+}
+
+button {
+    float: right;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 50px;
+    color: black;
+    font-family: 'Open Sans Bold', arial;
+    font-size: 4vh;
+}
+
+/* The a selector for the UP nav bar logo*/
+#upLogoLink {
+    height: 100%;
+    display: inline-block;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    padding-left: 10px;
+}
+
+/* Update Size & Location Of Nav Bar Logo*/
+#upNavLogo {
+    max-width: 10vw;
+    min-width: 5em;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    
+}
+
+textarea {
+    float: right;
+}
+
+label {
+    float: right;
+}
+
+.main_image {
+    height: auto;
+    width: 5%;
+    position: absolute;
+    margin-left: 75px;
+    border: black 2px solid;
+    margin-top: -50px;
+    z-index: 2;
+}
+
+#main_image_div {
+    height: 150px;
+}
+
+.computer_image {
+    height: auto;
+    width: 5%;
+    position: absolute;
+    margin-left: 75px;
+    border: black 2px solid;
+    margin-top: -50px;
+    z-index: 2;
+}
+
+#computer_image_div {
+    height: 1px;
+}
+
+/* Remove Page Margin */
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    /*These two lines remove weird gap on right of page */
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+
+/* add space for footer */
+body::after {
+    content: '';
+    display: block;
+    height: 4%;
+}
+
+
+/* footer */
+footer {
+    background-color: #1e1656;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 4%;
+    text-align: center;
+    display: table;
+}
+
+/* footer text */
+footer p {
+    margin: 0;
+    padding: 0 0;
+    color: #F5F5F5;
+    display: table-cell;
+    vertical-align: middle;
 }
