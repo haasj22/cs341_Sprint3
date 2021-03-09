@@ -14,6 +14,19 @@
     border-bottom: solid black 2px;
 }
 
+/* Nav Bar Link Styles (takes user to other pages)*/
+.navBarLinks {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 5vh;
+    float: right;
+    margin-top: 1.5vh;
+    margin-right: 2.5vw;
+    margin-bottom: 1.5vh;
+    font-family: 'Hattori Hanzo Light', arial;
+}
+
 /*formats the footer of the page*/
 .endCard{
     position:fixed;
