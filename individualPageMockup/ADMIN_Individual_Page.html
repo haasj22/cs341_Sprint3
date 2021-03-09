@@ -4,8 +4,14 @@
 
   <head>
     <link rel="stylesheet" href="ADMIN_Individual_Page.css">
+
+    <!-- Scripts -->
+    <script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"/></script>
+    <script src="javascripts/ADMIN_Individual_Page.js"></script>
+
   </head>
 
+  <!-- Back Button -->
   <div id="back">
     <input width="60" type="image" alt="Back" src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Ic_arrow_back_48px.svg">
   </div>
@@ -17,10 +23,22 @@
     <button id="request">Add Item to Request</button>
   </div>
 
-  
-  <div id="main_image_div">
+  <!--Main item image-->
+  <div class ="mainImageDiv" id="main_image_div">
     <img src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg"
 alt="dslr_camera" class="main_image">
+    <input type="image" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png"
+    style="width:20px;height:20px;display:inline;" class="edit_main_photo_button" alt="edit icon"></input>
+  </div>
+
+  <!--Form to edit main equipment page photo-->
+  <div class="edit_main_photo_form" id="editMainPhotoForm">
+    <form action="/action_page.php" class="edit_main_photo_form_container">
+      <h1>Edit Equipment Photo</h1>
+      <label for="upload_image_button" class="custom_image_button">Upload Image</label>
+      <input type="file" class="upload_image_button" id="upload_image_button" accept="image/png, image/jpeg"></input>
+      <button type="button" class="close_edit_main_photo_button">Close</button>
+    </form>
   </div>
 
 <!--Info about the products - includes images and text in 2 columns-->
@@ -32,41 +50,94 @@ alt="dslr_camera" class="main_image">
         <div class="alt-images">
           <img src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg"
 		alt="dslr_camera" class="sub-img-style" >
+          <input type="image" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png"
+    style="width:20px;height:20px;display:inline;" class="edit_sub_photo_button1" alt="edit icon"></input>
         </div>
 
         <div class="alt-images">
           <img src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg"
 		alt="dslr_camera" class="sub-img-style">
+          <input type="image" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png"
+    style="width:20px;height:20px;display:inline;" class="edit_sub_photo_button2" alt="edit icon"></input>
         </div>
 
         <div class="alt-images">
           <img src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg"
 		alt="dslr_camera" class="sub-img-style">
+          <input type="image" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png"
+    style="width:20px;height:20px;display:inline;" class="edit_sub_photo_button3" alt="edit icon"></input>
         </div>
 
       </div>
 
     </div>
+    
+    <!--Form to edit sub equipment page photo 1 (leftmost image)-->
+    <div class="edit_sub_photo_form" id="editSubPhotoForm1">
+      <form action="/action_page.php" class="edit_sub_photo_form_container">
+        <h1>Edit Equipment Photo 1</h1>
+        <label for="upload_image_button" class="custom_image_button">Upload Image</label>
+        <input type="file" class="upload_image_button" id="upload_image_button" accept="image/png, image/jpeg"></input>
+        <button type="button" class="close_edit_sub_photo_button">Close</button>
+      </form>
+    </div>
 
+    <!--Form to edit sub equipment page photo 2 (center image)-->
+    <div class="edit_sub_photo_form" id="editSubPhotoForm2">
+      <form action="/action_page.php" class="edit_sub_photo_form_container">
+        <h1>Edit Equipment Photo 2</h1>
+        <label for="upload_image_button" class="custom_image_button">Upload Image</label>
+        <input type="file" class="upload_image_button" id="upload_image_button" accept="image/png, image/jpeg"></input>
+        <button type="button" class="close_edit_sub_photo_button">Close</button>
+      </form>
+    </div>
+
+    <!--Form to edit sub equipment page photo 3 (rightmost image)-->
+    <div class="edit_sub_photo_form" id="editSubPhotoForm3">
+      <form action="/action_page.php" class="edit_sub_photo_form_container">
+        <h1>Edit Equipment Photo 3</h1>
+        <label for="upload_image_button" class="custom_image_button">Upload Image</label>
+        <input type="file" class="upload_image_button" id="upload_image_button" accept="image/png, image/jpeg"></input>
+        <button type="button" class="close_edit_sub_photo_button">Close</button>
+      </form>
+    </div>
+
+    <!-- Product Specs and Description -->
     <div id="product-stats">
 
       <div>
         <h1 class="stat_title">Model/Brand</h1>
+        <div class="edit_icon">
+          <img src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png"
+            style="width:20px;height:20px;display:inline;" class="sub-img-style">
+        </div>
         <p id="item-brand">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit saepe veniam, vero in deserunt laudantium suscipit repellat similique nemo nam numquam. Atque temporibus maiores impedit suscipit inventore, enim esse sed.</p>
       </div>
 
       <div>
         <h1 class="stat_title">Categories</h1>
+        <div class="edit_icon">
+          <img src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png"
+            style="width:20px;height:20px;display:inline;" class="sub-img-style">
+        </div>
         <p id="item-categories">Camera, Video, Photography</p>
     </div>
 
       <div>
         <h1 class="stat_title">Uses</h1>
+        <div class="edit_icon">
+          <img src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png"
+            style="width:20px;height:20px;display:inline;" class="sub-img-style">
+        </div>
         <p id="item-uses">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit saepe veniam, vero in deserunt laudantium suscipit repellat similique nemo nam numquam. Atque temporibus maiores impedit suscipit inventore, enim esse sed.</p>
       </div>
 
       <div>
         <h1 class="stat_title">Accessories</h1>
+        <div class="edit_icon">
+          <img src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png"
+            style="width:20px;height:20px;display:inline;" class="sub-img-style">
+        </div>
         <p id="item-accessories">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit saepe veniam, vero in deserunt laudantium suscipit repellat similique nemo nam numquam. Atque temporibus maiores impedit suscipit inventore, enim esse sed.</p>
       </div>
 
@@ -78,12 +149,17 @@ alt="dslr_camera" class="main_image">
 
   <div id="description_div">
     <h1 class="stat_title">Description</h1>
+    <div class="edit_icon">
+          <img src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png"
+            style="width:20px;height:20px;display:inline;" class="sub-img-style">
+        </div>
     <p id="item-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas integer eget. Cursus metus aliquam eleifend mi. Lacus sed viverra tellus in hac habitasse. Arcu vitae elementum curabitur vitae nunc sed velit dignissim sodales. Turpis egestas integer eget aliquet nibh praesent. Facilisis leo vel fringilla est ullamcorper. Vivamus at augue eget arcu dictum varius duis at. Egestas purus viverra accumsan in nisl nisi scelerisque eu ultrices. Id ornare arcu odio ut sem nulla pharetra. At erat pellentesque adipiscing commodo elit at. In dictum non consectetur a erat nam. Lectus sit amet est placerat. Tempus urna et pharetra pharetra massa massa ultricies mi quis. Risus ultricies tristique nulla aliquet.</p>
   </div>
 
 
   <br><br><br><br><br>
 
+    <!-- Similar Items -->
     <div>
       <h1 class="stat_title">Similar Items</h1>
       <div class="row">
