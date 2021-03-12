@@ -1,6 +1,6 @@
 //Author: Alex Junkins, Adrian Muth, and Justin Cao
-//Version: March 9 2021
-// A short router to test client connection to the website
+//Version: March 11 2021
+//A router for the main catalog page to request a list of the product data
 var express = require('express');
 var router = express.Router();
 var serverfunctions = require('./dbms.js');
@@ -12,29 +12,27 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-
+//a variable to hold the data
 const orderObj = {
     error:null,
-    data:[    ]
+    productData:[],
+    imageData:[]
 };
 
-/* GET orders listing. */
-router.get('/', function(req, res, next) {
+//POST reciever, request the product data from the server
+router.post('/', function(req, res, next) {
+    console.log("Accessing products table from SQL server.");
     serverfunctions.dbquery("SELECT * FROM products;", recieveData);
 
-    /* helper fn process the data from the SQL Server */
+    // helper fn process the data from the SQL Server 
     function recieveData(error, results) {
+        console.log("Recieved products table from SQL server.");
         orderObj.error = error;
-        orderObj.data = results;
+        orderObj.productData = results;
         res.json(orderObj);
         console.log("Finished post request.");
     }
 });
 
-
-router.post('/', function(req, res, next) {
-    console.log("POST: " + JSON.stringify(orderObj));
-    res.json(orderObj);
-});
 
 module.exports = router;
