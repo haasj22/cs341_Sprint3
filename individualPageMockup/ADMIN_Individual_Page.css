@@ -111,6 +111,18 @@
     display: none;
 }
 
+/* Style the save image button */
+.edit_main_photo_form_container .save_photo_button {
+    color: black;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:.8vw;
+    background-color: rgb(225, 225, 225);
+    font-family: 'Times New Roman', Times, serif;
+}
+
 /* Style the close button */
 .edit_main_photo_form_container .close_edit_main_photo_button {
     color: black;
@@ -119,7 +131,6 @@
     cursor: pointer;
     width: 100%;
     margin-bottom:.2vw;
-    opacity: 0.8;
     background-color: rgb(225, 225, 225);
     font-family: 'Times New Roman', Times, serif;
 }
