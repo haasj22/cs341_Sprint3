@@ -1,127 +1,418 @@
-/* Authors: Matthew Groh, Aidan Day, Blake Nygren, Jack Volonte */
+/* Authors: Matthew Groh, Aidan Day, Blake Nygren, Jack Volonte, Trey Dettmer */
 
-
-/* Header Elements */
-
-.headCard {
-    text-align: right;
-    height: 40%;
-    width: 100%;
-    left: 0;
-    top: 0;
-    background-color: #9A00F5;
-    position: absolute; /*must be absolute*/
-    z-index: 1;
-    border-bottom: solid black 2px;
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 100vw;
+    overflow-x: hidden;
+    
 }
 
-#back {
-    z-index: 3;
-    position: absolute;
+* {
+    font-family: 'Hattori Hanzo Light', arial;
 }
-
-#name {
-    margin-right: 30px;
-    font-size: 3.5em;
-}
-
-#manageRequest {
-    margin-right: 30px;
-    margin-top: 10px;
-    font-size: 1.0em;
-    border: solid black 2px;
-    cursor: pointer;
-    background-color: #D2B48C;
-}
-
-#request {
-    margin-right: 30px;
-    margin-bottom: 10px;
-    font-size: 1.0em;
-    background-color: #D2B48C;
-    border: solid black 2px;
-    cursor: pointer;
-}
-
-
-/* Body Elements */
-
-#product-info {
-    display: flex;
-    height: auto;
-    width: 100%;
-}
-
-.stat_title {
-    color: #9A00F5;
-}
-
-#images_div {
-    background-color: white;
-    width: 50%;
-    margin-top: 200px;
-    margin-left: 50px;
-}
-
-.main_image {
-    height: auto;
-    width: 30%;
-    position: absolute;
-    margin-left: 50px;
-    border: black 2px solid;
-    margin-top: 100px;
-    z-index: 2;
-}
-
-#main_image_div {
-    height: 150px;
-}
-
-#sub-images {
-    display: flex;
-    margin-top: 200px;
-}
-
-.alt-images {
-    border-color: gray;
-}
-
-.sub-img-style {
-    width: 50%;
+/* add space for footer */
+body::after {
+    content: '';
     display: block;
-    border: 2px solid #000000;
+    height: 8vh;
+}
+
+
+/* Top Nav Bar */
+.topNavBar {
+    background-color: #1e1656;
+    overflow: hidden;
+    position: relative;
+    
+}
+
+/* Nav Bar Link  */
+.navBarLink {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 5vh;
+    float: right;
+    padding-top: 1.5vh;
+    padding-right: 1.5vw;
+    padding-left: 1.5vw;
+    padding-bottom: 1.5vh;
+    font-family: 'Hattori Hanzo Light', arial;
+}
+
+/*  What happens when navbar link is hovered over*/
+.navBarLink:hover {
+    background-color: #100a3a;
+}
+
+/* The navbar link of the current page (currently not used for individual page) */
+.navBarLinkCurrent {
+    background-color: #100a3a;
+}
+
+/* The a tag for the UP logo in nav bar*/
+#upLogoLink {
+    height: 100%;
+    display: inline-block;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    padding-left: 10px;
+}
+
+/* UP logo in nav bar*/
+#upNavLogo {
+    max-width: 10vw;
+    min-width: 5em;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    
+}
+
+/* section for item name and request button */
+.itemHead {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2; 
+    position: relative;
+    display: flex;
+    gap: 0em; 
+}
+
+/* Item Name */
+#itemName {
+    
+    font-size: 4em;
+    flex-grow: 4;
+    text-align: right;
+    
+}
+
+/* request button wrapper that centers the button vertically */
+#requestButtonWrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* request button used to request the item */
+#requestButton {
+    font-size: 1.5em;
+    border: solid black 1px;
+    border-radius: .2em;
     cursor: pointer;
+    background-color: #EEAF30;
+    text-decoration: none;
+    color: #000000;
+    flex-shrink: 1;
+    margin: .4em auto 0 1.8em;
 }
 
-#product-stats {
-    width: 50%;
-    margin-top: 7%;
+/*  What happens when request button is hovered over*/
+#requestButton:hover {
+    background-color:#c99120;
+    
 }
 
-#description_div {
-    width: 100%;
-    margin-left: 50px;
+/* Div which contains all images of item */
+.images{
+
+    max-width: 100%;
+    text-align: center;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    position: relative;
 }
 
-#item-description {
+/* big image of item */
+#mainImage {
+    border: black 2px solid;
+    margin-bottom: 1vh;
+    object-fit: contain;
+}
+
+/* Div which contains alterate smaller images of item */
+#altImages {
+    display: flex;
+}
+
+
+/* Individual alternate small image of item */
+.altImage {
+
+    object-fit: contain;
+    border: 2px solid #000000;
+    margin: 0 1em;
+    
+}
+
+/* Div which contains item info (model, categories, uses, accessories) */
+.productInfo {
+
+    padding-right: 5vw;
+}
+
+/* Title for a section of text (e.g., Model, Categories) */
+.statTitle {
+    color: #53565a;
+    font-weight: bold;
+}
+
+/* Body text of a section */
+.infoText {
+    color: #5E6A71;
+}
+
+/* Visible icon which is clicked to save changes made to body text */
+.textEditIcon {
+    width: 20px;
+    height: 20px;
+    display: inline;
+}
+
+/* Link which is clicked to upload a new image */
+.imageEditIconLink {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 0px;
+    right:0px;
+    opacity: 0;
+    
+    z-index: 10;
+}
+
+/* Visible icon whose parent link is clicked to upload a new image */
+.imageEditIcon {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 0px;
+    right:0px;
+}
+
+/* Link which is clicked to upload new image for an alternative item image */
+.altImageEditIconLink {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 0px;
+    opacity: 0;
+    
+    z-index: 10;
+}
+
+/* Visible icon whose parent link is clicked to upload a new image for an alternative item image */
+.altImageEditIcon {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 0px;
+    
+}
+
+/* Div which contains the description of the item */
+.description {
+    padding-left: 1vw;
     margin-right: 50px;
 }
 
-.column {
-    float: left;
-    width: 15.00%;
-    padding: 15px;
+/* Div which contains images of similar items */
+.similarItems {
+    padding-left: 1vw;
+    
 }
 
-.column_right {
-    float: left;
-    transform: scaleX(-1);
-    width: 15.00%;
-    padding: 15px;
+/* Div which centers the similar items horizontally */
+#similarItemsWrapper {
+    text-align: center;
 }
 
-.row::after {
-    content: "";
-    clear: both;
+/* Div which contains a similar item image */
+.similarItemContainer {
+    position: relative;
+    display: inline-block;
+    width: 15vw;
+    margin: 0 1vw;
+    border: 2px solid #000000;
+}
+
+/* Similar item image */
+.similarItemImage {
+    object-fit: contain;
+    width: 15vw;
+    height: 15vw;
+}
+
+
+/* footer */
+footer {
+    background-color: #1e1656;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 4vh;
+    text-align: center;
     display: table;
+}
+
+/* footer text */
+footer p {
+    margin: 0;
+    padding: 0 0;
+    font-size: 2vh;
+    color: #F5F5F5;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+
+/* layout on mobile device */
+@media (max-aspect-ratio: 6/7) {
+
+    .navBarLink {
+        font-size: 5vw;
+    }
+
+    #requestButton {
+        font-size: 2em;
+    }
+
+    .pageContent {
+        display: grid;
+        grid-template-columns: 1.3fr 1fr;
+        /*                  itemHead   main images     item info        description    similar items  */
+        grid-template-rows: .1fr fit-content(1em) fit-content(1em) fit-content(1em)     1fr;
+    }
+
+    .images {
+        grid-row: 2 / 3;
+        grid-column: 1 / 3;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    #mainImage {
+        width: 60vw;
+        height: 60vw;  
+    }
+
+    #altImages {
+        flex-direction: column;
+        max-width: 20vw;
+        gap:1em;
+    }
+
+    .altImage {
+        width: 20vw;
+        height: 20vw;
+    }
+
+    .altImageEditIconLink {
+        right: -1.2em;
+    }
+
+    .altImageEditIcon {
+        right: -1.2em;
+    }
+
+    .productInfo {
+        grid-row: 3 / 4;
+        grid-column: 1 / 3;
+        padding-left: 1vw;
+    }
+
+    .statTitle {
+        font-size: 3em;
+    }
+
+    .infoText {
+        font-size: 1.5em;
+    }
+
+    .description {
+        grid-row: 4 / 5;
+        grid-column: 1 / 3;
+    }
+
+    .similarItems {
+        grid-row: 5 / 6;
+        grid-column: 1 / 3;
+    }
+}
+
+/* layout on tablet or monitor */
+@media (min-aspect-ratio: 6/7) {
+
+
+    .pageContent {
+        display: grid;
+        grid-template-columns: 1.3fr 1fr;
+        /*                itemHead   images and info      description       similar items       */
+        grid-template-rows: .3fr   fit-content(1em)    fit-content(1em)        1fr;
+    }
+
+    .images {
+        grid-row: 2 / 3;
+        grid-column: 1 / 2;
+        flex-direction: column;
+    }
+
+    #mainImage {
+        height: 30vw;
+        width: 30vw;  
+    }
+
+    #altImages{
+        flex-direction: row;
+        height: 10vh;
+        max-width: 30vw;
+        justify-content: center;
+    }
+
+    .altImage {
+        width: 6vw;
+        height: 6vw;
+    }
+
+    .altImageEditIconLink {
+        right: 1em;
+    }
+
+    .altImageEditIcon {
+        right: 1em;
+    }
+
+    .productInfo {
+        grid-row: 2 / 3;
+        grid-column: 2 / 3;
+        padding-right: 5vw;
+    }
+
+    .statTitle {
+        font-size: 2em;
+    }
+
+    .infoText {
+        font-size: 1.5em;
+    }
+
+    .description {
+        grid-row: 3 / 4;
+        grid-column: 1 / 3;
+    }
+
+    .similarItems {
+        grid-row: 4 / 5;
+        grid-column: 1 / 3;
+    }
 }
