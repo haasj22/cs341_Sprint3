@@ -44,6 +44,10 @@ h2 {
     font-family: 'Open Sans Bold', arial;
 }
 
+ul {
+	list-style-type: none;
+}
+
 /*formats the list of items in the user's cart*/
 li {
     border: solid black 1px;
