@@ -99,7 +99,7 @@
     padding: 16px 20px;
     cursor: pointer;
     margin-bottom: .8vw;
-    margin-top: .8vw;
+    margin-top: .2vw;
     width: 86.5%;
     text-align: center;
     z-index: 10;
@@ -131,6 +131,50 @@
     cursor: pointer;
     width: 100%;
     margin-bottom:.2vw;
+    background-color: rgb(225, 225, 225);
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* Style the close button */
+.edit_sub_photo_form_container .save_photo_button {
+    color: black;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:.8vw;
+    background-color: rgb(225, 225, 225);
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* Style the save sub-image buttons */
+.save_photo_button1 {
+    color: black;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:.8vw;
+    background-color: rgb(225, 225, 225);
+    font-family: 'Times New Roman', Times, serif;
+}
+.save_photo_button2 {
+    color: black;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:.8vw;
+    background-color: rgb(225, 225, 225);
+    font-family: 'Times New Roman', Times, serif;
+}
+.save_photo_button3 {
+    color: black;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:.8vw;
     background-color: rgb(225, 225, 225);
     font-family: 'Times New Roman', Times, serif;
 }
@@ -186,17 +230,20 @@
 .edit_sub_photo_button1{
     position: absolute;
     z-index: 4;
-    transform: translate(750%, -825%);
+    transform: translate(-1vw, 0vw);
+    border: 1px solid #000000;
 }
 .edit_sub_photo_button2{
     position: absolute;
     z-index: 4;
-    transform: translate(750%, -825%);
+    transform: translate(-1vw, 0vw);
+    border: 1px solid #000000;
 }
 .edit_sub_photo_button3{
     position: absolute;
     z-index: 4;
-    transform: translate(750%, -825%);
+    transform: translate(-1vw, 0vw);
+    border: 1px solid #000000;
 }
 
 .edit_sub_photo_form {
@@ -245,12 +292,48 @@
     background-color: rgb(225, 225, 225);
     font-family: 'Times New Roman', Times, serif;
 }
-
 .sub-img-style {
     width: 50%;
-    display: block;
+    display: inline-block;
     border: 2px solid #000000;
     cursor: pointer;
+    max-width: 300px;
+    max-height: 300px;
+    min-width: 200px;
+    min-height: 200px;
+}
+
+.sub-img-style1 {
+    width: 50%;
+    display: inline-block;
+    border: 2px solid #000000;
+    cursor: pointer;
+    max-width: 300px;
+    max-height: 300px;
+    min-width: 200px;
+    min-height: 200px;
+}
+
+.sub-img-style2 {
+    width: 50%;
+    display: inline-block;
+    border: 2px solid #000000;
+    cursor: pointer;
+    max-width: 300px;
+    max-height: 300px;
+    min-width: 200px;
+    min-height: 200px;
+}
+
+.sub-img-style3 {
+    width: 50%;
+    display: inline-block;
+    border: 2px solid #000000;
+    cursor: pointer;
+    max-width: 300px;
+    max-height: 300px;
+    min-width: 200px;
+    min-height: 200px;
 }
 
 #product-stats {
