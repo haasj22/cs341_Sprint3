@@ -27,26 +27,73 @@ $(document).ready(function()
     }
 
     // changeImage: changes the main catalogue page image to the user uploaded image
-    // ISSUE: "fakepath" is sent to browser rather than actual file path
-    function changeMainImage(event) {
-        var new_image = document.getElementById("upload_image_button_main").value;
-        $(".main_image").attr('src', new_image);
-    }
+    function changeMainImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('main_image_source').src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0])
+          }
+          else
+          {
+            alert("Issue uploading image");
+          }
+        }
+        $("#edit_main_photo_button").change(function() {
+        changeMainImage(this)
+    });
 
-    function changeSubImage1(event) {
-        var new_image = document.getElementById("upload_image_button1").value;
-        $(".sub-img-style1").attr('src', new_image);
-    }
+    function changeSubImage1(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('sub_image_source1').src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0])
+          }
+          else
+          {
+            alert("Issue uploading image");
+          }
+        }
+        $("#edit_sub_photo_button1").change(function() {
+        changeSubImage1(this)
+    });
 
-    function changeSubImage2(event) {
-        var new_image = document.getElementById("upload_image_button2").value;
-        $(".sub-img-style2").attr('src', new_image);
-    }
+    function changeSubImage2(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('sub_image_source2').src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0])
+          }
+          else
+          {
+            alert("Issue uploading image");
+          }
+        }
+        $("#edit_sub_photo_button2").change(function() {
+        changeSubImage2(this)
+    });
 
-    function changeSubImage3(event) {
-        var new_image = document.getElementById("upload_image_button3").value;
-        $(".sub-img-style3").attr('src', new_image);
-    }
+    function changeSubImage3(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('sub_image_source3').src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0])
+          }
+          else
+          {
+            alert("Issue uploading image");
+          }
+        }
+        $("#edit_sub_photo_button3").change(function() {
+        changeSubImage3(this)
+    });
 
     // call functions when buttons are clicked
     $(".edit_main_photo_button").on("click",openForm);
@@ -55,8 +102,4 @@ $(document).ready(function()
     $(".edit_sub_photo_button3").on("click",openSubForm3);
     $(".close_edit_main_photo_button").on("click", closeForm);
     $(".close_edit_sub_photo_button").on("click", closeForm);
-    $(".save_photo_button").on("click", changeMainImage);
-    $(".save_photo_button1").on("click", changeSubImage1);
-    $(".save_photo_button2").on("click", changeSubImage2);
-    $(".save_photo_button3").on("click", changeSubImage3);
 });
