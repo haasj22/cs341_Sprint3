@@ -44,6 +44,85 @@
     opacity: 70%;
 }
 
+/* Edit equipment photo form */
+
+/* Container for main image and edit main photo button */
+.mainImageDiv {
+    position: relative;
+    display: inline-block;
+    z-index: 3;
+    margin-left: 9vw;
+    margin-top: 100px; 
+}
+
+.mainImageDiv .main_image{
+    height: auto;
+    width: 30%;
+    /*position: absolute;*/
+    /*margin-left: 50px;*/
+    border: black 2px solid;
+    /*margin-top: 100px;*/
+    z-index: 2;
+    opacity: 70%;
+}
+
+.mainImageDiv .edit_main_photo_button {
+    color: black;
+    cursor: pointer;
+    position: absolute;
+    z-index: 4;
+    transform: translate(-100%, 0%);
+    width: 50%;
+    display: block;
+    border: 2px solid #000000;
+}
+
+.edit_main_photo_form {
+    display: none;
+    position: absolute;
+    border: 3px solid rgb(175, 172, 172);
+    background-color: white;
+    z-index: 6;
+    margin-left: 42vw;
+    font-size: .8em;
+}
+
+.edit_main_photo_form_container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+}
+
+/* Set a style for the upload img button */
+.edit_main_photo_form_container .custom_image_button {
+    display: inline-block;
+    padding: 16px 20px;
+    cursor: pointer;
+    margin-bottom: .8vw;
+    margin-top: .8vw;
+    width: 86.5%;
+    text-align: center;
+    z-index: 10;
+    background-color: rgb(225, 225, 225);
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.edit_main_photo_form_container .upload_image_button {
+    display: none;
+}
+
+/* Style the close button */
+.edit_main_photo_form_container .close_edit_main_photo_button {
+    color: black;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:.2vw;
+    opacity: 0.8;
+    background-color: rgb(225, 225, 225);
+    font-family: 'Times New Roman', Times, serif;
+}
 
 /* Body Elements */
 
@@ -64,7 +143,7 @@
     margin-left: 50px;
 }
 
-.main_image {
+/*.main_image {
     height: auto;
     width: 30%;
     position: absolute;
@@ -73,7 +152,7 @@
     margin-top: 100px;
     z-index: 2;
     opacity: 70%;
-}
+}*/
 
 #main_image_div {
     height: 150px;
@@ -88,6 +167,72 @@
 
 .alt-images {
     border-color: gray;
+    display: inline-block;
+    position: relative;
+}
+
+/* Style the edit sub-photo buttons */
+.edit_sub_photo_button1{
+    position: absolute;
+    z-index: 4;
+    transform: translate(750%, -825%);
+}
+.edit_sub_photo_button2{
+    position: absolute;
+    z-index: 4;
+    transform: translate(750%, -825%);
+}
+.edit_sub_photo_button3{
+    position: absolute;
+    z-index: 4;
+    transform: translate(750%, -825%);
+}
+
+.edit_sub_photo_form {
+    display: none;
+    position: absolute;
+    border: 3px solid rgb(175, 172, 172);
+    background-color: white;
+    z-index: 6;
+    margin-left: 42vw;
+    font-size: .8em;
+}
+
+.edit_sub_photo_form_container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+}
+
+/* Set a style for the upload img button */
+.edit_sub_photo_form_container .custom_image_button {
+    display: inline-block;
+    padding: 16px 20px;
+    cursor: pointer;
+    margin-bottom: .8vw;
+    margin-top: .8vw;
+    width: 86.5%;
+    text-align: center;
+    z-index: 10;
+    background-color: rgb(225, 225, 225);
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.edit_sub_photo_form_container .upload_image_button {
+    display: none;
+}
+
+/* Style the close button */
+.edit_sub_photo_form_container .close_edit_sub_photo_button {
+    color: black;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:.2vw;
+    opacity: 0.8;
+    background-color: rgb(225, 225, 225);
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .sub-img-style {
@@ -128,4 +273,8 @@
     content: "";
     clear: both;
     display: table;
+}
+
+h1 {
+    display: inline;
 }

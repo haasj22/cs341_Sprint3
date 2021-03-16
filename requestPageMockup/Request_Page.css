@@ -1,5 +1,7 @@
+/*request page CSS
+  authors Ethan Figueredo, William Lau, Haley Welliver, Malia Lundstrom, Trey Dettmer, Jarren Calizo */
 
-
+/*formats the header of the page including color and positioning*/
 .headCard{
     text-align:left;
     height: 8.5%;
@@ -12,6 +14,7 @@
     border-bottom: solid black 2px;
 }
 
+/*formats the footer of the page*/
 .endCard{
     position:fixed;
     bottom: 0;
@@ -23,6 +26,7 @@
     z-index: 10;
 }
 
+/*formats the "request" button*/
 #request {
     background-color: #e7e7e7;
     margin-right: 30px;
@@ -33,6 +37,7 @@
 	font-size: 16px;
 }
 
+/*formats the "Total Items:" text*/
 h2 {
     margin-right: 30px;
     color: white;
@@ -43,6 +48,7 @@ ul {
 	list-style-type: none;
 }
 
+/*formats the list of items in the user's cart*/
 li {
     border: solid black 1px;
     width: 100%;
@@ -62,6 +68,7 @@ li {
 	margin-top: -75px;
 }
 
+/*formats individual items in the user's cart*/
 .items {
     position: relative;
     z-index: 99; /*for testing location*/
@@ -69,10 +76,12 @@ li {
     top: 8.5%;
 }
 
+/*formats the "Remove Item" buttons within the list of items in the user's cart*/
 button {
     float: right;
 }
 
+/*formats the page's main title, "Your Request"*/
 h1 {
     text-align: center;
     margin-bottom: 50px;
@@ -103,4 +112,79 @@ h1 {
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     
+}
+
+textarea {
+    float: right;
+}
+
+label {
+    float: right;
+}
+
+.main_image {
+    height: auto;
+    width: 5%;
+    position: absolute;
+    margin-left: 75px;
+    border: black 2px solid;
+    margin-top: -50px;
+    z-index: 2;
+}
+
+#main_image_div {
+    height: 150px;
+}
+
+.computer_image {
+    height: auto;
+    width: 5%;
+    position: absolute;
+    margin-left: 75px;
+    border: black 2px solid;
+    margin-top: -50px;
+    z-index: 2;
+}
+
+#computer_image_div {
+    height: 1px;
+}
+
+/* Remove Page Margin */
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    /*These two lines remove weird gap on right of page */
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+
+/* add space for footer */
+body::after {
+    content: '';
+    display: block;
+    height: 4%;
+}
+
+
+/* footer */
+footer {
+    background-color: #1e1656;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 4%;
+    text-align: center;
+    display: table;
+}
+
+/* footer text */
+footer p {
+    margin: 0;
+    padding: 0 0;
+    color: #F5F5F5;
+    display: table-cell;
+    vertical-align: middle;
 }
