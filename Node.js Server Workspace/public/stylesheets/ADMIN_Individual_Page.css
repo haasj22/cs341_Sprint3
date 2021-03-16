@@ -31,16 +31,17 @@
     font-size: 1.0em;
     border: solid black 2px;
     cursor: pointer;
-    background-color: #D2B48C;
+    opacity: 70%;
 }
 
 #request {
     margin-right: 30px;
     margin-bottom: 10px;
     font-size: 1.0em;
-    background-color: #D2B48C;
+    background-color: #D7F80D;
     border: solid black 2px;
     cursor: pointer;
+    opacity: 70%;
 }
 
 
@@ -71,15 +72,18 @@
     border: black 2px solid;
     margin-top: 100px;
     z-index: 2;
+    opacity: 70%;
 }
 
 #main_image_div {
     height: 150px;
 }
 
+
 #sub-images {
     display: flex;
     margin-top: 200px;
+    opacity: 70%;
 }
 
 .alt-images {
@@ -124,10 +128,4 @@
     content: "";
     clear: both;
     display: table;
-}
-#footer{
-    display: table;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
 }

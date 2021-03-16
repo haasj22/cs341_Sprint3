@@ -1,4 +1,4 @@
-<!-- Jarren Calizo, Daniel Co, Trey Dettmer, Alex Junkins, version 3-13-21 -->
+<!-- Jarren Calizo, Daniel Co, Trey Dettmer, Alex Junkins, version 2-9-21 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +15,7 @@
     <title> UP AVS Rental Catalog</title>
 
     <!-- Link Stylesheet to HTML Document -->
-    <link rel="stylesheet" href="css/ADMIN_mainCatalog.css">
+    <link rel="stylesheet" href="stylesheets/ADMIN_mainCatalog.css">
 
     <!-- Link Hattori Hanzo Light Font -->
     <link href="https://allfont.net/allfont.css?fonts=hattori-hanzo-light" rel="stylesheet" type="text/css" />
@@ -153,10 +153,14 @@
                 <figcaption>Camera Placeholder (2021)</figcaption>
             </figure>
             <figure class="bottomIndividualItem">
-                <i class="fa fa-plus-circle" style="font-size:200px;color:grey"></i> 
-                <p> Add Item  </p>
-            </figure> 
-
+                <div class="deletionOverlay">
+                    <p class="deletionMessage">This item is set for deletion.</p>
+                    <a class="undoDeletionMessage">undo?</a> 
+                </div> 
+                <button class="deleteButton" type="button">X</button>
+                <img class="bottomImage" src="https://www.adorama.com/alc/wp-content/uploads/2017/06/dslr-camera-1.jpg" alt="camera">
+                <figcaption>Camera Placeholder (2021)</figcaption>
+            </figure>
         </div>
 
     </div>
