@@ -9,5 +9,5 @@ wish to do so, simply run 'npm install' in the console in the workspace
 folder. After that, 'npm start' should start the server at localhost:3000.
 When committing, PLEASE remember to delete the node_modules folder, in order to keep pushes/pulls small. Thank you!
 Workspace currently does not include changes from the following branches:
-Dan, Haley, Malia, Moses, Trey, Will, htmlcssteam, and master.
+Dan, Haley, Malia, Moses, Trey, Will, and master.
 Love, Javascript Backend team <3
