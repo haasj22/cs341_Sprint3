@@ -44,6 +44,96 @@
     opacity: 70%;
 }
 
+/* Equipment photos/buttons */
+
+/* Container for main image and edit main photo button */
+.mainImageDiv {
+    position: relative;
+    display: inline-block;
+    z-index: 3;
+    margin-left: 9vw;
+    margin-top: 100px; 
+}
+
+.mainImageDiv .main_image{
+    height: auto;
+    border: black 2px solid;
+    z-index: 2;
+    opacity: 70%;
+    max-width: 25.819482421875vw;
+    max-height: 25.819482421875vw;
+    min-width: 21.97265625vw;
+    min-height: 21.97265625vw;
+}
+
+.mainImageDiv .edit_main_photo_button {
+    cursor: pointer;
+    position: absolute;
+    z-index: 5;
+    transform: translate(-100%, 0%);
+    width: 50%;
+    display: block;
+    border: 2px solid #000000;
+    opacity: 0%;
+}
+
+#edit_main_photo_icon {
+    color: black;
+    cursor: pointer;
+    position: absolute;
+    z-index: 4;
+    transform: translate(-100%, 0%);
+    width: 50%;
+    display: block;
+    border: 1px solid #000000;
+}
+
+/* Container for sub images */
+
+.alt-images {
+    border-color: gray;
+    display: inline-block;
+    position: relative;
+}
+
+.edit_sub_photo_icon {
+    color: black;
+    position: absolute;
+    z-index: 4;
+    transform: translate(-100%, 0%);
+    width: 50%;
+    display: block;
+    border: 1px solid #000000;
+}
+
+.edit_sub_photo_button {
+    cursor: pointer;
+    position: absolute;
+    z-index: 5;
+    transform: translate(-100%, 0%);
+    width: 50%;
+    display: block;
+    border: 1px solid #000000;
+    opacity: 0%;
+}
+
+/* Style the sub images */
+.sub-img-style {
+    width: 50%;
+    display: inline-block;
+    border: 2px solid #000000;
+    max-width: 14.6484375vw;
+    max-height: 14.6484375vw;
+    min-width: 9.765625vw;
+    min-height: 9.765625vw;
+    margin-left: .2vw;
+}
+
+#sub-images {
+    display: flex;
+    margin-top: 9.765625vw;
+    opacity: 70%;
+}
 
 /* Body Elements */
 
@@ -64,37 +154,8 @@
     margin-left: 50px;
 }
 
-.main_image {
-    height: auto;
-    width: 30%;
-    position: absolute;
-    margin-left: 50px;
-    border: black 2px solid;
-    margin-top: 100px;
-    z-index: 2;
-    opacity: 70%;
-}
-
 #main_image_div {
     height: 150px;
-}
-
-
-#sub-images {
-    display: flex;
-    margin-top: 200px;
-    opacity: 70%;
-}
-
-.alt-images {
-    border-color: gray;
-}
-
-.sub-img-style {
-    width: 50%;
-    display: block;
-    border: 2px solid #000000;
-    cursor: pointer;
 }
 
 #product-stats {
@@ -128,4 +189,8 @@
     content: "";
     clear: both;
     display: table;
+}
+
+h1 {
+    display: inline;
 }
