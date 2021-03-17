@@ -14,6 +14,19 @@
     border-bottom: solid black 2px;
 }
 
+/* Nav Bar Link Styles (takes user to other pages)*/
+.navBarLinks {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 5vh;
+    float: right;
+    margin-top: 1.5vh;
+    margin-right: 2.5vw;
+    margin-bottom: 1.5vh;
+    font-family: 'Hattori Hanzo Light', arial;
+}
+
 /*formats the footer of the page*/
 .endCard{
     position:fixed;
@@ -40,8 +53,13 @@
 /*formats the "Total Items:" text*/
 h2 {
     margin-right: 30px;
-    color: white;
+    color: black;
     font-family: 'Open Sans Bold', arial;
+    float: right;
+}
+
+ul {
+	list-style-type: none;
 }
 
 /*formats the list of items in the user's cart*/
@@ -53,6 +71,7 @@ li {
 	font-size: 30px;
 }
 
+/*formats placeholder images in cart list*/
 .image {
 	max-width: 60%;
 	max-height: 150px;
@@ -68,7 +87,7 @@ li {
 .items {
     position: relative;
     z-index: 99; /*for testing location*/
-    margin-top: 50px;
+    margin-top: 130px;
     top: 8.5%;
 }
 
@@ -171,14 +190,14 @@ footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 4%;
+    height: 4vh;
     text-align: center;
     display: table;
 }
 
 /* footer text */
 footer p {
-    margin: 0;
+    margin: 100;
     padding: 0 0;
     color: #F5F5F5;
     display: table-cell;
