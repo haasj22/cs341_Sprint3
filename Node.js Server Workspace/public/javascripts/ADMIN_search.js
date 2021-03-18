@@ -23,6 +23,8 @@ const resultCount = document.getElementById('resultCount');
 
 //retrive searchbar to extract search criteria
 const searchBar = document.getElementById('searchBar');
+var placeholderImage = "https://www.universitycounselingjobs.com/institution/logo/logo2(4).png";
+let CatalogItemsFull = [];
 let CatalogItems = [];
 
 /*
@@ -71,7 +73,7 @@ function displayItemsByNameAndCategory(searchString) {
     const filteredItems = CatalogItems.filter((item) => {
         return (
             item.name.toLowerCase().includes(searchString) ||
-            item.catagory.toLowerCase().includes(searchString)
+            item.category.toLowerCase().includes(searchString)
         );
     });
 
@@ -82,7 +84,7 @@ function displayItemsByNameAndCategory(searchString) {
 function displayItemsByCategory(searchString) {
     const filteredItems = CatalogItems.filter((item) => {
         return (
-            item.catagory.toLowerCase().includes(searchString)
+            item.category.toLowerCase().includes(searchString)
         );
     });
 
@@ -166,7 +168,7 @@ This method adds an image of the university logo to any items that do not contai
 */
 function addFillersToEmptyImages(item) {
     if (item.image.localeCompare("") == 0 ) {
-        item.image = "https://www.universitycounselingjobs.com/institution/logo/logo2(4).png"
+        item.image = placeholderImage;
     }
 } 
 
