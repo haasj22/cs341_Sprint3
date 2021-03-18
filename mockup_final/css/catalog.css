@@ -8,6 +8,9 @@ body {
     overflow-x: hidden;
 }
 
+* {
+    font-family: 'Hattori Hanzo Light', arial;
+}
 
 /* add space for footer */
 body::after {
@@ -56,17 +59,22 @@ body::after {
     text-decoration: none;
     font-size: 5vh;
     float: right;
-    margin-top: 1.5vh;
-    margin-right: 2.5vw;
-    margin-bottom: 1.5vh;
+    padding-top: 1.5vh;
+    padding-right: 1.5vw;
+    padding-left: 1.5vw;
+    padding-bottom: 1.5vh;
     font-family: 'Hattori Hanzo Light', arial;
+}
+
+/* The navbar link of the current page */
+.navBarLinkCurrent {
+    background-color: #100a3a;
 }
 
 /*  Nav Bar Link Hover Styles*/
 .navBarLinks:hover {
     background-color: #100a3a;
-    /* WORK ON LATER */
-    /* margin-top: 0;  */
+
 }
 
 /*  Nav Bar Active Link Style*/
@@ -233,7 +241,7 @@ form.search-bar button:hover {
     max-width: 900px;
     cursor: pointer;
     position: relative;
-    font-family: 'Hattori Hanzo Light', arial;
+    
 }
 
 /* Bottom catalog item images */
@@ -294,6 +302,7 @@ footer {
 footer p {
     margin: 0;
     padding: 0 0;
+    font-size: 2vh;
     color: #F5F5F5;
     display: table-cell;
     vertical-align: middle;
