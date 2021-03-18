@@ -22,7 +22,7 @@ const orderObj = {
 //POST reciever, request the product data from the server
 router.post('/', function(req, res, next) {
     console.log("Accessing products table from SQL server.");
-    serverfunctions.dbquery("SELECT * FROM products;", recieveData);
+    serverfunctions.dbquery("SELECT * FROM PRODUCTS;", recieveData);
 
     // helper fn process the data from the SQL Server 
     function recieveData(error, results) {
