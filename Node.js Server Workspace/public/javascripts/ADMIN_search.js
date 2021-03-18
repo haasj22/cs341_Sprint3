@@ -23,6 +23,8 @@ const resultCount = document.getElementById('resultCount');
 
 //retrive searchbar to extract search criteria
 const searchBar = document.getElementById('searchBar');
+var placeholderImage = "https://www.universitycounselingjobs.com/institution/logo/logo2(4).png";
+let CatalogItemsFull = [];
 let CatalogItems = [];
 
 /*
@@ -71,7 +73,7 @@ function displayItemsByNameAndCategory(searchString) {
     const filteredItems = CatalogItems.filter((item) => {
         return (
             item.name.toLowerCase().includes(searchString) ||
-            item.catagory.toLowerCase().includes(searchString)
+            item.category.toLowerCase().includes(searchString)
         );
     });
 
@@ -82,7 +84,7 @@ function displayItemsByNameAndCategory(searchString) {
 function displayItemsByCategory(searchString) {
     const filteredItems = CatalogItems.filter((item) => {
         return (
-            item.catagory.toLowerCase().includes(searchString)
+            item.category.toLowerCase().includes(searchString)
         );
     });
 
@@ -104,18 +106,38 @@ const loadItems = async () => {
         console.error(err);
     } */
 
+    //Populate CatalogItemsFull with data from the SQL server: 'sprint2cs341', database: 'sprint2', table: 'products'
+    //only do so if the variable is empty (the data has not been loaded yet)
+    if (CatalogItemsFull.length == 0){
+        console.log("Attempting to access item data with POST");
+        $.post({
+            traditional: true,
+            url: '/catalogData',    // url
+            success: function(data, ) {// success callback
+                readServerData(data);
+            }
+        }).fail(function(jqxhr, settings, ex) { 
+            alert('Accessing product data failed, ' + ex + "\nLoading static dataset."); 
+            loadStaticDataset();
+        });
+    }
+
     //for now we are using a static data set
-    CatalogItems = [{ name: "Canon DLSR", image: "https://static.bhphoto.com/images/images500x500/jvc_gz_e100b_gz_e100_full_hd_memory_1357667269_909762.jpg", catagory: "recording" },
-    { name: "Canon R", image: "https://static.bhphoto.com/images/images1000x1000/1536120359_1433711.jpg", catagory: "recording" },
-    { name: "Canon 80D", image: "https://www.bhphotovideo.com/images/images2500x2500/canon_1263c005_eos_80d_dslr_camera_1225876.jpg", catagory: "recording" },
-    { name: "Canon 90D", image: "https://images-na.ssl-images-amazon.com/images/I/61f9Hy-cujL._AC_SX679_.jpg", catagory: "recording" },
-    { name: "Vanko", image: "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6419/6419996_sd.jpg;maxHeight=200;maxWidth=300", catagory: "conferencing" },
-    { name: "Epson - HC 3800", image: "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6366/6366530_sd.jpg;maxHeight=200;maxWidth=300", catagory: "conferencing" },
-    { name: "Epson - HC 2250", image: "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6428/6428462_sd.jpg;maxHeight=200;maxWidth=300", catagory: "conferencing" },
-    { name: "LG - PF50KA", image: "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6228/6228221_sd.jpg;maxHeight=200;maxWidth=300", catagory: "conferencing" },
-    { name: "Logitech - C922", image: "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5579/5579380_sd.jpg;maxHeight=200;maxWidth=300", catagory: "streaming" },
-    { name: "Logitech - HD Webcam", image: "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/9928/9928354_sa.jpg;maxHeight=200;maxWidth=300", catagory: "streaming" }]
+    CatalogItems = CatalogItemsFull;
 };
+
+function loadStaticDataset(){
+    CatalogItems = [{ name: "Canon DLSR", image: "", category: "recording" },
+    { name: "Canon R", image: "https://static.bhphoto.com/images/images1000x1000/1536120359_1433711.jpg", category: "recording" },
+    { name: "Canon 80D", image: "https://www.bhphotovideo.com/images/images2500x2500/canon_1263c005_eos_80d_dslr_camera_1225876.jpg", category: "recording" },
+    { name: "Canon 90D", image: "https://images-na.ssl-images-amazon.com/images/I/61f9Hy-cujL._AC_SX679_.jpg", category: "recording" },
+    { name: "Vanko", image: "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6419/6419996_sd.jpg;maxHeight=200;maxWidth=300", category: "conferencing" },
+    { name: "Epson - HC 3800", image: "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6366/6366530_sd.jpg;maxHeight=200;maxWidth=300", category: "conferencing" },
+    { name: "Epson - HC 2250", image: "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6428/6428462_sd.jpg;maxHeight=200;maxWidth=300", category: "conferencing" },
+    { name: "LG - PF50KA", image: "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6228/6228221_sd.jpg;maxHeight=200;maxWidth=300", category: "conferencing" },
+    { name: "Logitech - C922", image: "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5579/5579380_sd.jpg;maxHeight=200;maxWidth=300", category: "streaming" },
+    { name: "Logitech - HD Webcam", image: "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/9928/9928354_sa.jpg;maxHeight=200;maxWidth=300", category: "streaming" }]
+}
 
 /*
 displayItems takes an array of items and converts each item into a HTML block. Each of these blocks is appended together and incerted into bottomCategory div of mainCatelog 
@@ -146,9 +168,46 @@ This method adds an image of the university logo to any items that do not contai
 */
 function addFillersToEmptyImages(item) {
     if (item.image.localeCompare("") == 0 ) {
-        item.image = "https://www.universitycounselingjobs.com/institution/logo/logo2(4).png"
+        item.image = placeholderImage;
     }
 } 
+
+//A helper function to read items from the database format into the local CatalogItems format 
+//and load into CatalogItemsFull
+function readServerData(data){
+    console.log("Attempting to load item data from SQL server");
+    //console.log(data)
+    productDataArray = data.productData;
+    console.log(productDataArray);
+    var i;
+    //skipping the first entry in the table, a dummy entry
+    CatalogItemsFull.length = productDataArray.length-1;
+    console.log("productDataArray Length: " + productDataArray.length);
+    console.log("CatalogItemsFull Length: " + CatalogItemsFull.length);
+    for (i = 1; i < productDataArray.length; i++){
+        prodData = productDataArray[i];
+        //console.log("productDataArray[" + i + "]");
+        //console.log(prodData);
+        var b = prodData.brand;
+        if (b == null){
+            b = "";
+        }
+        var n = prodData.name;
+        if (n == null){
+            n = "No Name";
+        }
+        var bn = b + " " + n;
+        var img = placeholderImage;
+        var c = prodData.category;
+        if (c == null){
+            c = "";
+        }
+        productjson = {name:bn, image:img, category:c};
+        CatalogItemsFull[i] = productjson;
+    }
+    console.log(CatalogItemsFull);
+    console.log("Item loading complete!");
+}
 
 loadItems();
 
