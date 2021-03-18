@@ -1,0 +1,170 @@
+<!-- Jarren Calizo, Daniel Co, Trey Dettmer, Alex Junkins, version 3-13-21 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- HTML Document Encoding -->
+    <meta charset="UTF-8"> 
+
+    <!-- Choose version of unsupported browsers' page should be rendered as -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <!-- Tells Browser Page's Sizing for Responsive Web Design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- HTML Page Header -->
+    <title> UP AVS Rental Catalog</title>
+
+    <!-- Link Stylesheet to HTML Document -->
+    <link rel="stylesheet" href="stylesheets/ADMIN_catalog.css">
+
+    <!-- Link Hattori Hanzo Light Font -->
+    <link href="https://allfont.net/allfont.css?fonts=hattori-hanzo-light" rel="stylesheet" type="text/css" />
+
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" type="image/jpg" href="https://www.up.edu/_files/images/favicon/favicon.ico">
+
+    <!-- Search Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- scripts -->
+    <script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"/></script>
+    <script src="javascripts/ADMIN_catalog.js"></script>
+</head>
+<body>
+    <div id="topNavBar">
+        <a id="upLogoLink" href="https://www.up.edu/index.html" target="_blank">
+            <img id="upNavLogo" src="https://www.giving.up.edu/s/1797/images/logo.png">
+        </a>
+        <!-- <input type="image" id="shoppingCart" src="https://img.icons8.com/pastel-glyph/64/ffffff/fast-cart.png"/> -->
+        <a class="navBarLinks" href="#"> Admin</a>
+        <a class="navBarLinks" href="#"> Help</a>
+        <a class="navBarLinks navBarLinkCurrent" href="#"> Catalog</a>
+        <a class="navBarLinks" href="#"> View Requests</a>
+    </div>
+    <div id="mainSelectionBar">
+        <div id="title">
+            <h2 id="primaryHeader">Audio Visual Services Rental Catalog</h2>
+        </div>
+        <div class="searchBar">
+            <form class="search-bar" action="/action_page.php" style="margin:auto;max-width:800px;alignment:center">
+                <input type="text" placeholder="Search..." name="search2">
+                <button type="search-button"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+        <div id="categories">
+            <div class="itemCategory">
+                <img class="categoryImage" src="images/catalog_view_all.png" alt="View All">
+                <span class="categoryTitle">View All</span>
+            </div>
+            <div class="itemCategory">
+                <img class="categoryImage" src="images/catalog_conferencing.png" alt="Conferencing">
+                <span class="categoryTitle">Conferencing</span>
+            </div>
+            <div class="itemCategory">
+                <img class="categoryImage" src="images/catalog_streaming.png" alt="Streaming">
+                <span class="categoryTitle">Streaming</span>
+            </div>
+            <div class="itemCategory">
+                <img class="categoryImage" src="images/catalog_recording.png" alt="Recording">
+                <span class="categoryTitle">Recording</span>
+            </div>
+            <div class="itemCategory">
+                <img class="categoryImage" src="images/catalog_presentation.png" alt="Presentation">
+                <span class="categoryTitle">Presentation</span>
+            </div>
+            <div class="itemCategory">
+                <img class="categoryImage" src="images/catalog_audio.png" alt="Audio">
+                <span class="categoryTitle">Audio</span>
+            </div>
+            <div class="itemCategory">
+                <img class="categoryImage" src="images/catalog_computers.png" alt="Computers">
+                <span class="categoryTitle">Computers</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottomCatalog">
+        <div class="bottomCatalogHeader">
+            <!-- Temporary results count -->
+            <p id="resultCount">8 results</p>
+        </div>
+        <!-- Item imgs for catalog -->
+        <div class="bottomCatalogItems" id="bottomCatalogItems">
+            <figure class="bottomIndividualItem">
+                <div class="ADMIN deletionOverlay">
+                    <p class="deletionMessage">This item is set for deletion.</p>
+                    <a class="undoDeletionMessage">undo?</a> 
+                </div> 
+                <button class="ADMIN deleteButton" type="button">X</button>
+                <img class="bottomImage" src="https://static.bhphoto.com/images/images2500x2500/1452001041_1211809.jpg" alt="camera">
+                <figcaption> Panasonic HC-V180 (2016)</figcaption>
+            </figure>
+            <figure class="bottomIndividualItem">
+                <div class="ADMIN deletionOverlay">
+                    <p class="deletionMessage">This item is set for deletion.</p>
+                    <a class="undoDeletionMessage">undo?</a> 
+                </div> 
+                <button class="ADMIN deleteButton" type="button">X</button>
+                <img class="bottomImage" src="https://static.bhphoto.com/images/images500x500/jvc_gz_e100b_gz_e100_full_hd_memory_1357667269_909762.jpg" alt="camera">
+                <figcaption> JVC GZ-E100BU (2015)</figcaption>
+            </figure>
+            <figure class="bottomIndividualItem">
+                <div class="ADMIN deletionOverlay">
+                    <p class="deletionMessage">This item is set for deletion.</p>
+                    <a class="undoDeletionMessage">undo?</a> 
+                </div> 
+                <button class="ADMIN deleteButton" type="button">X</button>
+                <img class="bottomImage" src="https://static.bhphoto.com/images/images1000x1000/1359454829_917882.jpg" alt="camera">
+                <figcaption> Canon PowerShot A2500 (2013)</figcaption>
+            </figure>
+            <figure class="bottomIndividualItem">
+                <div class="ADMIN deletionOverlay">
+                    <p class="deletionMessage">This item is set for deletion.</p>
+                    <a class="undoDeletionMessage">undo?</a> 
+                </div> 
+                <button class="ADMIN deleteButton" type="button">X</button>
+                <img class="bottomImage" src="https://www.adorama.com/alc/wp-content/uploads/2017/06/dslr-camera-1.jpg" alt="camera">
+                <figcaption>Camera Placeholder (2021)</figcaption>
+            </figure>
+            <figure class="bottomIndividualItem">
+                <div class="ADMIN deletionOverlay">
+                    <p class="deletionMessage">This item is set for deletion.</p>
+                    <a class="undoDeletionMessage">undo?</a> 
+                </div> 
+                <button class="ADMIN deleteButton" type="button">X</button>
+                <img class="bottomImage" src="https://www.adorama.com/alc/wp-content/uploads/2017/06/dslr-camera-1.jpg" alt="camera">
+                <figcaption>Camera Placeholder (2021)</figcaption>
+            </figure>
+            <figure class="bottomIndividualItem">
+                <div class="ADMIN deletionOverlay">
+                    <p class="deletionMessage">This item is set for deletion.</p>
+                    <a class="undoDeletionMessage">undo?</a> 
+                </div> 
+                <button class="ADMIN deleteButton" type="button">X</button>
+                <img class="bottomImage" src="https://www.adorama.com/alc/wp-content/uploads/2017/06/dslr-camera-1.jpg" alt="camera">
+                <figcaption>Camera Placeholder (2021)</figcaption>
+            </figure>
+            <figure class="bottomIndividualItem">
+                <div class="ADMIN deletionOverlay">
+                    <p class="deletionMessage">This item is set for deletion.</p>
+                    <a class="undoDeletionMessage">undo?</a> 
+                </div> 
+                <button class="ADMIN deleteButton" type="button">X</button>
+                <img class="bottomImage" src="https://www.adorama.com/alc/wp-content/uploads/2017/06/dslr-camera-1.jpg" alt="camera">
+                <figcaption>Camera Placeholder (2021)</figcaption>
+            </figure>
+            <figure class="ADMIN bottomIndividualItem">
+                <i class="fa fa-plus-circle" style="font-size:200px;color:grey"></i> 
+                <p> Add Item  </p>
+            </figure> 
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Phone Number: 503.943.7774 &emsp; Email: av@up.edu</p>
+    </footer>
+
+    <script src="javascripts/ADMIN_search.js"></script>
+</body>
+</html>
