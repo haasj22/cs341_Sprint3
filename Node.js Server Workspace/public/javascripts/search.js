@@ -44,9 +44,9 @@ $(document).ready(function () {
     const displayItems = (items) => {
         items.forEach(addFillersToEmptyImages);
         const htmlString = items
-            .map((item) => {
+            .map((item, index) => {
                 return ` 
-        <a href="VIEWER_individual_page.html?${item.name}|${item.image}">               
+        <a href="VIEWER_individual_page.html?${item.itemKey}">               
             <figure class="bottomIndividualItem">
               <img class="bottomImage" src="${item.image}" alt="${item.name}">
               <figcaption>${item.name}</figcaption>
@@ -152,13 +152,7 @@ $(document).ready(function () {
     and makes a call to displays all items contained. 
     */
     const loadItems = async () => {
-        /* try {
-            const res = await fetch('https://hp-api.herokuapp.com/api/characters');
-            CatalogItems = await res.json();
-            displayItems(CatalogItems);
-        } catch (err) {
-            console.error(err);
-        } */
+       
 
         //Populate CatalogItemsFull with data from the SQL server: 'sprint2cs341', database: 'sprint2', table: 'products'
         //only do so if the variable is empty (the data has not been loaded yet)
@@ -216,7 +210,7 @@ $(document).ready(function () {
                 b = "";
             }
             var n = prodData.name;
-            if (n == null) {
+            if (n == "") {
                 n = "No Name";
             }
             var bn = b + " " + n;
@@ -225,7 +219,11 @@ $(document).ready(function () {
             if (c == null) {
                 c = "";
             }
-            productjson = { name: bn, image: img, category: c };
+            var k = prodData.item_key;
+            if (k == null){
+                k = "";
+            }
+            var productjson = {itemKey:k, name:bn, image:img, category:c};
             CatalogItemsFull[i] = productjson;
         }
         console.log(CatalogItemsFull);
