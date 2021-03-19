@@ -161,7 +161,7 @@ const loadItems = async () => {
     }
 
     //for now we are using a static data set
-    CatalogItems = CatalogItemsFull;
+    CatalogItemsFull = CatalogItems;
 
     //console.log(CatalogItems);
 };
