@@ -55,12 +55,13 @@ const displayItems = (items) => {
     items.forEach(addFillersToEmptyImages);
     const htmlString = items
         .map((item) => {
-            return `                
-        <figure class="bottomIndividualItem">
-            <img class="bottomImage" src="${item.image}" alt="${item.name}">
-            <figcaption>${item.name}</figcaption>
-        </figure>           
-        
+            return ` 
+        <a href="VIEWER_individual_page.html?${item.name}|${item.image}">               
+            <figure class="bottomIndividualItem">
+              <img class="bottomImage" src="${item.image}" alt="${item.name}">
+              <figcaption>${item.name}</figcaption>
+            </figure>           
+        </a>
         `;
         })
         .join('');

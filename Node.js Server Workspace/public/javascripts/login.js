@@ -32,5 +32,5 @@ loginButton.addEventListener('click', (e) => {
         }
     });
     */
-    document.location = "login_placeholder.html";
+    document.location = "login_placeholder.html"+"?data";
 });
