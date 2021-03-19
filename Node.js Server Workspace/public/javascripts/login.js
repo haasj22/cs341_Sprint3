@@ -21,6 +21,7 @@ loginButton.addEventListener('click', (e) => {
 
     var loginData = { USERNAME:name, PASSWORD:pass  };
 
+    /*
     $.post({
         traditional: true,
         url: '/login',    // url
@@ -30,6 +31,6 @@ loginButton.addEventListener('click', (e) => {
 
         }
     });
-
-    document.location = "ADMIN_mainCatalog.html";
+    */
+    document.location = "login_placeholder.html";
 });
