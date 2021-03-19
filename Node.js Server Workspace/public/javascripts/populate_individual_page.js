@@ -96,7 +96,7 @@ function populatePage() {
 
     var pageArguments = queryString.split("|");
     itemName.innerHTML = pageArguments[0];
-    document.getElementById('mainImage').src = 
+    document.getElementById('mainImage').src = pageArguments[1];
 
     var searchString = "Canon R".toLowerCase();
     loadStaticDataset();
