@@ -15,7 +15,7 @@
     <title> UP AVS Rental Catalog</title>
 
     <!-- Link Stylesheet to HTML Document -->
-    <link rel="stylesheet" href="stylesheets/catalog.css">
+    <link rel="stylesheet" href="stylesheets/ADMIN_catalog.css">
 
     <!-- Link Hattori Hanzo Light Font -->
     <link href="https://allfont.net/allfont.css?fonts=hattori-hanzo-light" rel="stylesheet" type="text/css" />
@@ -26,8 +26,8 @@
     <!-- Search Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- scripts -->
-    <script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="javascripts/catalog.js"></script>
+    <script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"/></script>
+    <script src="javascripts/ADMIN_catalog.js"></script>
 </head>
 <body>
     <div id="topNavBar">
@@ -37,15 +37,15 @@
         <!-- <input type="image" id="shoppingCart" src="https://img.icons8.com/pastel-glyph/64/ffffff/fast-cart.png"/> -->
         <a class="navBarLinks" href="#"> Admin</a>
         <a class="navBarLinks" href="#"> Help</a>
-        <a id="firstNavLink" class="navBarLinks" href="#"> Catalog</a>
-        <a id="secondNavLink" class="navBarLinks" href="#"> View Requests</a>
+        <a class="navBarLinks navBarLinkCurrent" href="#"> Catalog</a>
+        <a class="navBarLinks" href="#"> View Requests</a>
     </div>
     <div id="mainSelectionBar">
         <div id="title">
             <h2 id="primaryHeader">Audio Visual Services Rental Catalog</h2>
         </div>
         <div class="searchBar">
-            <form class="search-bar" action="/action_page.php" style="margin:auto;max-width:800px;alignment:center">
+            <form class="search-bar" action="/action_page.php" style="margin:auto;max-width:800px;">
                 <input type="text" placeholder="Search..." name="search2">
                 <button type="search-button"><i class="fa fa-search"></i></button>
             </form>
@@ -164,8 +164,7 @@
     <footer>
         <p>Phone Number: 503.943.7774 &emsp; Email: av@up.edu</p>
     </footer>
-    <!-- Script for importing jquery Functionality-->
-    <script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <script src="javascripts/ADMIN_search.js"></script>
 </body>
 </html>

@@ -1,115 +1,139 @@
-<!-- Authors: Matthew Groh, Aidan Day, Blake Nygren, Jack Volonte -->
+<!-- Authors: Matthew Groh, Aidan Day, Blake Nygren, Jack Volonte, Trey Dettmer -->
 
 <html>
 
   <head>
-    <link rel="stylesheet" href="stylesheets/ADMIN_Individual_Page.css">
+    <link rel="stylesheet" href="stylesheets/ADMIN_individual_page.css">
+    <!--include Jquery, this should be installed locally but we can fetch it for now-->
+    <script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"/></script>
+    <script src="javascripts/ADMIN_individual_page1.js"></script>
   </head>
 
-  <div id="back">
-    <input width="60" type="image" alt="Back" src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Ic_arrow_back_48px.svg">
-  </div>
-
-  <!--Header card - absolutely fixed to the top - holds buttons (except back) and name-->
-  <div class="headCard">
-    <a href="Request_Page.html"><button id="manageRequest" >Manage Your Request</button></a>
-    <h1 id="name">DSLR Camera</h1>
-    <button id="request">Add Item to Request</button>
-  </div>
-
-  
-  <div id="main_image_div">
-    <img src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg"
-alt="dslr_camera" class="main_image">
-  </div>
-
-<!--Info about the products - includes images and text in 2 columns-->
-  <div id="product-info">
-
-    <div id="images_div">
-
-      <div id="sub-images">
-        <div class="alt-images">
-          <img src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg"
-		alt="dslr_camera" class="sub-img-style" >
-        </div>
-
-        <div class="alt-images">
-          <img src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg"
-		alt="dslr_camera" class="sub-img-style">
-        </div>
-
-        <div class="alt-images">
-          <img src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg"
-		alt="dslr_camera" class="sub-img-style">
-        </div>
-
-      </div>
-
+  <body>
+    <!-- Purple top nav bar-->
+    <div class="topNavBar">
+      <a id="upLogoLink" href="https://www.up.edu/index.html" target="_blank">
+          <img id="upNavLogo" src="https://www.giving.up.edu/s/1797/images/logo.png">
+      </a>
+      <a class="navBarLink" href="#"> Admin</a>
+      <a class="navBarLink" href="#"> Help</a>
+      <a class="navBarLink" href="#"> Catalog</a>
+      <a class="navBarLink" href="#"> View Requests</a>
     </div>
 
-    <div id="product-stats">
+    <!-- Div which holds all page content besides navbar and footer-->
+    <div class=pageContent>
 
-      <div>
-        <h1 class="stat_title">Model/Brand</h1>
-        <p id="item-brand">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit saepe veniam, vero in deserunt laudantium suscipit repellat similique nemo nam numquam. Atque temporibus maiores impedit suscipit inventore, enim esse sed.</p>
+      <!--Item name and button to request item-->
+      <div class=itemHead>
+        <h1 id="itemName">DSLR Camera</h1>
+        <div id="requestButtonWrapper">
+          <input type="button" id="requestButton" value="Request Item" />
+        </div>
       </div>
 
-      <div>
-        <h1 class="stat_title">Categories</h1>
-        <p id="item-categories">Camera, Video, Photography</p>
+      <!--Div which contains all images of item-->
+      <div class="images">
+        <!-- Big image of item-->
+        <div style="position: relative;">
+          <img id="mainImage" src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg" alt="dslr_camera" >
+          <input type="file" class="ADMIN imageEditIconLink" accept="image/png, image/jpeg">
+            <img  class="ADMIN imageEditIcon" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png">
+          </input>
+        </div>
+
+        <!-- Smaller alternative images of item-->
+        <div id="altImages">
+          <div style="position: relative;">
+            <img class="altImage" src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg" alt="dslr_camera">
+            <input type="file" class="ADMIN altImageEditIconLink" accept="image/png, image/jpeg">
+              <img class="ADMIN altImageEditIcon" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png">
+            </input>
+          </div>
+          <div style="position: relative;">
+            <img class="altImage" src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg" alt="dslr_camera">
+            <input type="file" class="ADMIN altImageEditIconLink" accept="image/png, image/jpeg">
+              <img class="ADMIN altImageEditIcon" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png">
+            </input>
+          </div>
+          <div style="position: relative;">
+            <img class="altImage" src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg" alt="dslr_camera">
+            <input type="file" class="ADMIN altImageEditIconLink" accept="image/png, image/jpeg">
+              <img class="ADMIN altImageEditIcon" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png">
+            </input>
+          </div>
+        </div>
+
+      </div>
+
+      <!--Info about the products - model/brand, categories, uses, accessories -->
+      <div class="productInfo">
+
+          <div>
+            <h1 class="statTitle" style="margin-top: 0;">Model/Brand</h1>
+            <img class="ADMIN textEditIcon" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png" alt="edit" >
+            <p class="infoText" contenteditable="true">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit saepe veniam, vero in deserunt laudantium suscipit repellat similique nemo nam numquam. Atque temporibus maiores impedit suscipit inventore, enim esse sed.</p>
+          </div>
+
+          <div>
+            <h1 class="statTitle">Categories</h1>
+            <img class="ADMIN textEditIcon"  src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png" alt="edit" >
+            <p class="infoText" contenteditable="true">Camera, Video, Photography</p>
+          </div>
+
+          <div>
+            <h1 class="statTitle">Uses</h1>
+            <img class="ADMIN textEditIcon" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png" alt="edit" >
+            <p class="infoText" contenteditable="true">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit saepe veniam, vero in deserunt laudantium suscipit repellat similique nemo nam numquam. Atque temporibus maiores impedit suscipit inventore, enim esse sed.</p>
+          </div>
+
+          <div>
+            <h1 class="statTitle">Accessories</h1>
+            <img class="ADMIN textEditIcon" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png" alt="edit" >
+            <p class="infoText" contenteditable="true">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit saepe veniam, vero in deserunt laudantium suscipit repellat similique nemo nam numquam. Atque temporibus maiores impedit suscipit inventore, enim esse sed.</p>
+          </div>
+
+      </div>  
+
+      <!-- Item Description-->
+      <div class="description">
+        <h1 class="statTitle">Description</h1>
+        <img class="ADMIN textEditIcon" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png" alt="edit" >
+        <p class="infoText" contenteditable="true">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas integer eget. Cursus metus aliquam eleifend mi. Lacus sed viverra tellus in hac habitasse. Arcu vitae elementum curabitur vitae nunc sed velit dignissim sodales. Turpis egestas integer eget aliquet nibh praesent. Facilisis leo vel fringilla est ullamcorper. Vivamus at augue eget arcu dictum varius duis at. Egestas purus viverra accumsan in nisl nisi scelerisque eu ultrices. Id ornare arcu odio ut sem nulla pharetra. At erat pellentesque adipiscing commodo elit at. In dictum non consectetur a erat nam. Lectus sit amet est placerat. Tempus urna et pharetra pharetra massa massa ultricies mi quis. Risus ultricies tristique nulla aliquet.</p>
+      </div>
+
+      <!-- Similar Items -->
+      <div class=similarItems>
+        <h1 class="statTitle">Similar Items</h1>
+        <div id="similarItemsWrapper">
+          <div class="similarItemContainer">
+            <img class="similarItemImage" src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg" alt="dslr_camera">
+            <input type="file" class="ADMIN imageEditIconLink" accept="image/png, image/jpeg">
+              <img  class="ADMIN imageEditIcon" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png">
+            </input>
+          </div>
+          <div class="similarItemContainer">
+            <img class="similarItemImage" src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg" alt="dslr_camera">
+            <input type="file" class="ADMIN imageEditIconLink" accept="image/png, image/jpeg">
+              <img  class="ADMIN imageEditIcon" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png">
+            </input>
+          </div>
+          <div class="similarItemContainer">
+            <img class="similarItemImage" src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg" alt="dslr_camera">
+            <input type="file" class="ADMIN imageEditIconLink" accept="image/png, image/jpeg">
+              <img  class="ADMIN imageEditIcon" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png">
+            </input>
+          </div>
+
+        </div>
+      </div>
     </div>
 
-      <div>
-        <h1 class="stat_title">Uses</h1>
-        <p id="item-uses">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit saepe veniam, vero in deserunt laudantium suscipit repellat similique nemo nam numquam. Atque temporibus maiores impedit suscipit inventore, enim esse sed.</p>
-      </div>
-
-      <div>
-        <h1 class="stat_title">Accessories</h1>
-        <p id="item-accessories">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit saepe veniam, vero in deserunt laudantium suscipit repellat similique nemo nam numquam. Atque temporibus maiores impedit suscipit inventore, enim esse sed.</p>
-      </div>
-
-    </div>
-
-  </div>  
-
-
-
-  <div id="description_div">
-    <h1 class="stat_title">Description</h1>
-    <p id="item-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas integer eget. Cursus metus aliquam eleifend mi. Lacus sed viverra tellus in hac habitasse. Arcu vitae elementum curabitur vitae nunc sed velit dignissim sodales. Turpis egestas integer eget aliquet nibh praesent. Facilisis leo vel fringilla est ullamcorper. Vivamus at augue eget arcu dictum varius duis at. Egestas purus viverra accumsan in nisl nisi scelerisque eu ultrices. Id ornare arcu odio ut sem nulla pharetra. At erat pellentesque adipiscing commodo elit at. In dictum non consectetur a erat nam. Lectus sit amet est placerat. Tempus urna et pharetra pharetra massa massa ultricies mi quis. Risus ultricies tristique nulla aliquet.</p>
-  </div>
-
-
-  <br><br><br><br><br>
-
-    <div>
-      <h1 class="stat_title">Similar Items</h1>
-      <div class="row">
-        <div class="column">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Ic_arrow_back_48px.svg"
-          alt="previous" class="sub-img-style" style="width:50%">
-        </div>
-        <div class="column">
-          <img src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg"
-          alt="dslr_camera" class="sub-img-style" style="width:100%">
-        </div>
-        <div class="column">
-          <img src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg"
-          alt="dslr_camera" class="sub-img-style" style="width:100%">
-        </div>
-        <div class="column">
-          <img src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg"
-          alt="dslr_camera" class="sub-img-style" style="width:100%">
-        </div>
-        <div class="column_right">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Ic_arrow_back_48px.svg"
-          alt="next" class="sub-img-style" style="width:50%">
-        </div>
-      </div>
-    </div>
+    <!-- Footer with contact information -->
+    <footer>
+      <p>Phone Number: 503.943.7774 &emsp; Email: av@up.edu</p>
+    </footer> 
     
-
+  </body>
 
 </html>

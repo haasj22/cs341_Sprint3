@@ -2,6 +2,7 @@
 
 $(document).ready(function()
 {
+    
     $(".deleteButton").on("click",HideItem);
     $(".undoDeletionMessage").on("click",RevealItem)
 

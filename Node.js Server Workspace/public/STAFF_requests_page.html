@@ -3,13 +3,20 @@
 <lang html>
     <head>
         <title>Your Requests</title>
-        <link rel="stylesheet" href="stylesheets/Request_Page.css">
+        <link rel="stylesheet" href="stylesheets/STAFF_requests_page.css">
+        <script src="javascripts/STAFF_requests_page.js"></script>
       </head>
 
     <div class="headCard">
         <a id="upLogoLink" href="https://www.up.edu/index.html" target="_blank">
-            <img alt="upLogoNav" id="upNavLogo" src="https://www.giving.up.edu/s/1797/images/logo.png">
-        </a>    
+            <img id="upNavLogo" src="https://www.giving.up.edu/s/1797/images/logo.png">
+        </a>   
+
+        <!--adding buttons in nav bar for user to return to home page--> 
+        <a class="navBarLinks" href="#"> Log In</a>
+        <a class="navBarLinks" href="#"> Help</a>
+        <a id="firstNavLink" class="navBarLinks" href="#"> Catalog</a>
+        <a class="navBarLinks" href="#"> View Requests</a>
     </div>
 
     <div class="items">
@@ -110,11 +117,12 @@
                       </div>
             </li>
         </ul>
+        <button id="request">Request</button>
+        <h2>Total Items: 2</h2>
     </div>
 
     <div class="endCard">
-        <h2>Total Items: 2</h2>
-        <button id="request">Request</button>
+
 
         <body>
             <footer>
@@ -124,4 +132,5 @@
             </footer>
         </body>
     </div>
+
 </html>
