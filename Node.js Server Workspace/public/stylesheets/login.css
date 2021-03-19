@@ -1,0 +1,118 @@
+
+body {
+    background-image: url('../images/login_background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    text-align: center;
+    font-family: 'Hattori Hanzo Light', arial;
+}
+
+#mainDiv {
+
+    background-color: rgba(252, 252, 252, .9);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(252, 252, 252, .9);
+    border-radius: 3px;
+
+}
+
+/* "Audio Visual Services Rental" text */
+h2 {
+    font-size: 1.8em;
+}
+
+#header {
+    flex: 1.5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#usernameDiv {
+    flex: 1; 
+    width: 70%;
+    margin: 0 auto;
+}
+
+#usernameDiv > p {
+    text-align: left;
+    margin-bottom: 0;
+}
+
+#usernameDiv > input {
+    width: 100%;
+    font-size: 1.5em;
+}
+
+
+#passwordDiv {
+    flex: 1;
+    width: 70%;
+    margin: 0 auto;
+}
+
+#passwordDiv > p {
+    text-align: left;
+    margin-bottom: 0;
+}
+
+#passwordDiv > input {
+    width: 100%;
+    font-size: 1.5em;
+}
+
+#loginDiv {
+    position: relative;
+    flex: 1.5;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#loginDiv > button {
+   
+   margin-right: 10%;
+   font-size: 1.5em;
+   background-color: #1e1656;
+   color: white;
+   cursor: pointer;
+   transition: transform .1s;
+}
+
+#loginDiv > button:hover {
+   transform: scale(1.01); 
+}
+
+
+/* Make login form look good on all screens */
+@media only screen and (max-width: 600px) {
+    #mainDiv {
+        width: 300px;
+        height: 400px;
+    }
+}
+
+@media only screen and (max-width: 305px) {
+    #mainDiv {
+        width: 250px;
+        height: 350px;
+    }
+}
+
+
+@media only screen and (min-width: 600px) {
+    #mainDiv {
+        width: 500px;
+        height: 350px;
+    }
+}
+
+
