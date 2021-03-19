@@ -18,9 +18,7 @@ router.post('/', function(req, res, next) {
     //authentication code would go here.
 
     console.log("recieved login request.");
-    res.render('ADMIN_mainCatalog', { title: 'Express' });
-    //res.redirect("public/ADMIN_mainCatalog.html");
-    
+    res.redirect("ADMIN_catalog.html");
 });
 
 
