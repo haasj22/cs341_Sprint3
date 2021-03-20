@@ -23,9 +23,12 @@ body::after {
 /* Top Nav Bar */
 .topNavBar {
     background-color: #1e1656;
-    overflow: hidden;
+    overflow-x: auto;
     position: relative;
-    
+    height: 9vh;
+    display: flex;
+    flex-direction: row;
+    padding: 0 1em; 
 }
 
 /* Nav Bar Link  */
@@ -34,12 +37,19 @@ body::after {
     text-align: center;
     text-decoration: none;
     font-size: 5vh;
-    float: right;
-    padding-top: 1.5vh;
-    padding-right: 1.5vw;
-    padding-left: 1.5vw;
-    padding-bottom: 1.5vh;
+    padding: 0 1.5vw;
     font-family: 'Hattori Hanzo Light', arial;
+    display: inline-block;
+    flex: 1;
+    align-self: center;
+    white-space: nowrap;
+}
+
+/* Nav Bar Link  */
+.navBarLinkSpacer {
+    display: inline-block;
+    flex: 4;
+    align-self: flex-end;
 }
 
 /*  What happens when navbar link is hovered over*/
@@ -54,26 +64,15 @@ body::after {
 
 /* The a tag for the UP logo in nav bar*/
 #upLogoLink {
-    height: 100%;
+    height: 80%;
     display: inline-block;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    padding-left: 10px;
+    flex: 1;
+    margin: auto 0;
 }
 
 /* UP logo in nav bar*/
 #upNavLogo {
-    max-width: 10vw;
-    min-width: 5em;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    
+    height: 100%;  
 }
 
 /* section for item name and request button */
@@ -87,11 +86,9 @@ body::after {
 
 /* Item Name */
 #itemName {
-    
     font-size: 4em;
     flex-grow: 4;
     text-align: right;
-    
 }
 
 /* request button wrapper that centers the button vertically */
@@ -278,10 +275,6 @@ footer p {
 
 /* layout on mobile device */
 @media (max-aspect-ratio: 6/7) {
-
-    .navBarLink {
-        font-size: 5vw;
-    }
 
     #requestButton {
         font-size: 2em;

@@ -18,86 +18,62 @@ body::after {
     display: block;
     height: 8vh;
 }
-
-/* The a selector for the UP nav bar logo*/
-#upLogoLink {
-    height: 100%;
-    display: inline-block;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    padding-left: 10px;
-}
-
-/* Update Size & Location Of Nav Bar Logo*/
-#upNavLogo {
-    max-width: 10vw;
-    min-width: 5em;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    
-}
-
-/* Top Nav Bar Styles */
-#topNavBar {
+/* Top Nav Bar */
+.topNavBar {
     background-color: #1e1656;
-    /* background-image: linear-gradient(316deg, #6c33a3 0%, #1e1656 74%); */
-    /* margin-bottom: 2vh; */
-    overflow: hidden;
+    overflow-x: auto;
     position: relative;
+    height: 9vh;
+    display: flex;
+    flex-direction: row;
+    padding: 0 1em; 
 }
 
-/* Nav Bar Link Styles */
-.navBarLinks {
+/* Nav Bar Link  */
+.navBarLink {
     color: white;
     text-align: center;
     text-decoration: none;
     font-size: 5vh;
-    float: right;
-    padding-top: 1.5vh;
-    padding-right: 1.5vw;
-    padding-left: 1.5vw;
-    padding-bottom: 1.5vh;
+    padding: 0 1.5vw;
     font-family: 'Hattori Hanzo Light', arial;
+    display: inline-block;
+    flex: 1;
+    align-self: center;
+    white-space: nowrap;
 }
 
-/* The navbar link of the current page */
+/* Nav Bar Link  */
+.navBarLinkSpacer {
+    display: inline-block;
+    flex: 4;
+    align-self: flex-end;
+}
+
+/*  What happens when navbar link is hovered over*/
+.navBarLink:hover {
+    background-color: #100a3a;
+}
+
+/* The navbar link of the current page (currently not used for individual page) */
 .navBarLinkCurrent {
     background-color: #100a3a;
 }
 
-/*  Nav Bar Link Hover Styles*/
-.navBarLinks:hover {
-    background-color: #100a3a;
-
+/* The a tag for the UP logo in nav bar*/
+#upLogoLink {
+    height: 80%;
+    display: inline-block;
+    flex: 1;
+    margin: auto 0;
 }
 
-/*  Nav Bar Active Link Style*/
-.navBarLinks:active {
-    color: #3d3281;
+/* UP logo in nav bar*/
+#upNavLogo {
+    height: 100%;  
 }
 
 
-/* Responsive navbar */
-@media only screen and (max-width: 700px) {
-    /* Nav Bar Link Styles */
-    .navBarLinks {
-        color: white;
-        text-align: center;
-        text-decoration: none;
-        font-size: 5vw;
-        float: right;
-        margin-top: 1.5vh;
-        margin-right: 2.5vw;
-        margin-bottom: 1.5vh;
-        font-family: 'Hattori Hanzo Light', arial;
-    }
-}
 
 /*  Set Main Selection Bar Color */
 #mainSelectionBar {
