@@ -1,9 +1,7 @@
-$(document).ready(function()
-{
+$(document).ready(function () {
     //Author Aidan Day Sprint 2 CS 341
     //Structure of search was taken from James Q Quick's JS Search Bar Tutorial
     //https://www.youtube.com/watch?v=wxz5vJ1BWrc
-
 
 
     //retrieve catalog element to be populated.
@@ -21,56 +19,57 @@ $(document).ready(function()
     //retrieve returnCount <p> div to update with every item display
     const resultCount = document.getElementById('resultCount');
 
-
-
     //retrive searchbar to extract search criteria
     const searchBar = document.getElementById('searchBar');
+    //an image of the university logo
     var placeholderImage = "https://www.universitycounselingjobs.com/institution/logo/logo2(4).png";
     let CatalogItemsFull = [];
     let CatalogItems = [];
 
     /*
-    his method refreshes the search criteria evertime user releases a key stroke in the searchbar. 
+    This method refreshes the search criteria evertime user releases a key stroke in the searchbar. 
     */
     searchBar.addEventListener('keyup', (e) => {
         const searchString = e.target.value.toLowerCase();
         displayItemsByNameAndCategory(searchString);
     });
 
-    viewAll.addEventListener('click', (e) => {
-        //return all values to CatalogItems array
-        loadItems();
+    // //send items to be displayed
+    // displayItems(filteredItems);
 
-        //send items to be displayed
-        resultCount.innerHTML = CatalogItems.length + " results";
-        displayItems(CatalogItems);
-    });
 
-    conferencing.addEventListener('click', (e) => {
-        const searchString = "conferencing";
-        displayItemsByCategory(searchString);
-    });
+    /*
+    displayItems takes an array of items and converts each item into a HTML block. Each of these blocks is appended together and inserted into bottomCategory div of mainCatelog 
+    */
+    const displayItems = (items) => {
+        items.forEach(addFillersToEmptyImages);
+        const htmlString = items
+            .map((item, index) => {
+                return ` 
+        <a href="STAFF_individual_page.html?${item.itemKey}">               
+            <figure class="bottomIndividualItem">
+              <img class="bottomImage" src="${item.image}" alt="${item.name}">
+              <figcaption>${item.name}</figcaption>
+            </figure>           
+        </a>
+        `;
+            })
+            .join('');
+        resultCount.innerHTML = items.length + " results";
+        itemCatalog.innerHTML = htmlString;
+    };
 
-    streaming.addEventListener('click', (e) => {
-        const searchString = "streaming";
-        displayItemsByCategory(searchString);
-    });
-
-    recording.addEventListener('click', (e) => {
-        const searchString = "recording";
-        displayItemsByCategory(searchString);
-    });
-
-    presentation.addEventListener('click', (e) => {
-        const searchString = "presentation";
-        displayItemsByCategory(searchString);
-    });
-
-    audio.addEventListener('click', (e) => {
-        const searchString = "audio";
-        displayItemsByCategory(searchString);
-    });
-
+    /*
+    This method adds an image of the university logo to any items that do not contain images 
+    */
+    function addFillersToEmptyImages(item) {
+        if (item.image.localeCompare("") == 0) {
+            item.image = placeholderImage;
+        }
+    }
+    /*
+    filters items using both name and category and makes call to display them
+    */
     function displayItemsByNameAndCategory(searchString) {
         const filteredItems = CatalogItems.filter((item) => {
             return (
@@ -83,6 +82,21 @@ $(document).ready(function()
         displayItems(filteredItems);
     }
 
+ 
+
+    /*
+    This method adds an image of the university logo to any items that do not contain images 
+    */
+    function addFillersToEmptyImages(item) {
+        if (item.image.localeCompare("") == 0) {
+            item.image = placeholderImage;
+        }
+    }
+
+
+    /*
+    displayItemsByCategory filters and displays solely when category buttons are clicked 
+    */
     function displayItemsByCategory(searchString) {
         const filteredItems = CatalogItems.filter((item) => {
             return (
@@ -95,40 +109,74 @@ $(document).ready(function()
     }
 
 
+    viewAll.addEventListener('click', (e) => {
+        //return all values to CatalogItems array
+        loadItems();
+
+        //send items to be displayed
+        displayItems(CatalogItems);
+    });
+
+    //categorical search for conferencing items
+    conferencing.addEventListener('click', (e) => {
+        const searchString = "conferencing";
+        displayItemsByCategory(searchString);
+    });
+
+    //categorical search for streaming items
+    streaming.addEventListener('click', (e) => {
+        const searchString = "streaming";
+        displayItemsByCategory(searchString);
+    });
+
+    //categorical search for recording items
+    recording.addEventListener('click', (e) => {
+        const searchString = "recording";
+        displayItemsByCategory(searchString);
+    });
+
+    //categorical search for presentation items
+    presentation.addEventListener('click', (e) => {
+        const searchString = "presentation";
+        displayItemsByCategory(searchString);
+    });
+    //categorical search for audio items
+    audio.addEventListener('click', (e) => {
+        const searchString = "audio";
+        displayItemsByCategory(searchString);
+    });
+
+
     /*
     loadItems is the first method called when the script is run. This method populates our CatalogItems array
     and makes a call to displays all items contained. 
     */
     const loadItems = async () => {
-        /* try {
-            const res = await fetch('https://hp-api.herokuapp.com/api/characters');
-            CatalogItems = await res.json();
-            displayItems(CatalogItems);
-        } catch (err) {
-            console.error(err);
-        } */
+       
 
         //Populate CatalogItemsFull with data from the SQL server: 'sprint2cs341', database: 'sprint2', table: 'products'
         //only do so if the variable is empty (the data has not been loaded yet)
-        if (CatalogItemsFull.length == 0){
+        if (CatalogItemsFull.length == 0) {
             console.log("Attempting to access item data with POST");
             $.post({
                 traditional: true,
                 url: '/catalogData',    // url
-                success: function(data, ) {// success callback
+                success: function (data,) {// success callback
                     readServerData(data);
                 }
-            }).fail(function(jqxhr, settings, ex) { 
-                alert('Accessing product data failed, ' + ex + "\nLoading static dataset."); 
+            }).fail(function (jqxhr, settings, ex) {
+                alert('Accessing product data failed, ' + ex + "\nLoading static dataset.");
                 loadStaticDataset();
             });
         }
 
         //for now we are using a static data set
         CatalogItemsFull = CatalogItems;
+
+        //console.log(CatalogItems);
     };
 
-    function loadStaticDataset(){
+    function loadStaticDataset() {
         CatalogItems = [{ name: "Canon DLSR", image: "", category: "recording" },
         { name: "Canon R", image: "https://static.bhphoto.com/images/images1000x1000/1536120359_1433711.jpg", category: "recording" },
         { name: "Canon 80D", image: "https://www.bhphotovideo.com/images/images2500x2500/canon_1263c005_eos_80d_dslr_camera_1225876.jpg", category: "recording" },
@@ -141,84 +189,49 @@ $(document).ready(function()
         { name: "Logitech - HD Webcam", image: "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/9928/9928354_sa.jpg;maxHeight=200;maxWidth=300", category: "streaming" }]
     }
 
-    /*
-    displayItems takes an array of items and converts each item into a HTML block. Each of these blocks is appended together and incerted into bottomCategory div of mainCatelog 
-    */
-    const displayItems = (items) => {
-        items.forEach(addFillersToEmptyImages);
-        const htmlString = items
-            .map((item) => {
-                return `             
-                        <figure class="bottomIndividualItem">
-                            <div class="deletionOverlay">
-                            <p class="deletionMessage">This item is set for deletion.</p>
-                            <a class="undoDeletionMessage">undo?</a> 
-                            </div> 
-                            <button class="deleteButton" type="button">X</button>
-                            <a href="ADMIN_Individual_Page.html?${item.itemKey}">  
-                            <img class="bottomImage" src="${item.image}" alt="${item.image}">
-                            </a>
-                            <figcaption>${item.name}</figcaption>
-                        </figure>          
-                
-            `;
-            })
-            .join('');
-        resultCount.innerHTML = items.length + " results";
-        itemCatalog.innerHTML = htmlString;
-    };
-    /*
-    This method adds an image of the university logo to any items that do not contain images 
-    */
-    function addFillersToEmptyImages(item) {
-        if (item.image.localeCompare("") == 0 ) {
-            item.image = placeholderImage;
-        }
-    } 
-
     //A helper function to read items from the database format into the local CatalogItems format 
     //and load into CatalogItemsFull
-    function readServerData(data){
+    function readServerData(data) {
         console.log("Attempting to load item data from SQL server");
         //console.log(data)
         productDataArray = data.productData;
         console.log(productDataArray);
         var i;
         //skipping the first entry in the table, a dummy entry
-        CatalogItemsFull.length = productDataArray.length-1;
+        CatalogItemsFull.length = productDataArray.length - 1;
         console.log("productDataArray Length: " + productDataArray.length);
         console.log("CatalogItemsFull Length: " + CatalogItemsFull.length);
-        for (i = 1; i < productDataArray.length; i++){
+        for (i = 1; i < productDataArray.length; i++) {
             prodData = productDataArray[i];
             //console.log("productDataArray[" + i + "]");
             //console.log(prodData);
             var b = prodData.brand;
-            if (b == null){
+            if (b == null) {
                 b = "";
             }
             var n = prodData.name;
-            if (n == null){
+            if (n == "") {
                 n = "No Name";
             }
             var bn = b + " " + n;
             var img = placeholderImage;
             var c = prodData.category;
-            if (c == null){
+            if (c == null) {
                 c = "";
             }
-            productjson = {name:bn, image:img, category:c};
+            var k = prodData.item_key;
+            if (k == null){
+                k = "";
+            }
+            var productjson = {itemKey:k, name:bn, image:img, category:c};
             CatalogItemsFull[i] = productjson;
         }
         console.log(CatalogItemsFull);
         console.log("Item loading complete!");
     }
 
+    //initial population of page when script is  run
     loadItems();
 
-
-
-
-
-    
 });
 
