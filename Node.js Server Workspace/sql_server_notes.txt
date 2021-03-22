@@ -9,9 +9,9 @@ gcloud config set project sprint2cs341;
 gcloud sql connect sprint2cs341 --user=root --quiet;
 
 primary database: sprint2
-table names:	PRODUCTIMAGES	formats:	IMAGEID:varchar(100)	MODELNUMBER:varchar(100)	IMAGE:varchar(200)	
+table names:	PRODUCTIMAGES	formats:	key_number:int(11)	image_id:varchar(100)	model_number:varchar(100)	image:varchar(200)	
 		USERS				USERNAME:varchar(75)	PASSWORD:varchar(100)	ISADMIN:bit(1)	ISSTAFF:bit(1)
-		PRODUCTS			model_num:varchar(50)	name:varchar(75)	brand:varchar(50) picture:varchar(100)
+		PRODUCTS			item_key:int(11)	model_num:varchar(50)	name:varchar(75)	brand:varchar(50) picture:varchar(100)
 						category:varchar(50)	description:varchar(300)	reservation_length:int(11)
 						uses:varchar(100)	accessories:varchar(200)
 
