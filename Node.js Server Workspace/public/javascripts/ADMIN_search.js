@@ -3,6 +3,7 @@ $(document).ready(function()
     //Author Aidan Day Sprint 2 CS 341
     //Structure of search was taken from James Q Quick's JS Search Bar Tutorial
     //https://www.youtube.com/watch?v=wxz5vJ1BWrc
+    //Version: March 21, 2021
 
 
 
@@ -21,22 +22,24 @@ $(document).ready(function()
     //retrieve returnCount <p> div to update with every item display
     const resultCount = document.getElementById('resultCount');
 
-
-
     //retrive searchbar to extract search criteria
     const searchBar = document.getElementById('searchBar');
     var placeholderImage = "https://www.universitycounselingjobs.com/institution/logo/logo2(4).png";
     let CatalogItemsFull = [];
     let CatalogItems = [];
 
+    //variable for initializing the page
+    let init = true;
+
     /*
-    his method refreshes the search criteria evertime user releases a key stroke in the searchbar. 
+    This method refreshes the search criteria evertime user releases a key stroke in the searchbar. 
     */
     searchBar.addEventListener('keyup', (e) => {
         const searchString = e.target.value.toLowerCase();
         displayItemsByNameAndCategory(searchString);
     });
 
+    //Display all categories when viewAll button is clicked
     viewAll.addEventListener('click', (e) => {
         //return all values to CatalogItems array
         loadItems();
@@ -46,30 +49,69 @@ $(document).ready(function()
         displayItems(CatalogItems);
     });
 
+    //categorical search for conferencing items
     conferencing.addEventListener('click', (e) => {
         const searchString = "conferencing";
         displayItemsByCategory(searchString);
     });
 
+    //categorical search for streaming items
     streaming.addEventListener('click', (e) => {
         const searchString = "streaming";
         displayItemsByCategory(searchString);
     });
 
+    //categorical search for recording items
     recording.addEventListener('click', (e) => {
         const searchString = "recording";
         displayItemsByCategory(searchString);
     });
 
+    //categorical search for presentation items
     presentation.addEventListener('click', (e) => {
         const searchString = "presentation";
         displayItemsByCategory(searchString);
     });
 
+    //categorical search for audio items
     audio.addEventListener('click', (e) => {
         const searchString = "audio";
         displayItemsByCategory(searchString);
     });
+
+    //categorical search for computer items
+    computer.addEventListener('click', (e) => {
+        const searchString = "computer";
+        displayItemsByCategory(searchString);
+    });
+
+
+    /*
+    displayItems takes an array of items and converts each item into a HTML block. Each of these blocks is appended together and incerted into bottomCategory div of mainCatelog 
+    */
+    const displayItems = (items) => {
+        items.forEach(addFillersToEmptyImages);
+        const htmlString = items
+            .map((item) => {
+                return `             
+                        <figure class="bottomIndividualItem">
+                            <div class="deletionOverlay">
+                            <p class="deletionMessage">This item is set for deletion.</p>
+                            <a class="undoDeletionMessage">undo?</a> 
+                            </div> 
+                            <button class="deleteButton" type="button">X</button>
+                            <a href="ADMIN_Individual_Page.html?${item.itemKey}">  
+                            <img class="bottomImage" src="${item.image}" alt="${item.image}">
+                            </a>
+                            <figcaption>${item.name}</figcaption>
+                        </figure>          
+                
+            `;
+            })
+            .join('');
+        resultCount.innerHTML = items.length + " results";
+        itemCatalog.innerHTML = htmlString;
+    };
 
     function displayItemsByNameAndCategory(searchString) {
         const filteredItems = CatalogItems.filter((item) => {
@@ -124,8 +166,8 @@ $(document).ready(function()
             });
         }
 
-        //for now we are using a static data set
-        CatalogItemsFull = CatalogItems;
+        //load maellable list
+        CatalogItems = CatalogItemsFull;
     };
 
     function loadStaticDataset(){
@@ -142,32 +184,6 @@ $(document).ready(function()
     }
 
     /*
-    displayItems takes an array of items and converts each item into a HTML block. Each of these blocks is appended together and incerted into bottomCategory div of mainCatelog 
-    */
-    const displayItems = (items) => {
-        items.forEach(addFillersToEmptyImages);
-        const htmlString = items
-            .map((item) => {
-                return `             
-                        <figure class="bottomIndividualItem">
-                            <div class="deletionOverlay">
-                            <p class="deletionMessage">This item is set for deletion.</p>
-                            <a class="undoDeletionMessage">undo?</a> 
-                            </div> 
-                            <button class="deleteButton" type="button">X</button>
-                            <a href="ADMIN_Individual_Page.html?${item.itemKey}">  
-                            <img class="bottomImage" src="${item.image}" alt="${item.image}">
-                            </a>
-                            <figcaption>${item.name}</figcaption>
-                        </figure>          
-                
-            `;
-            })
-            .join('');
-        resultCount.innerHTML = items.length + " results";
-        itemCatalog.innerHTML = htmlString;
-    };
-    /*
     This method adds an image of the university logo to any items that do not contain images 
     */
     function addFillersToEmptyImages(item) {
@@ -183,42 +199,67 @@ $(document).ready(function()
         //console.log(data)
         productDataArray = data.productData;
         console.log(productDataArray);
+        productImageArray = data.imageData;
+        console.log(productImageArray);
         var i;
-        //skipping the first entry in the table, a dummy entry
-        CatalogItemsFull.length = productDataArray.length-1;
+        // CatalogItemsFull.length = productDataArray.length - 1;
         console.log("productDataArray Length: " + productDataArray.length);
+        console.log("productImageArray Length: " + productImageArray.length);
         console.log("CatalogItemsFull Length: " + CatalogItemsFull.length);
-        for (i = 1; i < productDataArray.length; i++){
+        for (i = 1; i < productDataArray.length; i++) {
             prodData = productDataArray[i];
             //console.log("productDataArray[" + i + "]");
-            //console.log(prodData);
+            console.log(prodData);
+            // assigns brand name
             var b = prodData.brand;
-            if (b == null){
+            if (b == null) {
                 b = "";
             }
-            var n = prodData.name;
-            if (n == null){
-                n = "No Name";
+            // assigns model name
+            var n = prodData.model_num;
+            if (n == "") {
+                n = "No Model";
             }
+            // combines brand and model for full title
             var bn = b + " " + n;
             var img = placeholderImage;
+            // assigns category
             var c = prodData.category;
-            if (c == null){
+            if (c == null) {
                 c = "";
             }
-            productjson = {name:bn, image:img, category:c};
+            var k = prodData.item_key;
+            // console.log("type of key" + typeof(k));
+            if (k == null){
+                k = "";
+            }
+            // key_number, image_id(starts at 1)
+            // searches through image table for first image with matching item key and returns it
+            for (j = 0; j < productImageArray.length; j++) {
+                if (k == null) {
+                    break;
+                }
+                imgData = productImageArray[j];
+                if(imgData.image_id == 1){
+                    img = imgData.image;
+                    //console.log("image url: " + img);
+                }
+            }
+            //temporary line, until images are fixed
+            var img = placeholderImage;
+
+            var productjson = {itemKey:k, name:bn, image:img, category:c};
             CatalogItemsFull[i] = productjson;
         }
         console.log(CatalogItemsFull);
         console.log("Item loading complete!");
+        if (init){
+            displayItems(CatalogItems);
+            init = false;
+        }
     }
 
+    //initial population of page when script is  run
     loadItems();
-
-
-
-
-
-    
 });
 

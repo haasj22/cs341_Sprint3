@@ -1,3 +1,7 @@
+//Author: Alex Junkins, Adrian Muth, and Justin Cao
+//Version: March 21 2021
+// Pulls information on items from database and loads items based on keys
+
 $(document).ready(function () {
 
     let CatalogItemsFull = [];
@@ -5,7 +9,7 @@ $(document).ready(function () {
 
     const itemName = document.getElementById('itemName');
     const modelText = document.getElementById('modelText');
-    const categotyText = document.getElementById('categoryText');
+    const categoryText = document.getElementById('categoryText');
     const usesText = document.getElementById('usesText');
     const accessoriesText = document.getElementById('accessoriesText');
     const descriptionText = document.getElementById('descriptionText');
@@ -38,10 +42,8 @@ $(document).ready(function () {
             });
         }
 
-        //for now we are using a static data set
+        //load maellable list
         CatalogItems = CatalogItemsFull;
-
-        //console.log(CatalogItems);
     };
 
     function loadStaticDataset() {
@@ -62,36 +64,63 @@ $(document).ready(function () {
     function readServerData(data) {
         console.log("Attempting to load item data from SQL server");
         //console.log(data)
-        var productDataArray = data.productData;
+        productDataArray = data.productData;
         console.log(productDataArray);
+        productImageArray = data.imageData;
+        console.log(productImageArray);
         var i;
-        //skipping the first entry in the table, a dummy entry
-        CatalogItemsFull.length = productDataArray.length - 1;
+        // CatalogItemsFull.length = productDataArray.length - 1;
         console.log("productDataArray Length: " + productDataArray.length);
+        console.log("productImageArray Length: " + productImageArray.length);
         console.log("CatalogItemsFull Length: " + CatalogItemsFull.length);
-        for (i = 1; i < productDataArray.length; i++) {
-            var prodData = productDataArray[i];
+        for (i = 0; i < productDataArray.length; i++) {
+            prodData = productDataArray[i];
             //console.log("productDataArray[" + i + "]");
-            //console.log(prodData);
+            console.log(prodData);
+            // assigns brand name
             var b = prodData.brand;
             if (b == null) {
                 b = "";
             }
-            var n = prodData.name;
+            // assigns model name
+            var n = prodData.model_num;
             if (n == "") {
-                n = "No Name";
+                n = "No Model";
             }
+            // combines brand and model for full title
             var bn = b + " " + n;
             var img = placeholderImage;
+            // assigns category
             var c = prodData.category;
             if (c == null) {
                 c = "";
             }
+            // assigns description
+            var d = prodData.description;
+            if (d == null) {
+                d = "No Description";
+            }
             var k = prodData.item_key;
-            if (k == null) {
+            // console.log("type of key" + typeof(k));
+            if (k == null){
                 k = "";
             }
-            var productjson = { itemKey: k, name: bn, image: img, category: c };
+            // key_number, image_id(starts at 1)
+            // searches through image table for first image with matching item key and returns it
+            for (j = 0; j < productImageArray.length; j++) {
+                if (k == null) {
+                    break;
+                }
+                imgData = productImageArray[j];
+                if(imgData.image_id == 1){
+                    img = imgData.image;
+                    //console.log("image url: " + img);
+                }
+            }
+            //temporary line, until images are fixed
+            var img = placeholderImage;
+
+            var productjson = {itemKey:k, name:bn, brand:b, model_num:n, image:img, category:c, description:d};
             CatalogItemsFull[i] = productjson;
         }
         console.log(CatalogItemsFull);
@@ -126,6 +155,15 @@ $(document).ready(function () {
 
         //add more initiations when more data is avaliable from database team
         itemName.innerHTML = item.name;
+        modelText.innerHTML = item.brand + "/" + item.model_num;
+        var categoriesArray = item.category.split(" ");
+        var categoriesString = categoriesArray[0];
+        var i;
+        for (i = 1; i < categoriesArray.length; i++){
+            categoriesString = categoriesString + ", " + categoriesArray[i];
+        }
+        categoryText.innerHTML = categoriesString;
+        descriptionText.innerHTML = item.description;
         document.getElementById('mainImage').src = item.image;
     }
 

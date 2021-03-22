@@ -22,4 +22,3 @@ To see databases
 show databases;
 To see tables
 show tables;
-

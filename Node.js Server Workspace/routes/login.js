@@ -49,9 +49,17 @@ router.post('/', function(req, res, next) {
         });
         // direct user to correct webpage
         if(isAdmin == true){
+            isAdmin = false;
+            loginMatch = false;
+            user.email = "email";
+            user.password = "pass";
             console.log("redirecting to admin page");
             res.redirect("ADMIN_catalog.html");
         } else if(loginMatch == true) {
+            isAdmin = false;
+            loginMatch = false;
+            user.email = "email";
+            user.password = "pass";
             console.log("redirecting to staff page");
             res.redirect("STAFF_catalog.html");
         } else {

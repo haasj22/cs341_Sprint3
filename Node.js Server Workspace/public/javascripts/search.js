@@ -2,6 +2,7 @@ $(document).ready(function () {
     //Author Aidan Day Sprint 2 CS 341
     //Structure of search was taken from James Q Quick's JS Search Bar Tutorial
     //https://www.youtube.com/watch?v=wxz5vJ1BWrc
+    //Version: March 21, 2021
 
 
     //retrieve catalog element to be populated.
@@ -26,6 +27,9 @@ $(document).ready(function () {
     let CatalogItemsFull = [];
     let CatalogItems = [];
 
+    //variable for initializing the page
+    let init = true;
+
     /*
     This method refreshes the search criteria evertime user releases a key stroke in the searchbar. 
     */
@@ -37,78 +41,7 @@ $(document).ready(function () {
     // //send items to be displayed
     // displayItems(filteredItems);
 
-
-    /*
-    displayItems takes an array of items and converts each item into a HTML block. Each of these blocks is appended together and inserted into bottomCategory div of mainCatelog 
-    */
-    const displayItems = (items) => {
-        items.forEach(addFillersToEmptyImages);
-        const htmlString = items
-            .map((item, index) => {
-                return ` 
-        <a href="VIEWER_individual_page.html?${item.itemKey}">               
-            <figure class="bottomIndividualItem">
-              <img class="bottomImage" src="${item.image}" alt="${item.name}">
-              <figcaption>${item.name}</figcaption>
-            </figure>           
-        </a>
-        `;
-            })
-            .join('');
-        resultCount.innerHTML = items.length + " results";
-        itemCatalog.innerHTML = htmlString;
-    };
-
-    /*
-    This method adds an image of the university logo to any items that do not contain images 
-    */
-    function addFillersToEmptyImages(item) {
-        if (item.image.localeCompare("") == 0) {
-            item.image = placeholderImage;
-        }
-    }
-    /*
-    filters items using both name and category and makes call to display them
-    */
-    function displayItemsByNameAndCategory(searchString) {
-        const filteredItems = CatalogItems.filter((item) => {
-            return (
-                item.name.toLowerCase().includes(searchString) ||
-                item.category.toLowerCase().includes(searchString)
-            );
-        });
-
-        //send items to be displayed
-        displayItems(filteredItems);
-    }
-
- 
-
-    /*
-    This method adds an image of the university logo to any items that do not contain images 
-    */
-    function addFillersToEmptyImages(item) {
-        if (item.image.localeCompare("") == 0) {
-            item.image = placeholderImage;
-        }
-    }
-
-
-    /*
-    displayItemsByCategory filters and displays solely when category buttons are clicked 
-    */
-    function displayItemsByCategory(searchString) {
-        const filteredItems = CatalogItems.filter((item) => {
-            return (
-                item.category.toLowerCase().includes(searchString)
-            );
-        });
-
-        //send items to be displayed
-        displayItems(filteredItems);
-    }
-
-
+    //Display all categories when viewAll button is clicked
     viewAll.addEventListener('click', (e) => {
         //return all values to CatalogItems array
         loadItems();
@@ -140,11 +73,92 @@ $(document).ready(function () {
         const searchString = "presentation";
         displayItemsByCategory(searchString);
     });
+
     //categorical search for audio items
     audio.addEventListener('click', (e) => {
         const searchString = "audio";
         displayItemsByCategory(searchString);
     });
+
+    //categorical search for computer items
+    computer.addEventListener('click', (e) => {
+        const searchString = "computer";
+        displayItemsByCategory(searchString);
+    });
+
+    /*
+    displayItems takes an array of items and converts each item into a HTML block. Each of these blocks is appended together and inserted into bottomCategory div of mainCatelog 
+    */
+    const displayItems = (items) => {
+        items.forEach(addFillersToEmptyImages);
+        const htmlString = items
+            .map((item, index) => {
+                return ` 
+        <a href="VIEWER_individual_page.html?${item.itemKey}">               
+            <figure class="bottomIndividualItem">
+              <img class="bottomImage" src="${item.image}" alt="${item.name}">
+              <figcaption>${item.name}</figcaption>
+            </figure>           
+        </a>
+        `;
+            })
+            .join('');
+        resultCount.innerHTML = items.length + " results";
+        itemCatalog.innerHTML = htmlString;
+    };
+
+    /*
+    This method adds an image of the university logo to any items that do not contain images 
+    */
+    function addFillersToEmptyImages(item) {
+        if (item.image.localeCompare("") == 0) {
+            item.image = placeholderImage;
+        }
+    }
+    /*
+    This method adds an image of the university logo to any items that do not contain images 
+    maybe an error...?
+    */
+   /*
+    function addFillersToEmptyImages(item) {
+        if (item.image.localeCompare("") == 0) {
+            item.image = placeholderImage;
+        }
+    }
+    */
+
+    
+    /*
+    filters items using both name and category and makes call to display them
+    */
+    function displayItemsByNameAndCategory(searchString) {
+        const filteredItems = CatalogItems.filter((item) => {
+            return (
+                item.name.toLowerCase().includes(searchString) ||
+                item.category.toLowerCase().includes(searchString)
+            );
+        });
+
+        //send items to be displayed
+        displayItems(filteredItems);
+    }
+
+
+    /*
+    displayItemsByCategory filters and displays solely when category buttons are clicked 
+    */
+    function displayItemsByCategory(searchString) {
+        const filteredItems = CatalogItems.filter((item) => {
+            return (
+                item.category.toLowerCase().includes(searchString)
+            );
+        });
+
+        //send items to be displayed
+        displayItems(filteredItems);
+    }
+
+    
 
 
     /*
@@ -170,10 +184,8 @@ $(document).ready(function () {
             });
         }
 
-        //for now we are using a static data set
-        CatalogItemsFull = CatalogItems;
-
-        //console.log(CatalogItems);
+        //load maellable list
+        CatalogItems = CatalogItemsFull;
     };
 
     function loadStaticDataset() {
@@ -203,19 +215,19 @@ $(document).ready(function () {
         console.log("productDataArray Length: " + productDataArray.length);
         console.log("productImageArray Length: " + productImageArray.length);
         console.log("CatalogItemsFull Length: " + CatalogItemsFull.length);
-        for (i = 1; i < productDataArray.length; i++) {
+        for (i = 0; i < productDataArray.length; i++) {
             prodData = productDataArray[i];
             //console.log("productDataArray[" + i + "]");
-            //console.log(prodData);
+            console.log(prodData);
             // assigns brand name
             var b = prodData.brand;
             if (b == null) {
                 b = "";
             }
             // assigns model name
-            var n = prodData.name;
+            var n = prodData.model_num;
             if (n == "") {
-                n = "No Name";
+                n = "No Model";
             }
             // combines brand and model for full title
             var bn = b + " " + n;
@@ -239,14 +251,21 @@ $(document).ready(function () {
                 imgData = productImageArray[j];
                 if(imgData.image_id == 1){
                     img = imgData.image;
-                    console.log("image url: " + img);
+                    //console.log("image url: " + img);
                 }
             }
+            //temporary line, until images are fixed
+            var img = placeholderImage;
+
             var productjson = {itemKey:k, name:bn, image:img, category:c};
             CatalogItemsFull[i] = productjson;
         }
         console.log(CatalogItemsFull);
-        console.log("Item loading complete!"); 
+        console.log("Item loading complete!");
+        if (init){
+            displayItems(CatalogItems);
+            init = false;
+        }
     }
 
     //initial population of page when script is  run

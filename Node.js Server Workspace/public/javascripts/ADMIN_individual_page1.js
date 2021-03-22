@@ -36,14 +36,38 @@ $(document).ready(function()
     function SaveText() {
 
         var editElem = document.getElementsByClassName("infoText");
+        
+        //check the fields to make sure they fit the format
+        
+        //check the Model/Brand field
+        //check for 1 word, not multiple
+        var mbWordCount = editElem[0].innerHTML.split(" ").length;
+        if (mbWordCount > 1){
+            alert("Invalid model and brand format!\nPlease enter in this format: 'Model'/'Brand'");
+            return;
+        }
+        //check for '/'
+        var mb = editElem[0].innerHTML.split("/")
+        var mbSeparation = mb.length;
+        for (let j = 0; j < mbSeparation; j++){
+            if (mb[j] == ""){
+                alert("The brand and/or model is empty!\nPlease enter in this format: 'Model'/'Brand'");
+                return;
+            }
+        }
+        
+
+        //check the Categories field
+
         var savedJsonObj = { data: []};
         for (let i = 0; i < editElem.length;i++)
         {
-
             savedJsonObj.data.push({"Section": $($(editElem).prev().prev()[i]).text(), "Text": editElem[i].innerHTML});
-
         }
-        //console.log(savedJsonObj);
+        console.log(savedJsonObj);
+
+        //parse and send the new data to the server
+        
         alert("Text saved.");
     }
 

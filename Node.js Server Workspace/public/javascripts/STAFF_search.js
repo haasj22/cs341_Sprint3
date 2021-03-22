@@ -2,6 +2,7 @@ $(document).ready(function () {
     //Author Aidan Day Sprint 2 CS 341
     //Structure of search was taken from James Q Quick's JS Search Bar Tutorial
     //https://www.youtube.com/watch?v=wxz5vJ1BWrc
+    //Version: March 21, 2021
 
 
     //retrieve catalog element to be populated.
@@ -25,6 +26,9 @@ $(document).ready(function () {
     var placeholderImage = "https://www.universitycounselingjobs.com/institution/logo/logo2(4).png";
     let CatalogItemsFull = [];
     let CatalogItems = [];
+    
+    //variable for initializing the page
+    let init = true;
 
     /*
     This method refreshes the search criteria evertime user releases a key stroke in the searchbar. 
@@ -140,9 +144,16 @@ $(document).ready(function () {
         const searchString = "presentation";
         displayItemsByCategory(searchString);
     });
+    
     //categorical search for audio items
     audio.addEventListener('click', (e) => {
         const searchString = "audio";
+        displayItemsByCategory(searchString);
+    });
+
+    //categorical search for computer items
+    computer.addEventListener('click', (e) => {
+        const searchString = "computer";
         displayItemsByCategory(searchString);
     });
 
@@ -170,10 +181,8 @@ $(document).ready(function () {
             });
         }
 
-        //for now we are using a static data set
-        CatalogItemsFull = CatalogItems;
-
-        //console.log(CatalogItems);
+        //load maellable list
+        CatalogItems = CatalogItemsFull;
     };
 
     function loadStaticDataset() {
@@ -196,38 +205,64 @@ $(document).ready(function () {
         //console.log(data)
         productDataArray = data.productData;
         console.log(productDataArray);
+        productImageArray = data.imageData;
+        console.log(productImageArray);
         var i;
-        //skipping the first entry in the table, a dummy entry
-        CatalogItemsFull.length = productDataArray.length - 1;
+        // CatalogItemsFull.length = productDataArray.length - 1;
         console.log("productDataArray Length: " + productDataArray.length);
+        console.log("productImageArray Length: " + productImageArray.length);
         console.log("CatalogItemsFull Length: " + CatalogItemsFull.length);
         for (i = 1; i < productDataArray.length; i++) {
             prodData = productDataArray[i];
             //console.log("productDataArray[" + i + "]");
-            //console.log(prodData);
+            console.log(prodData);
+            // assigns brand name
             var b = prodData.brand;
             if (b == null) {
                 b = "";
             }
-            var n = prodData.name;
+            // assigns model name
+            var n = prodData.model_num;
             if (n == "") {
-                n = "No Name";
+                n = "No Model";
             }
+            // combines brand and model for full title
             var bn = b + " " + n;
             var img = placeholderImage;
+            // assigns category
             var c = prodData.category;
             if (c == null) {
                 c = "";
             }
             var k = prodData.item_key;
+            // console.log("type of key" + typeof(k));
             if (k == null){
                 k = "";
             }
+            // key_number, image_id(starts at 1)
+            // searches through image table for first image with matching item key and returns it
+            for (j = 0; j < productImageArray.length; j++) {
+                if (k == null) {
+                    break;
+                }
+                imgData = productImageArray[j];
+                if(imgData.image_id == 1){
+                    img = imgData.image;
+                    //console.log("image url: " + img);
+                }
+            }
+            //temporary line, until images are fixed
+            var img = placeholderImage;
+
             var productjson = {itemKey:k, name:bn, image:img, category:c};
             CatalogItemsFull[i] = productjson;
         }
         console.log(CatalogItemsFull);
         console.log("Item loading complete!");
+        if (init){
+            displayItems(CatalogItems);
+            init = false;
+        }
     }
 
     //initial population of page when script is  run
