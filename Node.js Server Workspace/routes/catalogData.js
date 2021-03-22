@@ -22,16 +22,30 @@ const orderObj = {
 //POST reciever, request the product data from the server
 router.post('/', function(req, res, next) {
     console.log("Accessing products table from SQL server.");
-    serverfunctions.dbquery("SELECT * FROM PRODUCTS;", recieveData);
+    serverfunctions.dbquery("SELECT * FROM PRODUCTS;", receiveProductData);
 
     // helper fn process the data from the SQL Server 
-    function recieveData(error, results) {
+    function receiveProductData(error, results) {
         console.log("Recieved products table from SQL server.");
         orderObj.error = error;
+        console.log("Error in receiveProductData: " + orderObj.error);
         orderObj.productData = results;
-        res.json(orderObj);
+        console.log(orderObj.productData);
         console.log("Finished post request.");
     }
+
+    serverfunctions.dbquery("SELECT * FROM PRODUCTIMAGES;", receiveImageData);
+    
+    function receiveImageData(error, results) {
+        console.log("Received images table from SQL server.");
+        orderObj.error = error;
+        console.log("Image error: " + orderObj.error);
+        orderObj.imageData = results;
+        console.log("Finished post request.");
+        console.log(orderObj.imageData);
+        res.json(orderObj);
+    }
+
 });
 
 

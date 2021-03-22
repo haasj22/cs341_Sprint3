@@ -196,38 +196,57 @@ $(document).ready(function () {
         //console.log(data)
         productDataArray = data.productData;
         console.log(productDataArray);
+        productImageArray = data.imageData;
+        console.log(productImageArray);
         var i;
-        //skipping the first entry in the table, a dummy entry
-        CatalogItemsFull.length = productDataArray.length - 1;
+        // CatalogItemsFull.length = productDataArray.length - 1;
         console.log("productDataArray Length: " + productDataArray.length);
+        console.log("productImageArray Length: " + productImageArray.length);
         console.log("CatalogItemsFull Length: " + CatalogItemsFull.length);
         for (i = 1; i < productDataArray.length; i++) {
             prodData = productDataArray[i];
             //console.log("productDataArray[" + i + "]");
             //console.log(prodData);
+            // assigns brand name
             var b = prodData.brand;
             if (b == null) {
                 b = "";
             }
+            // assigns model name
             var n = prodData.name;
             if (n == "") {
                 n = "No Name";
             }
+            // combines brand and model for full title
             var bn = b + " " + n;
             var img = placeholderImage;
+            // assigns category
             var c = prodData.category;
             if (c == null) {
                 c = "";
             }
             var k = prodData.item_key;
+            // console.log("type of key" + typeof(k));
             if (k == null){
                 k = "";
+            }
+            // key_number, image_id(starts at 1)
+            // searches through image table for first image with matching item key and returns it
+            for (j = 0; j < productImageArray.length; j++) {
+                if (k == null) {
+                    break;
+                }
+                imgData = productImageArray[j];
+                if(imgData.image_id == 1){
+                    img = imgData.image;
+                    console.log("image url: " + img);
+                }
             }
             var productjson = {itemKey:k, name:bn, image:img, category:c};
             CatalogItemsFull[i] = productjson;
         }
         console.log(CatalogItemsFull);
-        console.log("Item loading complete!");
+        console.log("Item loading complete!"); 
     }
 
     //initial population of page when script is  run

@@ -10,9 +10,8 @@ $(document).ready(function()
     Transition to the login page when Login button is clicked
     */
     loginButton.addEventListener('click', (e) => {
-        document.location.href= "login_placeholder.html";
-
         console.log("pressed login button");
+        document.location.href= "login.html";
         
     });
 });

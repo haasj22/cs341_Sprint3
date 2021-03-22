@@ -24,8 +24,7 @@
         <link rel="shortcut icon" type="image/jpg" href="https://www.up.edu/_files/images/favicon/favicon.ico">
 
         <!-- scripts -->
-        <script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"/></script>
-        <script src="javascripts/login.js"></script>
+        <script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
 
     <body>
@@ -33,19 +32,27 @@
             <div id="header">
                 <h2>Audio Visual Services Rental</h2>
             </div>
-            
+            <!-- sourced from https://www.w3schools.com/tags/tag_input.asp -->
+            <form action="/login" method="POST">
             <div id="usernameDiv">
-                <p>Username</p>
-                <input type="text">
+                <!-- <p>Username</p>
+                <input type="text"> -->
+                <label for="emailaddress">Email:</label>
+                <input type="text" id="emailaddress" name="emailaddress" value="Enter email address"><br><br>
             </div>
             <div id="passwordDiv">
-                <p>Password</p>
-                <input type="password">
+                <!-- <p>Password</p>
+                <input type="password"> -->
+                <label for="password" >Password:</label>
+                <input type="text" id="password" name="password" value="Enter password"><br><br>
             </div>
             <div id="loginDiv">
-                <button id="loginButton">Login</button>
+                <!-- <button id="loginButton">Login</button> -->
+                <input type="submit" value="Login">
             </div>
+            </form>
         </div>
     </body>
+
 
 </html>
