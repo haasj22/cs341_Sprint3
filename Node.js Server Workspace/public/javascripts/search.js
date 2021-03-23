@@ -16,6 +16,7 @@ $(document).ready(function () {
     const presentation = document.getElementById('presentationSort');
     const audio = document.getElementById('audioSort');
     const computer = document.getElementById('computerSort');
+    const video = document.getElementById('videoSort');
 
     //retrieve returnCount <p> div to update with every item display
     const resultCount = document.getElementById('resultCount');
@@ -83,6 +84,12 @@ $(document).ready(function () {
     //categorical search for computer items
     computer.addEventListener('click', (e) => {
         const searchString = "computer";
+        displayItemsByCategory(searchString);
+    });
+
+    //categorical search for video items
+    video.addEventListener('click', (e) => {
+        const searchString = "video";
         displayItemsByCategory(searchString);
     });
 
