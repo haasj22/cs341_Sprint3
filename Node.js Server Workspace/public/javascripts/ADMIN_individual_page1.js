@@ -89,7 +89,7 @@ $(document).ready(function()
         console.log(savedJsonObj);
 
         //variables for the SQL product table:
-        //item_key:int(11)      model_num:varchar(20)      brand:varchar(50) 
+        //item_key:int(11)      model:varchar(20)      brand:varchar(50) 
         //picture:varchar(100)  category:varchar(50)	description:varchar(300)	
         //reservation_length:int(11)    uses:varchar(100)	(accessories:varchar(200)?)
 
@@ -114,7 +114,7 @@ $(document).ready(function()
 
         //send the new data to the server
         productDataNew = { 
-            item_key:itemKey, model_num:brandAndModel[1], brand:brandAndModel[0], picture:null,
+            item_key:itemKey, model:brandAndModel[1], brand:brandAndModel[0], picture:null,
             category:cats, description:savedJsonObj.data[4].Text, reservation_length:null, 
             uses:savedJsonObj.data[2].Text, accessories:null
         }

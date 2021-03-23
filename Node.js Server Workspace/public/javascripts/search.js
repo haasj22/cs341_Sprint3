@@ -93,6 +93,7 @@ $(document).ready(function () {
         displayItemsByCategory(searchString);
     });
 
+
     /*
     displayItems takes an array of items and converts each item into a HTML block. Each of these blocks is appended together and inserted into bottomCategory div of mainCatelog 
     */
@@ -232,12 +233,18 @@ $(document).ready(function () {
                 b = "";
             }
             // assigns model name
-            var n = prodData.model_num;
+            var n = prodData.model;
             if (n == "") {
                 n = "No Model";
             }
             // combines brand and model for full title
             var bn = b + " " + n;
+
+            // assigns category
+            var c = prodData.category;
+            if (c == null) {
+                c = "";
+            }
 
             var k = prodData.item_key;
             // console.log("type of key" + typeof(k));
@@ -268,27 +275,6 @@ $(document).ready(function () {
             } else {
                 img = placeholderImage;
             }
-
-
-
-
-            // assigns category
-            var c = prodData.category;
-            if (c == null) {
-                c = "";
-            }
-            // key_number, image_id(starts at 1)
-            // searches through image table for first image with matching item key and returns it
-            // for (j = 0; j < productImageArray.length; j++) {
-            //     if (k == null) {
-            //         break;
-            //     }
-            //     imgData = productImageArray[j];
-            //     if(imgData.image_id == 1){
-            //         img = imgData.image;
-            //         //console.log("image url: " + img);
-            //     }
-            // }
 
             var productjson = {itemKey:k, name:bn, image:img, category:c};
             CatalogItemsFull[i] = productjson;

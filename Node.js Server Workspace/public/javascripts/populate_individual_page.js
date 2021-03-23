@@ -59,6 +59,8 @@ $(document).ready(function () {
         { name: "Logitech - HD Webcam", image: "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/9928/9928354_sa.jpg;maxHeight=200;maxWidth=300", category: "streaming" }]
     }
 
+    
+    
     //A helper function to read items from the database format into the local CatalogItems format 
     //and load into CatalogItemsFull
     function readServerData(data) {
@@ -83,18 +85,46 @@ $(document).ready(function () {
                 b = "No_Brand";
             }
             // assigns model name
-            var n = prodData.model_num;
-            if (n == "") {
+            var n = prodData.model;
+            if (n == "" || n == null) {
                 n = "No_Model";
             }
             // combines brand and model for full title
-            var bn = "";
-            if (prodData.brand == null){
-                bn = n;
-            } else {
-                bn = b + " " + n;
+            var bn = b + " " + n;
+
+            var k = prodData.item_key;
+            // console.log("type of key" + typeof(k));
+            if (k == null){
+                k = "";
             }
-            var img = placeholderImage;
+
+            //get the correct image
+            var img = null;
+            var imgValue = prodData.picture;
+            if (imgValue != null){
+                if (imgValue == "YES"){
+                    //get the first image where item key matches image's key number
+                    for(let j = 0; j < productImageArray.length; j++){
+                        if (k == productImageArray[j].key_number){
+                            img = productImageArray[j].image;
+                            console.log("Found image for " + bn + ": " + img);
+                            break;
+                        }
+                    }
+                    if (img == null){
+                        img = placeholderImage;
+                        console.log("Couldn't find image for " + bn);
+                    }
+                } else {
+                    img = placeholderImage;
+                }
+            } else {
+                img = placeholderImage;
+            }
+
+
+
+
             // assigns category
             var c = prodData.category;
             if (c == null) {
@@ -111,35 +141,16 @@ $(document).ready(function () {
             if (u.normalize().valueOf() == nullvar.valueOf()) {
                 u = "No uses.";
             }
-            var k = prodData.item_key;
-            // console.log("type of key" + typeof(k));
-            if (k == null){
-                k = "";
-            }
-            // key_number, image_id(starts at 1)
-            // searches through image table for first image with matching item key and returns it
-            for (j = 0; j < productImageArray.length; j++) {
-                if (k == null) {
-                    break;
-                }
-                imgData = productImageArray[j];
-                if(imgData.image_id == 1){
-                    img = imgData.image;
-                    //console.log("image url: " + img);
-                }
-            }
-            //temporary line, until images are fixed
-            var img = placeholderImage;
             //temporary line, uncil accessories are added
             var a = "No accessories."
 
-            var productjson = {itemKey:k, name:bn, brand:b, model_num:n, image:img, category:c, uses:u, accessories:a, description:d};
+            var productjson = {itemKey:k, name:bn, brand:b, model:n, image:img, category:c, uses:u, accessories:a, description:d};
             CatalogItemsFull[i] = productjson;
         }
         console.log(CatalogItemsFull);
         console.log("Item loading complete!");
 
-        //once database has loaded populate page 
+        //once database has loaded, populate page
         populatePage();
     }
   
@@ -168,7 +179,7 @@ $(document).ready(function () {
 
         //add more initiations when more data is avaliable from database team
         itemName.innerHTML = item.name;
-        modelText.innerHTML = item.brand + "/" + item.model_num;
+        modelText.innerHTML = item.brand + "/" + item.model;
         var categoriesArray = item.category.split(" ");
         var categoriesString = categoriesArray[0];
         var i;
