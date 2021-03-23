@@ -7,6 +7,8 @@
     <!--include Jquery, this should be installed locally but we can fetch it for now-->
     <script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"/></script>
     <script src="javascripts/VIEWER_individual_page.js"></script>
+    <!-- Script for login popup window -->
+    <script src="javascripts/popup.js"></script>
   </head>
 
   <body>
@@ -19,6 +21,16 @@
       <a class="navBarLink" href="#"> Catalog</a>
       <a class="navBarLink" href="#"> Admin</a>
       <a class="navBarLink" href="#"> Help</a>
+    </div>
+
+    <!-- Login popup upon loading page -->
+    <div id="login_popup" class="modal">
+        <div class="modal_content">
+            <span id="close_button" class="close">&times;</span>
+            <p>Do you want to log in?</p>
+            <button id="login_true" class="popup_button">Yes</button>
+            <button id="login_false" class="popup_button">No</button>
+        </div>
     </div>
 
     <!-- Div which holds all page content besides navbar and footer-->

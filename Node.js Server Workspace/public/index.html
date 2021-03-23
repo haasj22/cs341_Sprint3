@@ -1,4 +1,4 @@
-<!-- Jarren Calizo, Daniel Co, Trey Dettmer, Alex Junkins, version 3-18-21 -->
+<!-- Jarren Calizo, Daniel Co, Trey Dettmer, Alex Junkins, Matthew Groh version 3-18-21 -->
 <!-- previously VIEWER_catalog.html, default page must be named index.html in node.js-->
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +33,8 @@
     <script src="javascripts/VIEWER_catalog.js"></script>
     <!-- Script for handling search -->
     <script src="javascripts/search.js"></script>
+    <!-- Script for login popup window -->
+    <script src="javascripts/popup.js"></script>
 </head>
 <body>
     <!-- Purple top nav bar-->
@@ -45,8 +47,18 @@
         <a class="navBarLink" href="#"> Catalog</a>
         <a class="navBarLink" href="#"> Admin</a>
         <a class="navBarLink" href="#"> Help</a>
-
     </div>
+
+    <!-- Login popup upon loading page -->
+    <div id="login_popup" class="modal">
+        <div class="modal_content">
+            <span id="close_button" class="close">&times;</span>
+            <p>Do you want to log in?</p>
+            <button id="login_true" class="popup_button">Yes</button>
+            <button id="login_false" class="popup_button">No</button>
+        </div>
+    </div>
+
     <div id="mainSelectionBar">
         <div id="title">
             <h2 id="primaryHeader">Audio Visual Services Rental Catalog</h2>
