@@ -231,31 +231,57 @@ $(document).ready(function () {
             }
             // combines brand and model for full title
             var bn = b + " " + n;
-            var img = placeholderImage;
-            // assigns category
-            var c = prodData.category;
-            if (c == null) {
-                c = "";
-            }
+
             var k = prodData.item_key;
             // console.log("type of key" + typeof(k));
             if (k == null){
                 k = "";
             }
+
+            //get the correct image
+            var img = null;
+            var imgValue = prodData.picture;
+            if (imgValue != null){
+                if (imgValue == "YES"){
+                    //get the first image where item key matches image's key number
+                    for(let j = 0; j < productImageArray.length; j++){
+                        if (k == productImageArray[j].key_number){
+                            img = productImageArray[j].image;
+                            console.log("Found image for " + bn + ": " + img);
+                            break;
+                        }
+                    }
+                    if (img == null){
+                        img = placeholderImage;
+                        console.log("Couldn't find image for " + bn);
+                    }
+                } else {
+                    img = placeholderImage;
+                }
+            } else {
+                img = placeholderImage;
+            }
+
+
+
+
+            // assigns category
+            var c = prodData.category;
+            if (c == null) {
+                c = "";
+            }
             // key_number, image_id(starts at 1)
             // searches through image table for first image with matching item key and returns it
-            for (j = 0; j < productImageArray.length; j++) {
-                if (k == null) {
-                    break;
-                }
-                imgData = productImageArray[j];
-                if(imgData.image_id == 1){
-                    img = imgData.image;
-                    //console.log("image url: " + img);
-                }
-            }
-            //temporary line, until images are fixed
-            var img = placeholderImage;
+            // for (j = 0; j < productImageArray.length; j++) {
+            //     if (k == null) {
+            //         break;
+            //     }
+            //     imgData = productImageArray[j];
+            //     if(imgData.image_id == 1){
+            //         img = imgData.image;
+            //         //console.log("image url: " + img);
+            //     }
+            // }
 
             var productjson = {itemKey:k, name:bn, image:img, category:c};
             CatalogItemsFull[i] = productjson;
