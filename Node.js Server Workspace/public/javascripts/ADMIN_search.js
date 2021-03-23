@@ -101,7 +101,11 @@ $(document).ready(function()
                             </div> 
                             <button class="deleteButton" type="button">X</button>
                             <a href="ADMIN_Individual_Page.html?${item.itemKey}">  
-                            <img class="bottomImage" src="${item.image}" alt="${item.image}">
+            function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+console.log(capitalizeFirstLetter('foo')); // Foo                <img class="bottomImage" src="${item.image}" alt="${item.image}">
                             </a>
                             <figcaption>${item.name}</figcaption>
                         </figure>          
@@ -206,7 +210,7 @@ $(document).ready(function()
         console.log("productDataArray Length: " + productDataArray.length);
         console.log("productImageArray Length: " + productImageArray.length);
         console.log("CatalogItemsFull Length: " + CatalogItemsFull.length);
-        for (i = 1; i < productDataArray.length; i++) {
+        for (i = 0; i < productDataArray.length; i++) {
             prodData = productDataArray[i];
             //console.log("productDataArray[" + i + "]");
             console.log(prodData);
