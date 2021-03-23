@@ -27,6 +27,16 @@
     font-family: 'Hattori Hanzo Light', arial;
 }
 
+/*  What happens when navbar link is hovered over*/
+.navBarLinks:hover {
+    background-color: #100a3a;
+}
+
+/* The navbar link of the current page (currently not used for individual page) */
+.navBarLinkCurrent {
+    background-color: #100a3a;
+}
+
 /*formats the footer of the page*/
 .endCard{
     position:fixed;
