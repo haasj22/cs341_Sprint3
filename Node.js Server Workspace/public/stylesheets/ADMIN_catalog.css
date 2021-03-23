@@ -168,7 +168,11 @@ form.search-bar button:hover {
 
 }
 
-
+/* Return displayed items styling to black and not underlined*/
+a {
+    text-decoration: none;
+    color: #000000;
+}
 
 /* Enlarge the item category on hover */
 .itemCategory:hover {

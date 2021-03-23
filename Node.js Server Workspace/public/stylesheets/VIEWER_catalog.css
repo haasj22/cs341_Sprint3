@@ -260,6 +260,12 @@ form.search-bar button:hover {
     float: right;
 }
 
+/* Return displayed items styling to black and not underlined*/
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
 
 
 

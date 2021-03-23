@@ -212,7 +212,7 @@ $(document).ready(function () {
         console.log("productDataArray Length: " + productDataArray.length);
         console.log("productImageArray Length: " + productImageArray.length);
         console.log("CatalogItemsFull Length: " + CatalogItemsFull.length);
-        for (i = 1; i < productDataArray.length; i++) {
+        for (i = 0; i < productDataArray.length; i++) {
             prodData = productDataArray[i];
             //console.log("productDataArray[" + i + "]");
             console.log(prodData);

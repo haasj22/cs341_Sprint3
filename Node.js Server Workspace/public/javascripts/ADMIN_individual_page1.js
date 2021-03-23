@@ -1,7 +1,12 @@
 // File initialized by Trey Dettmer
+// Additional Authors: Alex Junkins, Justin Cao, Adrian Muth
+// Version: 3/22/21
 
 $(document).ready(function()
 {
+    //list of all valid categories (in lower-case)
+    var validCategories = ["conferencing", "streaming", 
+    "recording", "presentation", "audio", "video", "computers"];
 
     //Link Admin icon interactions to their respective functions
     $(".textEditIcon").on("click", SaveText);
@@ -40,6 +45,7 @@ $(document).ready(function()
         //check the fields to make sure they fit the format
         
         //check the Model/Brand field
+        //must be in format: model/brand
         //check for 1 word, not multiple
         var mbWordCount = editElem[0].innerHTML.split(" ").length;
         if (mbWordCount > 1){
@@ -55,9 +61,25 @@ $(document).ready(function()
                 return;
             }
         }
-        
 
         //check the Categories field
+        //must be in format: category1, category2, category3
+        //valid categories: Conferencing, Streaming, Recording, Presentation, Audio, Computers
+        //NOT case-sensitive, does not work for potential multi-word categories
+
+        //split by spaces
+        var catsRaw = editElem[1].innerHTML.split(", ");
+        console.log(catsRaw);
+
+        //checking for valid categories
+        for (let k = 0; k < catsRaw.length; k++){
+            var catInsensitive = catsRaw[k].toLowerCase();
+            if (!checkValidCategory(catInsensitive)){
+                alert("You've included an invalid category: '" + catsRaw[k] + "'\nPlease enter in this format: 'Category1, Category2, Category3'\n\nValid categories: Conferencing, Streaming, Recording, Presentation, Audio, Computers\nCategories are case insensitive.");
+                return;
+            }
+            
+        }
 
         var savedJsonObj = { data: []};
         for (let i = 0; i < editElem.length;i++)
@@ -66,9 +88,70 @@ $(document).ready(function()
         }
         console.log(savedJsonObj);
 
-        //parse and send the new data to the server
+        //variables for the SQL product table:
+        //item_key:int(11)      model_num:varchar(20)      brand:varchar(50) 
+        //picture:varchar(100)  category:varchar(50)	description:varchar(300)	
+        //reservation_length:int(11)    uses:varchar(100)	(accessories:varchar(200)?)
+
+        //picture, accessories, and reservation_length are currently hard-coded to null
+
+        //parse the data 
+        var itemKey = location.search.substring(1);
+        var brandAndModel = savedJsonObj.data[0].Text.split("/");
+        var cats = "";
+        for(let l = 0; l < catsRaw.length; l++){
+            var catParsed = capitalizeFirstLetter(catsRaw[l].toLowerCase());
+            if (l != catsRaw.length - 1){
+                cats = cats + catParsed + " ";
+            }
+            else {
+                cats = cats + catParsed;
+            }
+        }
+
+        console.log("brandandmodel:")
+        console.log(brandAndModel)
+
+        //send the new data to the server
+        productDataNew = { 
+            item_key:itemKey, model_num:brandAndModel[1], brand:brandAndModel[0], picture:null,
+            category:cats, description:savedJsonObj.data[4].Text, reservation_length:null, 
+            uses:savedJsonObj.data[2].Text, accessories:null
+        }
         
-        alert("Text saved.");
+        console.log("POST REQUEST: " + JSON.stringify(productDataNew));
+        $.post({
+            traditional: true,
+            url: '/modify',    // url
+            data: productDataNew,
+            dataType: 'json',
+            success: function(data, ) {// success callback
+                if (data != false){
+                    console.log("Error: " + data);
+                }
+            }
+        }).done(function() { alert('Text saved.'); })
+        .fail(function(jqxhr, settings, ex) { alert('Failed to save text, ' + ex); });
+
+        
+    }
+
+    //check if a string matches any of the valid categories
+    //only compares lowercase strings.
+    function checkValidCategory(category){
+        for(let i = 0; i < validCategories.length; i++){
+            if (category.valueOf() == validCategories[i].valueOf()){
+                return true;
+            }
+        }
+        return false;
+        
+    }
+    
+    // sourced from https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
+    //function to capitalize the first letter of a string
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
 
