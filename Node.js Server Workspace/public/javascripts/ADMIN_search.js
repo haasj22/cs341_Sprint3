@@ -101,11 +101,7 @@ $(document).ready(function()
                             </div> 
                             <button class="deleteButton" type="button">X</button>
                             <a href="ADMIN_Individual_Page.html?${item.itemKey}">  
-            function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-console.log(capitalizeFirstLetter('foo')); // Foo                <img class="bottomImage" src="${item.image}" alt="${item.image}">
+                            <img class="bottomImage" src="${item.image}" alt="${item.image}">
                             </a>
                             <figcaption>${item.name}</figcaption>
                         </figure>          
@@ -146,14 +142,7 @@ console.log(capitalizeFirstLetter('foo')); // Foo                <img class="bot
     and makes a call to displays all items contained. 
     */
     const loadItems = async () => {
-        /* try {
-            const res = await fetch('https://hp-api.herokuapp.com/api/characters');
-            CatalogItems = await res.json();
-            displayItems(CatalogItems);
-        } catch (err) {
-            console.error(err);
-        } */
-
+    
         //Populate CatalogItemsFull with data from the SQL server: 'sprint2cs341', database: 'sprint2', table: 'products'
         //only do so if the variable is empty (the data has not been loaded yet)
         if (CatalogItemsFull.length == 0){
