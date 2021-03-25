@@ -1,4 +1,4 @@
-# Sprint2-AVS-Project-MVP
+# Sprint3-AVS-Project-MVP
 
 Note: March 13, 2021
 The Workspace folder includes all files for the functional Node.js site, just like in
@@ -19,3 +19,6 @@ need to work in the server's context, so from now on, it would be a good idea to
 from that folder ("Node.JS Server Workspace/public") in order to allow us to get your changes to work
 with the rest of the server.
 Love, Javascript Backend Team <3
+
+Note: March 24, 2021
+This is a copy from sprint 2's repository. All branches but test main were deleted since they were irrlevent. Test main was renamed main. 
