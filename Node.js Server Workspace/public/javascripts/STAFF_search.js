@@ -50,6 +50,7 @@ $(document).ready(function () {
         items.forEach(addFillersToEmptyImages);
         const htmlString = items
             .map((item, index) => {
+                if (!item.category.toLowerCase().includes("deleted")){
                 return ` 
         <a href="STAFF_individual_page.html?${item.itemKey}">               
             <figure class="bottomIndividualItem">
@@ -58,6 +59,10 @@ $(document).ready(function () {
             </figure>           
         </a>
         `;
+
+                }
+                
+                
             })
             .join('');
         resultCount.innerHTML = items.length + " results";

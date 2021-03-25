@@ -6,7 +6,7 @@ $(document).ready(function()
 {
     //list of all valid categories (in lower-case)
     var validCategories = ["conferencing", "streaming", 
-    "recording", "presentation", "audio", "video", "computers"];
+    "recording", "presentation", "audio", "video", "computers", "deleted"];
 
     //Link Admin icon interactions to their respective functions
     $(".textEditIcon").on("click", SaveText);
