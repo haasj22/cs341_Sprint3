@@ -1,12 +1,11 @@
 This isn't code, and doesn't do anything.
-updated 3/22
+updated 3/28
 
 Server Info:
-name: sprint2cs341
-mysql password: cs341_sprint2
-ip: 34.105.51.12
-gcloud config set project sprint2cs341;
-gcloud sql connect sprint2cs341 --user=root --quiet;
+name: DummyServer2
+ID: norse-feat-308803
+mysql password: cs341_sprint3
+ip: 35.184.141.118
 
 primary database: sprint2
 table names:	PRODUCTIMAGES	formats:	key_number:int(11)	image_id:varchar(100)	model:varchar(100)	image:varchar(200)	
@@ -16,8 +15,8 @@ table names:	PRODUCTIMAGES	formats:	key_number:int(11)	image_id:varchar(100)	mod
 						uses:varchar(100)
 
 To Access:
-gcloud config set project sprint2cs341;
-gcloud sql connect sprint2cs341 --user=root --quiet;
+gcloud config set project norse-feat-308803;
+gcloud sql connect sprint3 --user=root --quiet;
 To see databases
 show databases;
 To see tables
