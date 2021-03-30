@@ -85,7 +85,7 @@ $(document).ready(function () {
                 b = "No_Brand";
             }
             // assigns model name
-            var n = prodData.model;
+            var n = prodData.model_num;
             if (n == "" || n == null) {
                 n = "No_Model";
             }
@@ -138,8 +138,12 @@ $(document).ready(function () {
             // assigns uses
             var u = prodData.uses;
             nullvar = "NULL";
-            if (u.normalize().valueOf() == nullvar.valueOf()) {
-                u = "No uses.";
+            if (u != null){
+                if (u.normalize().valueOf() == nullvar.valueOf()) {
+                    u = "No uses.";
+                }
+            } else {
+                u = "No uses."
             }
             //temporary line, uncil accessories are added
             var a = "No accessories."
@@ -178,7 +182,11 @@ $(document).ready(function () {
     function updatePageText(item) {
 
         //add more initiations when more data is avaliable from database team
-        itemName.innerHTML = item.name;
+        if(item.category.toLowerCase().includes("deleted")){
+            itemName.innerHTML = item.name + " (deleted)";
+        } else{
+            itemName.innerHTML = item.name;
+        }
         modelText.innerHTML = item.brand + "/" + item.model;
         var categoriesArray = item.category.split(" ");
         var categoriesString = categoriesArray[0];

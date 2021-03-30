@@ -19,6 +19,7 @@ $(document).ready(function()
     const audio = document.getElementById('audioSort');
     const computer = document.getElementById('computerSort');
     const video = document.getElementById('videoSort');
+    const deleted = document.getElementById('deletedSort');
 
     //retrieve returnCount <p> div to update with every item display
     const resultCount = document.getElementById('resultCount');
@@ -92,6 +93,11 @@ $(document).ready(function()
         displayItemsByCategory(searchString);
     });
 
+    //categorical search for deleted items
+    deleted.addEventListener('click', (e) => {
+        const searchString = "deleted";
+        displayItemsByCategory(searchString);
+    });
 
     /*
     displayItems takes an array of items and converts each item into a HTML block. Each of these blocks is appended together and incerted into bottomCategory div of mainCatelog 
@@ -100,13 +106,19 @@ $(document).ready(function()
         items.forEach(addFillersToEmptyImages);
         const htmlString = items
             .map((item) => {
+                if (item.category.toLowerCase().includes("deleted")){
+                    //add ' (deleted)' to the end of item.name
+                    if(!item.name.includes("deleted")){
+                        item.name = item.name + " (deleted)";
+                    }
+                }
                 return `             
                         <figure class="bottomIndividualItem">
                             <div class="deletionOverlay">
                             <p class="deletionMessage">This item is set for deletion.</p>
                             <a class="undoDeletionMessage">undo?</a> 
                             </div> 
-                            <button class="deleteButton" type="button">X</button>
+                            <button class="ADMIN deleteButton" type="button">X</button>
                             <a href="ADMIN_Individual_Page.html?${item.itemKey}">  
                             <img class="bottomImage" src="${item.image}" alt="${item.image}">
                             </a>
@@ -216,7 +228,7 @@ $(document).ready(function()
                 b = "";
             }
             // assigns model name
-            var n = prodData.model;
+            var n = prodData.model_num;
             if (n == "") {
                 n = "No Model";
             }
@@ -267,7 +279,8 @@ $(document).ready(function()
         }
     }
 
-    //initial population of page when script is  run
+    //initial population of page when script is run
     loadItems();
+
 });
 

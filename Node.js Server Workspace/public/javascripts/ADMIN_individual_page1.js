@@ -114,7 +114,7 @@ $(document).ready(function()
 
         //send the new data to the server
         productDataNew = { 
-            item_key:itemKey, model:brandAndModel[1], brand:brandAndModel[0], picture:null,
+            item_key:itemKey, model_num:brandAndModel[1], brand:brandAndModel[0], picture:null,
             category:cats, description:savedJsonObj.data[4].Text, reservation_length:null, 
             uses:savedJsonObj.data[2].Text, accessories:null
         }
@@ -130,7 +130,7 @@ $(document).ready(function()
                     console.log("Error: " + data);
                 }
             }
-        }).done(function() { alert('Text saved.'); })
+        }).done(function() { alert('Text saved. Refresh page to view changes.'); })
         .fail(function(jqxhr, settings, ex) { alert('Failed to save text, ' + ex); });
 
         
