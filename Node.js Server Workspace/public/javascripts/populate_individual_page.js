@@ -85,7 +85,7 @@ $(document).ready(function () {
                 b = "No_Brand";
             }
             // assigns model name
-            var n = prodData.model;
+            var n = prodData.model_num;
             if (n == "" || n == null) {
                 n = "No_Model";
             }
@@ -138,8 +138,12 @@ $(document).ready(function () {
             // assigns uses
             var u = prodData.uses;
             nullvar = "NULL";
-            if (u.normalize().valueOf() == nullvar.valueOf()) {
-                u = "No uses.";
+            if (u != null){
+                if (u.normalize().valueOf() == nullvar.valueOf()) {
+                    u = "No uses.";
+                }
+            } else {
+                u = "No uses."
             }
             //temporary line, uncil accessories are added
             var a = "No accessories."
@@ -178,7 +182,11 @@ $(document).ready(function () {
     function updatePageText(item) {
 
         //add more initiations when more data is avaliable from database team
-        itemName.innerHTML = item.name;
+        if(item.category.toLowerCase().includes("deleted")){
+            itemName.innerHTML = item.name + " (deleted)";
+        } else{
+            itemName.innerHTML = item.name;
+        }
         modelText.innerHTML = item.brand + "/" + item.model;
         var categoriesArray = item.category.split(" ");
         var categoriesString = categoriesArray[0];
@@ -191,6 +199,42 @@ $(document).ready(function () {
         accessoriesText.innerHTML = item.accessories;
         descriptionText.innerHTML = item.description;
         document.getElementById('mainImage').src = item.image;
+
+        // Create randomly sorted catalog to vary similar items
+        const RandomCatalog = CatalogItemsFull.sort(() => Math.random() - 0.5);
+
+        // get pictures for Similar Items by matching item categories
+        var similarImagesArray = [];
+        for (i = 0; i < RandomCatalog.length; i++){
+            if (!RandomCatalog[i].category.toLowerCase().includes("deleted")){
+                // don't use image if it's the item itself
+                if(RandomCatalog[i].name.toLowerCase() === item.name.toLowerCase()){
+                    continue;
+                }
+                // iterate through categories of items until match is found
+                var itemCategories = RandomCatalog[i].category.split(" ");
+                for (k = itemCategories.length-1; k >= 0; k--){
+                    for(m = categoriesArray.length-1; m >= 0; m--){
+                        // if catagory match is found
+                        if (itemCategories[k].toLowerCase() === categoriesArray[m].toLowerCase()){
+                            similarImagesArray.push(RandomCatalog[i].image);
+                            k = m = -1;     // break double nested array
+                        }
+                    }
+                }
+            }
+        }
+        
+        // replace placeholder images with similarImagesArray
+        similarImagesDisplay = ['similarImage1', 'similarImage2', 'similarImage3'];
+        for (j = 0; j < 4; j++){
+            // display nothing in empty slots if < 3 items are in similarImagesArray, else display the items accordingly
+            if(similarImagesArray[j] == null){
+                document.getElementById(similarImagesDisplay[j]).style.display = 'none';
+            } else {
+                document.getElementById(similarImagesDisplay[j]).src = similarImagesArray[j];
+            }
+        }
     }
 
     //load items when page starts 

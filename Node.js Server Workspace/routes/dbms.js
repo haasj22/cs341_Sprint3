@@ -15,7 +15,7 @@
      async = require('async');
  
  var host = "35.184.141.118";    //from GCloud instance (change to match your db)
- var database = "sprint3";  //database name
+ var database = "Sprint3";  //database name
  var user = "root";         //username (change to match your db)
  var password = "cs341_sprint3";  //password (change to match your db, yes this is very poor practice)
  //change the above to not be poor practice

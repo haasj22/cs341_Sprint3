@@ -10,7 +10,7 @@ ip: 35.184.141.118
 primary database: sprint2
 table names:	PRODUCTIMAGES	formats:	key_number:int(11)	image_id:varchar(100)	model:varchar(100)	image:varchar(200)	
 		USERS				NAME:varchar(75)	PASSWORD:varchar(100)	ISADMIN:bit(1)	ISSTAFF:bit(1)
-		PRODUCTS			item_key:int(11)	model:varchar(50)	brand:varchar(50) picture:varchar(100)
+		PRODUCTS			item_key:int(11)	model_num:varchar(50)	brand:varchar(50) picture:varchar(100)
 						category:varchar(50)	description:varchar(300)	reservation_length:int(11)
 						uses:varchar(100)
 

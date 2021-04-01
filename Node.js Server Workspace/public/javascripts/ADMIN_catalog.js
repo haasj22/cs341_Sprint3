@@ -1,14 +1,17 @@
 // File initialized by Trey Dettmer
+// modified by JS Backend 3/29
+// not currently functional
 
 $(document).ready(function()
 {
-    
-    $(".deleteButton").on("click",HideItem);
+    console.log("Hello");
+    $(".ADMIN deleteButton").on("click",HideItem);
     $(".undoDeletionMessage").on("click",RevealItem)
 
     //called when "x" deletion button is clicked
     function HideItem(event)
     {
+        console.log("Trying to delete item.");
         $(this).prev().css("visibility","visible");
 
         $(this).prev().css("cursor","default");

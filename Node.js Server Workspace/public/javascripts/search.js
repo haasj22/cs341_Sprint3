@@ -235,7 +235,7 @@ $(document).ready(function () {
                 b = "";
             }
             // assigns model name
-            var n = prodData.model;
+            var n = prodData.model_num;
             if (n == "") {
                 n = "No Model";
             }
