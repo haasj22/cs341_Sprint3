@@ -115,8 +115,9 @@ $(document).ready(function()
                 return `             
                         <figure class="bottomIndividualItem">
                             <div class="deletionOverlay">
-                            <p class="deletionMessage">This item is set for deletion.</p>
-                            <a class="undoDeletionMessage">undo?</a> 
+                            <p class="deletionMessage">Do you want to delete this item?</p>
+                            <a class="confirmDeletionMessage" key="${item.itemKey}" category="${item.category}">Delete</a> 
+                            <a class="undoDeletionMessage">Undo</a> 
                             </div> 
                             <button class="ADMIN deleteButton" type="button">X</button>
                             <a href="ADMIN_Individual_Page.html?${item.itemKey}">  
@@ -277,8 +278,80 @@ $(document).ready(function()
             displayItems(CatalogItems);
             init = false;
         }
+
+        //For some asinine reason, this line has to be here. JSBE doesn't know why. If you do, please tell us.
+        loadButtonListeners();
     }
 
+    //A method to reassign deletion button listeners
+    function loadButtonListeners(){
+        $(".ADMIN.deleteButton").click(function(){
+            //alert("The paragraph was clicked.");
+            console.log("Clicked delete button.");
+        });
+        $(".ADMIN.deleteButton").on("click", HideItem);
+        $(".undoDeletionMessage").on("click", RevealItem);
+        $(".confirmDeletionMessage").on("click", DeleteItem);
+
+        //called when "x" deletion button is clicked
+        function HideItem(event)
+        {
+            console.log("Trying to delete item.");
+            $(this).prev().css("visibility","visible");
+            $(this).prev().css("cursor","default");
+        }
+
+        // called when "undo" is clicked
+        function RevealItem(event)
+        {
+            $(this).parent().css("visibility","hidden");
+            $(this).parent().css("cursor","pointer");
+        }
+
+        //called when "delete" is clicked
+        function DeleteItem(event) {
+            console.log("Confirm item deletion attempted.");
+            var ik = $(this).attr("key");
+            var c = $(this).attr("category");
+
+            console.log("category: " + c)
+            
+            productKey = { 
+                item_key:ik,
+                category:c
+            }
+
+            //BIG PROBLEM
+            //this presents a way for users to insert custom SQL code into the database
+            //we could add something to verify that the item key is an integer and the 
+            //category only has strings that are valid categories in the future
+
+            //attempt deletion w/ POST
+            console.log("Attempting to delete item from key with POST");
+            $.post({
+                traditional: true,
+                url: '/keyDelete',    // url
+                data: productKey,
+                dataType: 'json',
+                success: function(data, ) {// success callback
+                    successDelete(data);
+                }
+            }).fail(function(jqxhr, settings, ex) { 
+                alert("Couldn't access server." + ex); 
+            });
+        }
+
+        console.log("Loaded button listeners!");
+    }
+
+    //reloads catalog after an item has been deleted
+    function successDelete(data){
+        if (data == false){
+            location.reload();
+        }
+    }
+
+    
     //initial population of page when script is run
     loadItems();
 

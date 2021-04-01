@@ -256,6 +256,12 @@ a {
     cursor: pointer;
 }
 
+/* confirm option available once item is marked for deletion */
+.confirmDeletionMessage {
+    color: rgb(88, 20, 151);
+    cursor: pointer;
+}
+
 /* Button that deletes item */
 .deleteButton {
     cursor: pointer;

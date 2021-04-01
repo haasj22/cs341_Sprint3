@@ -11,6 +11,7 @@ var catalogDataRouter = require('./routes/catalogData');
 var loginRouter = require('./routes/login');
 var individualRouter = require('./routes/individualPage');
 var modifyRouter = require('./routes/modify');
+var keyDeleteRouter = require('./routes/keyDelete.js');
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use('/catalogData', catalogDataRouter);
 app.use('/login', loginRouter);
 app.use('/individualPage', individualRouter);
 app.use('/modify', modifyRouter);
+app.use('/keyDelete', keyDeleteRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
