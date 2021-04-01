@@ -287,6 +287,7 @@ footer p {
     vertical-align: middle;
 }
 
+/* right menu footer position */
 .right-menu {
     /*
     position: relative;
@@ -299,6 +300,7 @@ footer p {
     left: 63%;
     transform: translate(-50%,-50%)
 }
+/* dropdown menu initiated */
 .dropdown-menu {
     display: none;
     position: absolute;
@@ -307,28 +309,32 @@ footer p {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
+/* dropdown menu adjust */
 .dropdown-menu a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
+/* hover dropdown menu initiated */
 .dropdown-menu a:hover {
     background-color: #000;
     color: #fff
 }
+
+/* drop down and right menu hover display block */
 .right-menu:hover .dropdown-menu {
     display: block;
 }
 
 
-
+/* side scroll navigation */
 #topNav ul li ul{
     max-height:250px;/* you can change as you need it */
     overflow:auto;/* to get scroll */
  }
 
-
+/*vertical dropdown menu position change */
 .vertical-menu {
     min-width: 50px;
     max-width: 900px;
@@ -338,7 +344,7 @@ footer p {
      height: 150px;
      overflow-y: auto;*/
 }
-
+/*vertical a menu dropdown menu position change */
 .vertical-menu a {
     background-color: #eee;
     color: black;
@@ -346,16 +352,16 @@ footer p {
     padding: 12px;
     text-decoration: none;
 }
-
+/*hover vertical dropdown menu position change */
 .vertical-menu a:hover {
     background-color: #ccc;
 }
-
+/*vertical menu position change */
 .vertical-menu a.active {
     background-color: #4CAF50;
     color: white;
 }
-
+/* menu position change */
 .menu-button {
     min-width: 50px;
     max-width: 900px;
@@ -373,7 +379,7 @@ footer p {
 }
 
 
-/* TEST sh */
+/* TEST  */
 
 
 
@@ -420,7 +426,7 @@ ul li a:hover{
     background-color: #fff;
     color: #000;
 }
-
+/* menu button final format */
 .menu-button {
     background-color: transparent;
     color: rgba(255, 255, 255, 0);
@@ -429,6 +435,7 @@ ul li a:hover{
     cursor: pointer;
     border: 25px solid rgba(0, 0, 0, 0);
 }
+/* menu position right side */
 .right-menu {
     /*
     position: relative;
@@ -445,6 +452,7 @@ ul li a:hover{
 
     transform: translate(-50%,-50%)
 }
+/*dropdown menu position change */
 .dropdown-menu {
     display: none;
     position: absolute;
@@ -453,33 +461,37 @@ ul li a:hover{
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
+/*dropdown menu position -a change */
 .dropdown-menu a {
     color: black;
     padding: 12px 16px;
     display: block;
 }
+/*dropdown menu position hover change */
 .dropdown-menu a:hover {
     background-color: #000;
     color: #fff
 }
+/*hover right - dropdown menu position change */
 .right-menu:hover .dropdown-menu {
     display: block;
 }
 
 
-
+/* Navigation Scroll */
 #topNav ul li ul{
     max-height:250px;/* you can change as you need it */
     overflow:auto;/* to get scroll */
  }
 
-
+/*Vertical dropdown menu*/
 .vertical-menu {
      width: 200px;
      height: 150px;
      overflow-y: auto;
 }
 
+/*Vertical dropdown menu padding and format changes*/
 .vertical-menu a {
     background-color: #eee;
     color: black;
@@ -488,15 +500,18 @@ ul li a:hover{
     text-decoration: none;
 }
 
+/*Hover feature for vertical menu color scheme*/
 .vertical-menu a:hover {
     background-color: #ccc;
 }
 
+/*Activate vertical menu colors and background colors*/
 .vertical-menu a.active {
     background-color: #4CAF50;
     color: white;
 }
 
+/*Figure caption resize and reformat location*/
 #figCapForAdd {
     background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
