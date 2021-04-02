@@ -21,7 +21,7 @@ router.post('/', function(req, res, next) {
 
     //step 1 extract variables from JSON
     var ik = req.body.item_key;
-    var mn = req.body.model;
+    var mn = req.body.model_num;
     var b = req.body.brand;
     var p; //does not use
     var c = req.body.category;
@@ -31,9 +31,7 @@ router.post('/', function(req, res, next) {
     var a; //does not use
 
     //step 2 Send command to database
-    //console.log("UPDATE PRODUCTS SET model =" + mn + ", brand =" + b + ", category =" + c 
-    //    +  ", description =" + d + ", uses =" + u + " WHERE item_key = " + ik + ";")
-    serverfunctions.dbquery("UPDATE PRODUCTS SET model ='" + mn + "', brand ='" + b + "', category ='" + c 
+    serverfunctions.dbquery("UPDATE PRODUCTS SET model_num ='" + mn + "', brand ='" + b + "', category ='" + c 
         +  "', description ='" + d + "', uses ='" + u + "' WHERE item_key = '" + ik + "';", receiveData);
 
     // step 3 fn process the results from the SQL Server and send the error value to the client
