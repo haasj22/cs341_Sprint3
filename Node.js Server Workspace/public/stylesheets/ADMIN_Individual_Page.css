@@ -75,7 +75,7 @@ body::after {
     height: 100%;  
 }
 
-/* section for item name and request button */
+/* section for item name and delete button */
 .itemHead {
     grid-column: 1 / 3;
     grid-row: 1 / 2; 
@@ -91,16 +91,16 @@ body::after {
     text-align: right;
 }
 
-/* request button wrapper that centers the button vertically */
-#requestButtonWrapper {
+/* delete button wrapper that centers the button vertically */
+#deleteButtonWrapper {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-/* request button used to request the item */
-#requestButton {
+/* delete button used to delete the item */
+#deleteButton {
     font-size: 1.5em;
     border: solid black 1px;
     border-radius: .2em;
@@ -109,11 +109,10 @@ body::after {
     color: #000000;
     flex-shrink: 1;
     margin: .4em auto 0 1.8em;
-    opacity: 30%;
 }
 
-/*  What happens when request button is hovered over*/
-#requestButton:hover {
+/*  What happens when delete button is hovered over*/
+#deleteButton:hover {
     background-color:#c99120;
     
 }
@@ -276,7 +275,7 @@ footer p {
 /* layout on mobile device */
 @media (max-aspect-ratio: 6/7) {
 
-    #requestButton {
+    #deleteButton {
         font-size: 2em;
     }
 
