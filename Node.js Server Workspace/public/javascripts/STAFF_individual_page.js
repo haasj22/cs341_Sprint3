@@ -8,6 +8,7 @@ $(function()
 
     /* Saves item's id to request array in sessionStorage */
     function RequestItem() {
+        //get url (item id is at end of url after ?)
         let loc = window.location.href;
         let spli = loc.split('?');
         if (sessionStorage.getItem("requested_item_ids"))
