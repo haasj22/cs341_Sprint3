@@ -15,6 +15,15 @@ $(document).ready(function()
         console.log("Clicked delete button.");
     });
 
+    document.getElementById("btn open").addEventListener("click", openForm);
+    document.getElementById("btn cancel").addEventListener("click", closeForm);
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+      }
+      
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
     //called when "x" deletion button is clicked
     function HideItem(event)
     {
@@ -32,3 +41,4 @@ $(document).ready(function()
         $(this).parent().css("cursor","pointer");
     }
 });
+

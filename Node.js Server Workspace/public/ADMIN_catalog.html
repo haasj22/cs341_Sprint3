@@ -169,9 +169,36 @@
                 <figcaption>Camera Placeholder (2021)</figcaption>
             </figure>
             <figure class="ADMIN bottomIndividualItem">
-                <i class="fa fa-plus-circle" style="font-size:200px;color:grey"></i> 
+                <em class="fa fa-plus-circle" style="font-size:200px;color:grey" id="btn open"></em> 
                 <p> Add Item  </p>
             </figure> 
+
+            <div class="form-popup" id="myForm">
+                <form action="/action_page.php" class="form-container">
+                  <h1>Add Item</h1>
+              
+                  <label for="Model/Brand"><b>Model/Brand</b></label>
+                  <input type="text" placeholder="Enter Model/Brand" name="Model/Brand" required>
+              
+                  <label for="Categories"><b>Categories</b></label>
+                  <input type="text" placeholder="Enter Categories" name="Categories" required>
+                  
+                  <label for="Uses"><b>Uses</b></label>
+                  <input type="text" placeholder="Enter Uses" name="Uses" required>
+                 
+                  <label for="Accesories"><b>Accesories</b></label>
+                  <input type="text" placeholder="Enter Accesories" name="Accesories" required>
+                  
+                  <label for="Description"><b>Description</b></label>
+                  <input type="text" placeholder="Enter Description" name="Description" required>
+                  
+                  <label for="image"><b>Insert Image</b></label>
+                  <input type="file" name="reqInsertImage">
+                  
+                  <button type="submit" class="btn">Add Item</button>
+                  <button type="button" class="btn cancel" id="btn cancel">Close</button>
+                </form>
+              </div>
 
         </div>
 
