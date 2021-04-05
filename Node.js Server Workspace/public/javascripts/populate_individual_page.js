@@ -1,5 +1,5 @@
-//Author: Alex Junkins, Adrian Muth, and Justin Cao
-//Version: March 21 2021
+//Author: Alex Junkins, Adrian Muth, Daniel Co and Justin Cao
+//Version: April 4 2021
 // Pulls information on items from database and loads items based on keys
 
 $(document).ready(function () {
@@ -13,12 +13,63 @@ $(document).ready(function () {
     const usesText = document.getElementById('usesText');
     const accessoriesText = document.getElementById('accessoriesText');
     const descriptionText = document.getElementById('descriptionText');
-    const deleteButton = document.getElementById('deleteButton');
+    const deleteRestoreButton = document.getElementById('deleteButton');
 
     var placeholderImage = "https://lh3.googleusercontent.com/GQIuf05jvVfDru6tdwR_zEsRhNj59K3QKANkpQCS4cxinfu4DiwkCFFM0oi71calYudq9D4-jjwFYv1U0raDqP4blg0SkR3wQRLN4CmL1bHeLdmrnsFxMLiWo0ttWxLmfVNdIKz0KAAn7iSBs3NsOoCP7mQpnvdRdWWjy6DChe_E_BFOOxwfM01P5BwYy_FyHtWaYziquGADRjymlp9Xls_H-67k7JMFU8E3FRW4ZA1-rAk2VWmccJW3kQEwRzvL0zOmfss47m6rvKQXRZCdpNFgfsLxfPhmFfxNg8i5NUjgXFwTlkg4uLsklfeWRqG87K0snnoy-KuTj040_2PuicI9LQuMo5UwaGNReCGfOb5fEgy_ogXfmlUZWwENyqnnlHXYEHaYokz8HajekTkVo-apRo88_l9mKrHZbMHra9ukgJj0T878vC-_o4AKxkLSKZvF_l54RTlGM5sO5ET2M68uHensYDY9jl_-Hf9nhQyA_gLxQNtZkzX3rkm_WK3_br1hzz9XDQxGEaPKVvtp-ZE-oOQvCbme6h_y0kVS0MQ5Esvi1YHMHSfr2ddgVZvsMWSbwLWwUkHQUctFNB8UlgdavPGFcy5aCR27sdJbqB8Ea0NOOMn9DperBRpoFRw8hSt1M0mvaaaqfRlJtKPGihnkhxgA_taDfAchqrG9xxPayCXtXt50RS49VyJM5bdU4d7wlNTp5OWsY_8KaoSwe9yW=w2454-h1642-no?authuser=0";
+    
+    //Delete/Restore button functionality is only allowed on the ADMIN version of the individual page
+    if(deleteRestoreButton != null){
+        deleteRestoreButton.addEventListener('click', (e) => {
+            deleteOrRestoreItem();
+        });
+    }
 
+    //Delete/Restore button uses the item key and item categories to send a POST request for item deletion or restoration
+    function deleteOrRestoreItem(){
+        //pull query String from selected url
+        var itemKey = location.search.substring(1);
 
+        //get item object from catalog  (key-1 because item keys are indexed starting at 1)
+        var itemSearched = CatalogItems[itemKey - 1];
 
+        productKey = { 
+            item_key:itemKey,
+            category:itemSearched.category
+        }
+
+        //BIG PROBLEM
+        //this presents a way for users to insert custom SQL code into the database
+        //we could add something to verify that the item key is an integer and the 
+        //category only has strings that are valid categories in the future
+
+        //attempt deletion or restoration w/ POST
+        var routerKey = "";
+        if(deleteRestoreButton.value == "Delete Item"){
+            console.log("Attempting to delete item from key with POST");
+            routerKey = '/keyDelete';
+        } else if(deleteRestoreButton.value == "Restore Item"){
+            console.log("Attempting to restore item from key with POST");
+            routerKey = '/keyRestore';
+        }
+        $.post({
+            traditional: true,
+            url: routerKey,    // url
+            data: productKey,
+            dataType: 'json',
+            success: function(data, ) {// success callback
+                successDeleteOrRestore(data);
+            }
+        }).fail(function(jqxhr, settings, ex) { 
+            alert("Couldn't access server." + ex); 
+        });
+    }
+
+    //reloads catalog after an item has been deleted
+    function successDeleteOrRestore(data){
+        if (data == false){
+            location.reload();
+        }
+    }
 
 
     /*
@@ -182,13 +233,13 @@ $(document).ready(function () {
     */
     function updatePageText(item) {
 
-        console.log(deleteButton);
+        console.log(deleteRestoreButton);
 
         //add more initiations when more data is avaliable from database team
         if(item.category.toLowerCase().includes("deleted")){
             itemName.innerHTML = item.name + " (deleted)";
-            if(deleteButton != null){
-                deleteButton.value = "Restore Item";
+            if(deleteRestoreButton != null){
+                deleteRestoreButton.value = "Restore Item";
             }
         } else{
             itemName.innerHTML = item.name;

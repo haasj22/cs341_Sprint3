@@ -1,6 +1,6 @@
 //Author: Alex Junkins, Adrian Muth, Daniel Co and Justin Cao
 //Version: April 4 2021
-//A router for the ADMIN_catalog to delete an item based on its key
+//A router for the ADMIN_catalog to restore an item based on its key
 var express = require('express');
 var router = express.Router();
 var serverfunctions = require('./dbms.js');
@@ -21,8 +21,8 @@ router.post('/', function(req, res, next) {
     //step 1 extract variables from JSON and modify
     var ik = req.body.item_key;
     var c = req.body.category;
-    if (!c.toLowerCase().includes('deleted')) {
-        c = c + " Deleted";
+    if (c.toLowerCase().includes('deleted')) {
+        c = c.replace(" Deleted", "");
     }
 
    //step 2 Send command to database

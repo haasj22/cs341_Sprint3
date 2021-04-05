@@ -12,6 +12,7 @@ var loginRouter = require('./routes/login');
 var individualRouter = require('./routes/individualPage');
 var modifyRouter = require('./routes/modify');
 var keyDeleteRouter = require('./routes/keyDelete.js');
+var keyRestoreRouter = require('./routes/keyRestore.js');
 
 var app = express();
 
@@ -33,6 +34,7 @@ app.use('/login', loginRouter);
 app.use('/individualPage', individualRouter);
 app.use('/modify', modifyRouter);
 app.use('/keyDelete', keyDeleteRouter);
+app.use('/keyRestore', keyRestoreRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
