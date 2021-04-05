@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function () {
     //Author Aidan Day Sprint 2 CS 341
     //Structure of search was taken from James Q Quick's JS Search Bar Tutorial
     //https://www.youtube.com/watch?v=wxz5vJ1BWrc
@@ -176,25 +176,42 @@ $(document).ready(function () {
     */
     const loadItems = async () => {
        
+        // if items have already been loaded during the session, retrieve them from sessionStorage
+        if (sessionStorage.getItem("catalog_items"))
+        {
+            CatalogItemsFull = JSON.parse(sessionStorage.getItem("catalog_items"));
+            CatalogItems = CatalogItemsFull;
+            // display items (this code would be called in readServerData if we had queried the sql server)
+            if (init){
+                displayItems(CatalogItems);
+                init = false;
+            }
+        }
+        else 
+        {
+            //Populate CatalogItemsFull with data from the SQL server
+            //only do so if the variable is empty (the data has not been loaded yet)
+            if (CatalogItemsFull.length == 0) {
+                console.log("Attempting to access item data with POST");
+                $.post({
+                    traditional: true,
+                    url: '/catalogData',    // url
+                    success: function (data,) {// success callback
+                        readServerData(data);
+                        // save items to sessionStorage
+                        sessionStorage.setItem("catalog_items",JSON.stringify(CatalogItemsFull));
+                    }
+                }).fail(function (jqxhr, settings, ex) {
+                    alert('Accessing product data failed, ' + ex + "\nLoading static dataset.");
+                    loadStaticDataset();
+                });
+            }
 
-        //Populate CatalogItemsFull with data from the SQL server: 'sprint2cs341', database: 'sprint2', table: 'products'
-        //only do so if the variable is empty (the data has not been loaded yet)
-        if (CatalogItemsFull.length == 0) {
-            console.log("Attempting to access item data with POST");
-            $.post({
-                traditional: true,
-                url: '/catalogData',    // url
-                success: function (data,) {// success callback
-                    readServerData(data);
-                }
-            }).fail(function (jqxhr, settings, ex) {
-                alert('Accessing product data failed, ' + ex + "\nLoading static dataset.");
-                loadStaticDataset();
-            });
+            //load maellable list
+            CatalogItems = CatalogItemsFull;
+
         }
 
-        //load maellable list
-        CatalogItems = CatalogItemsFull;
     };
 
     function loadStaticDataset() {
