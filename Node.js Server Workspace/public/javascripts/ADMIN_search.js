@@ -115,21 +115,60 @@ $(document).ready(function()
                 return `             
                         <figure class="bottomIndividualItem">
                             <div class="deletionOverlay">
-                            <p class="deletionMessage">This item is set for deletion.</p>
-                            <a class="undoDeletionMessage">undo?</a> 
+                            <p class="deletionMessage">Do you want to delete this item?</p>
+                            <a class="confirmDeletionMessage" key="${item.itemKey}" category="${item.category}">Delete</a> 
+                            <a class="undoDeletionMessage">Undo</a> 
                             </div> 
                             <button class="ADMIN deleteButton" type="button">X</button>
                             <a href="ADMIN_Individual_Page.html?${item.itemKey}">  
                             <img class="bottomImage" src="${item.image}" alt="${item.image}">
                             </a>
                             <figcaption>${item.name}</figcaption>
-                        </figure>          
+                        </figure>   
                 
             `;
             })
             .join('');
+        
+        // adds the add item button and add item form at the end of the catalog each time items are generated
+        const final_htmlString = htmlString + `
+                                                <figure class="ADMIN bottomIndividualItem">
+                                                    <em class="fa fa-plus-circle" style="font-size:200px;color:grey" id="btn open"></em> 
+                                                    <p> Add Item  </p>
+                                                </figure>
+                                                <div class="form-popup" id="myForm">
+                                                    <form class="form-container">
+                                                    <h1>Add Item</h1>
+                                                
+                                                    <label for="Model"><b>Model</b></label>
+                                                    <input id="input model" type="text" placeholder="Enter Model" name="Model" required>
+
+                                                    <label for="Brand"><b>Brand</b></label>
+                                                    <input id="input brand" type="text" placeholder="Enter Brand" name="Brand" required>
+                                                
+                                                    <label for="Categories"><b>Categories</b></label>
+                                                    <input id="input categories" type="text" placeholder="Enter Categories" name="Categories" required>
+                                                    
+                                                    <label for="Uses"><b>Uses</b></label>
+                                                    <input id="input uses" type="text" placeholder="Enter Uses" name="Uses" required>
+                                                    
+                                                    <label for="Accessories"><b>Accessories</b></label>
+                                                    <input id="input accessories" type="text" placeholder="Enter Accessories" name="Accessories" required>
+                                                    
+                                                    <label for="Description"><b>Description</b></label>
+                                                    <input id="input description" type="text" placeholder="Enter Description" name="Description" required>
+                                                    
+                                                    <label for="image"><b>Insert Image</b></label>
+                                                    <input id="input image" type="file" name="reqInsertImage">
+                                                    
+                                                    <button type="submit" class="btn add" id="btn add">Add Item</button>
+                                                    <button type="button" class="btn cancel" id="btn cancel">Close</button>
+                                                    </form>
+                                                </div>       
+                                                `;
+        
         resultCount.innerHTML = items.length + " results";
-        itemCatalog.innerHTML = htmlString;
+        itemCatalog.innerHTML = final_htmlString;
     };
 
     function displayItemsByNameAndCategory(searchString) {
@@ -282,8 +321,155 @@ $(document).ready(function()
             displayItems(CatalogItems);
             init = false;
         }
+
+        //For some asinine reason, this line has to be here. JSBE doesn't know why. If you do, please tell us.
+        loadButtonListeners();
     }
 
+    //A method to reassign deletion button listeners
+    function loadButtonListeners(){
+        $(".ADMIN.deleteButton").click(function(){
+            //alert("The paragraph was clicked.");
+            console.log("Clicked delete button.");
+        });
+        
+        //Sets up the item deletion overlay for an item
+        $(".ADMIN.deleteButton").on("click", HideItem);
+        $(".undoDeletionMessage").on("click", RevealItem);
+        $(".confirmDeletionMessage").on("click", DeleteItem);
+
+        document.getElementById("btn open").addEventListener("click", openForm); // Add event listener for opening the form
+        document.getElementById("btn add").addEventListener("click", addProduct); // Add event listener for closing the form
+        document.getElementById("btn cancel").addEventListener("click", closeForm); // Add event listener for closing the form
+        
+
+        console.log("Loaded button listeners!");
+    }
+
+    
+    //opens the add item form
+    function openForm(event) {
+        document.getElementById("myForm").style.display = "block";
+    }
+        
+        
+    //closes the add item form
+    function closeForm(event) {
+        document.getElementById("myForm").style.display = "none";
+    }
+
+    //called when a new product is being added
+    function addProduct(event){
+
+        console.log("Attempting to add the item")
+
+        //retrieve the product values from the HTML form
+        var model_num = document.getElementById('input model').value
+        var brand = document.getElementById('input brand').value
+        var categories = document.getElementById('input categories').value
+        var uses = document.getElementById('input uses').value
+        var accessories = document.getElementById('input accessories').value
+        var description = document.getElementById('input description').value
+        var picture = document.getElementById('input image').value
+
+        //perform any parsing here
+
+        //build a JSON to send to the SQL server
+        productInfo = { 
+            model_num: model_num,
+            brand:brand,
+            category:categories,
+            uses:uses,
+            accessories:accessories,
+            description:description,
+            picture:picture
+        }
+
+        console.log("Printing add-product info.");
+
+        //send the JSON to the SQL server with a post request
+        console.log("Attempting to add new product data with POST");
+        $.post({
+            traditional: true,
+            url: '/addItem',    // url
+            data: productInfo,
+            dataType: 'json',
+            success: function(data, ) {// success callback
+                successAdd(data);
+            }
+        }).fail(function(jqxhr, settings, ex) { 
+            alert("Couldn't access server." + ex); 
+        });
+
+    }
+
+    //closes form after an item has been deleted
+    function successAdd(data){
+        if (data == false){
+            closeForm();
+            //tell the user to reload the page because doing it here is too fast
+            alert("Item added! Reload page to see updated catalog."); 
+        }
+    }
+
+
+    //called when "x" deletion button is clicked
+    function HideItem(event)
+    {
+        console.log("Trying to delete item.");
+        $(this).prev().css("visibility","visible");
+        $(this).prev().css("cursor","default");
+    }
+
+    // called when "undo" is clicked
+    function RevealItem(event)
+    {
+        $(this).parent().css("visibility","hidden");
+        $(this).parent().css("cursor","pointer");
+    }
+
+    //called when "delete" is clicked
+    function DeleteItem(event) {
+        console.log("Confirm item deletion attempted.");
+        var ik = $(this).attr("key");
+        var c = $(this).attr("category");
+
+        console.log("category: " + c)
+        
+        productKey = { 
+            item_key:ik,
+            category:c
+        }
+
+        //BIG PROBLEM
+        //this presents a way for users to insert custom SQL code into the database
+        //we could add something to verify that the item key is an integer and the 
+        //category only has strings that are valid categories in the future
+
+        //attempt deletion w/ POST
+        console.log("Attempting to delete item from key with POST");
+        $.post({
+            traditional: true,
+            url: '/keyDelete',    // url
+            data: productKey,
+            dataType: 'json',
+            success: function(data, ) {// success callback
+                successDelete(data);
+            }
+        }).fail(function(jqxhr, settings, ex) { 
+            alert("Couldn't access server." + ex); 
+        });
+    }
+
+    //reloads catalog after an item has been deleted
+    function successDelete(data){
+        if (data == false){
+            //tell the user to reload the page because doing it here is too fast
+            alert("Item deleted! Reload page to see updated catalog."); 
+        }
+    }
+
+    
     //initial population of page when script is run
     loadItems();
 

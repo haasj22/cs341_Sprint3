@@ -22,3 +22,16 @@ Love, Javascript Backend Team <3
 
 Note: March 24, 2021
 This is a copy from sprint 2's repository. All branches but test main were deleted since they were irrlevent. Test main was renamed main. 
+
+
+Note: April 5, 2021
+The add item form works, but should only take info in a particular format:
+-Model and Brand should be one word. If these entries have more than one word, just use an underscore "_" for now.
+-Categories should be entered as such: "Category1 Category2 Category3" etc.
+Uses, Accessories, and Description just take strings. We don't know if strings longer than the SQL size will break things but they probably will.
+-Uses: 100 chars
+-Accessories: currently unused, no column in the SQL table
+-description: 300 chars
+On a related note, the image and accessories field are not currently being used, as it was too late to implement them for this sprint.
+New items are automatically given an ID and a default reservation length of 0. The image is entered as an empty string by default.
+Love, Javascript Backend Team <3

@@ -46,6 +46,12 @@ router.post('/', function(req, res, next) {
         res.json(orderObj);
     }
 
+    /*
+    async function doSomething() {
+        let result = await functionThatReturnsPromiseA();
+        return result + 1;
+    } */
+
 });
 
 
