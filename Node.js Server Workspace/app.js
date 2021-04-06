@@ -13,6 +13,7 @@ var individualRouter = require('./routes/individualPage');
 var modifyRouter = require('./routes/modify');
 var keyDeleteRouter = require('./routes/keyDelete.js');
 var keyRestoreRouter = require('./routes/keyRestore.js');
+var addItemRouter = require('./routes/addItem.js');
 
 var app = express();
 
@@ -35,6 +36,8 @@ app.use('/individualPage', individualRouter);
 app.use('/modify', modifyRouter);
 app.use('/keyDelete', keyDeleteRouter);
 app.use('/keyRestore', keyRestoreRouter);
+app.use('/addItem', addItemRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

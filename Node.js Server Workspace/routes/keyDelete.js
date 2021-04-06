@@ -1,6 +1,6 @@
 //Author: Alex Junkins, Adrian Muth, Daniel Co and Justin Cao
 //Version: April 4 2021
-//A router for the ADMIN_catalog to delete an item based on its key
+//A router for the ADMIN_catalog to mark an item as deleted based on its key
 var express = require('express');
 var router = express.Router();
 var serverfunctions = require('./dbms.js');
@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-//POST reciever, modify product data
+//POST reciever, mark product as deleted based on a key
 //Note: This does not currently change reservation lenth, accessories, or anything in the pictures table
 router.post('/', function(req, res, next) {
     
