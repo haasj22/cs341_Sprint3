@@ -129,8 +129,17 @@ $(document).ready(function()
             `;
             })
             .join('');
+        
+        const htmlStringWithAddButton = htmlString + `
+                                                <figure class="ADMIN bottomIndividualItem">
+                                                    <em class="fa fa-plus-circle" style="font-size:200px;color:grey" id="btn open"></em> 
+                                                    <p> Add Item  </p>
+                                                </figure>
+                                                `;
+        const final_htmlString = htmlStringWithAddButton.join('');
+        
         resultCount.innerHTML = items.length + " results";
-        itemCatalog.innerHTML = htmlString;
+        itemCatalog.innerHTML = final_htmlString;
     };
 
     function displayItemsByNameAndCategory(searchString) {
