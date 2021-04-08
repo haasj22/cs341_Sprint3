@@ -441,6 +441,8 @@ $(document).ready(function()
             category:c
         }
 
+
+
         //BIG PROBLEM
         //this presents a way for users to insert custom SQL code into the database
         //we could add something to verify that the item key is an integer and the 
@@ -459,6 +461,10 @@ $(document).ready(function()
         }).fail(function(jqxhr, settings, ex) { 
             alert("Couldn't access server." + ex); 
         });
+        
+        // hide deletion overlay
+        $(this).parent().css("visibility","hidden");
+        $(this).parent().css("cursor","pointer");
     }
 
     //reloads catalog after an item has been deleted
