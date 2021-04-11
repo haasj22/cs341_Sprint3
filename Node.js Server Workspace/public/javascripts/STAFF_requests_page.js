@@ -7,9 +7,10 @@ $(function()
     let CatalogItems = [];
     //retrieve category elements from document for event listners
     const requestButton = document.getElementById('request');
+    var removeButton = null;
     //an image of the university logo
     var placeholderImage = "https://www.universitycounselingjobs.com/institution/logo/logo2(4).png";
-
+    
     let itemListHtml = document.getElementById("item_list");
 
     requestButton.addEventListener('click', (e) => {
@@ -17,14 +18,14 @@ $(function()
         //sendEmail();
     });
 
-
     /*
     This method updates the displayed requests with the actual requests saved in sessionStorage
     */
     function DisplayRequests() {
+        //load array of requested items from sessionStorage
+        let requested_item_ids = JSON.parse(sessionStorage.getItem("requested_item_ids"));
         if (sessionStorage.getItem("requested_item_ids")) {
-            //load array of requested items from sessionStorage
-            let requested_item_ids = JSON.parse(sessionStorage.getItem("requested_item_ids"));
+            
             //check that at least one item has been requested
             if (requested_item_ids.length > 0)
             {
@@ -36,7 +37,7 @@ $(function()
                     }
                     return `
                     <li>${item.name} 
-                        <button>Remove Item</button> 
+                        <button class="remove">Remove Item</button> 
 
                         <table> <!--table-->
                             <caption>Quantity</caption>
@@ -71,8 +72,31 @@ $(function()
                 itemListHtml.innerHTML = htmlString;
             }
         }
+        document.getElementById("totalItems").innerHTML = "Total items: " + requested_item_ids.length;
+        removeButton = document.getElementsByClassName('remove');
+        console.log("remove button length: " + removeButton.length);
+        for(let i = 0; i < removeButton.length ; i++){
+            removeButton[i].addEventListener('click', (e) => {
+                console.log("pressed a remove button");
+                removeItemFromRequests(i);
+            }); 
+        }
     }
 
+    function removeItemFromRequests(i) {
+        if (sessionStorage.getItem("requested_item_ids"))
+        {
+            //Check whether or not the current item is in the request array
+            let requested_item_ids = JSON.parse(sessionStorage.getItem("requested_item_ids"));
+            //Removes the current item's id to the session storage's request array
+            requested_item_ids.splice(i, 1);
+            sessionStorage.setItem("requested_item_ids",JSON.stringify(requested_item_ids));
+            location.reload();
+        }
+        else{ 
+            alert("Cart is empty!");
+        }
+    }
 
     /*
     Copied from STAFF_search.js
@@ -176,6 +200,8 @@ $(function()
           CatalogItemsFull[i] = productjson;
       }
       console.log("Item loading complete!");
+      
+      
       //update page with requested items
       DisplayRequests();
   }
