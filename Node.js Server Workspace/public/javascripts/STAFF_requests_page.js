@@ -1,5 +1,5 @@
 // File initialized by Trey Dettmer
-
+//File edited by Wiliam Cloutier
 $(function()
 {
 
@@ -15,8 +15,8 @@ $(function()
 
     requestButton.addEventListener('click', (e) => {
         console.log("pressed request button");
-        $.getScript('send_email_script.js', function () {
-          send_email_script()
+        $.getScript('/javascripts/send_email_script.js', function () {//gets function from send_email
+          sendEmail("Body Test");//calls the function with the body argument filled out
         });
     });
 
@@ -207,6 +207,23 @@ $(function()
       //update page with requested items
       DisplayRequests();
   }
+
+      //
+      // function sendEmail() {
+      //   alert("test01");
+      //   Email.send({
+      //     Host: "smtp-mail.outlook.com",
+      //     Username: "cloutier23@up.edu",
+      //     Password: "Caution@6565656565",
+      //     To: 'cloutier23@up.edu@up.edu',
+      //     From: "cloutier23@up.edu@up.edu",
+      //     Subject: "Subject here.",
+      //     Body: "Body Here",
+      //   })
+      //     .then(function (message) {
+      //       alert("mail sent successfully")
+      //     });
+      // }
 
   //load items from database
   loadItems();
