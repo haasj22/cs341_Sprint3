@@ -10,12 +10,14 @@ $(function()
     var removeButton = null;
     //an image of the university logo
     var placeholderImage = "https://www.universitycounselingjobs.com/institution/logo/logo2(4).png";
-    
+
     let itemListHtml = document.getElementById("item_list");
 
     requestButton.addEventListener('click', (e) => {
         console.log("pressed request button");
-        //sendEmail();
+        $.getScript('send_email_script.js', function () {
+          send_email_script()
+        });
     });
 
     /*
@@ -25,7 +27,7 @@ $(function()
         //load array of requested items from sessionStorage
         let requested_item_ids = JSON.parse(sessionStorage.getItem("requested_item_ids"));
         if (sessionStorage.getItem("requested_item_ids")) {
-            
+
             //check that at least one item has been requested
             if (requested_item_ids.length > 0)
             {
@@ -36,8 +38,8 @@ $(function()
                         item.image = placeholderImage;
                     }
                     return `
-                    <li>${item.name} 
-                        <button class="remove">Remove Item</button> 
+                    <li>${item.name}
+                        <button class="remove">Remove Item</button>
 
                         <table> <!--table-->
                             <caption>Quantity</caption>
@@ -79,7 +81,7 @@ $(function()
             removeButton[i].addEventListener('click', (e) => {
                 console.log("pressed a remove button");
                 removeItemFromRequests(i);
-            }); 
+            });
         }
     }
 
@@ -93,7 +95,7 @@ $(function()
             sessionStorage.setItem("requested_item_ids",JSON.stringify(requested_item_ids));
             location.reload();
         }
-        else{ 
+        else{
             alert("Cart is empty!");
         }
     }
@@ -101,10 +103,10 @@ $(function()
     /*
     Copied from STAFF_search.js
     loadItems is the first method called when the script is run. This method populates our CatalogItems array
-    and makes a call to displays all items contained. 
+    and makes a call to displays all items contained.
     */
     const loadItems = async () => {
-       
+
         // if items have already been loaded during the session, retrieve them from sessionStorage
         if (sessionStorage.getItem("catalog_items"))
         {
@@ -114,7 +116,7 @@ $(function()
             DisplayRequests();
 
         }
-        else 
+        else
         {
             //Populate CatalogItemsFull with data from the SQL server
             //only do so if the variable is empty (the data has not been loaded yet)
@@ -141,7 +143,7 @@ $(function()
   };
   /*
   Copied from STAFF_search.js
-  A helper function to read items from the database format into the local CatalogItems format 
+  A helper function to read items from the database format into the local CatalogItems format
   and load into CatalogItemsFull
   */
   function readServerData(data) {
@@ -200,26 +202,12 @@ $(function()
           CatalogItemsFull[i] = productjson;
       }
       console.log("Item loading complete!");
-      
-      
+
+
       //update page with requested items
       DisplayRequests();
   }
 
-  function sendEmail() { 
-      Email.send({ 
-        Host: "smtp.gmail.com", 
-        Username: "hanshaas4321@gmail.com", 
-        Password: "password", 
-        To: 'hanshaas4321@gmail.com',
-        From: "hanshaas4321@gmail.com", 
-        Subject: "Camera checked out", 
-        Body: "(1) JVC Camera has been requested by Staff Member 'x' ", 
-      }) 
-        .then(function (message) { 
-          alert("mail sent successfully") 
-        }); 
-  } 
   //load items from database
   loadItems();
 });
