@@ -208,23 +208,6 @@ $(function()
       DisplayRequests();
   }
 
-      //
-      // function sendEmail() {
-      //   alert("test01");
-      //   Email.send({
-      //     Host: "smtp-mail.outlook.com",
-      //     Username: "cloutier23@up.edu",
-      //     Password: "Caution@6565656565",
-      //     To: 'cloutier23@up.edu@up.edu',
-      //     From: "cloutier23@up.edu@up.edu",
-      //     Subject: "Subject here.",
-      //     Body: "Body Here",
-      //   })
-      //     .then(function (message) {
-      //       alert("mail sent successfully")
-      //     });
-      // }
-
   //load items from database
   loadItems();
 });
