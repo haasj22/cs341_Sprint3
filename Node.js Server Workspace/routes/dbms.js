@@ -40,7 +40,7 @@
      async.waterfall([
  
          //Step 1: Connect to the database
-         function (callback) {
+         functioan (callback) {
              console.log("\n** creating connection.");
              dbclient = mysql.createConnection({
                  host: host,

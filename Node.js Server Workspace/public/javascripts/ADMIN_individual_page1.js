@@ -19,7 +19,34 @@ $(document).ready(function()
         ChangeImage(this,$(this).prev());
     });
 
+  /**
+   * INSERTING IMAGE INTO DATABASE
+   * FROM INDIVIDUAL PAGE 
+   *    MALIA
+   */
+// Check if the form is submitted 
+if ( isset( $_POST['submit'] ) ) { 
+    // retrieve the form data by using the element's name attributes value as key 
+    $URL = $_REQUEST['insertedImageURL'];
+    console.log($URL);
+    //here send $URL to server
+    exit;
+}
 
+//send the JSON to the SQL server with a post request
+console.log("Attempting to add new product data with POST");
+$.post({
+    traditional: true,
+    url: '/addItem',    // url
+    data: productInfo,
+    dataType: 'json',
+    success: function(data, ) {// success callback
+        successAdd(data);
+    }
+}).fail(function(jqxhr, settings, ex) { 
+    alert("Couldn't access server." + ex); 
+});
+    
     /* Replaces destination image with uploaded input image */
     function ChangeImage(input,destination) {
 
@@ -154,5 +181,9 @@ $(document).ready(function()
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-
+    // show the form asking for a url in order to change images on admin individual page
+    function openURLForm() {
+        var URLForm = document.getElementById("imageURLForm");
+        URLForm.classList.toggle("show");
+    }
 });

@@ -407,4 +407,17 @@ footer p {
         grid-row: 4 / 5;
         grid-column: 1 / 3;
     }
+
+    /* Form for inserting a url to change imgs */
+    .imageURLForm {
+        visibility: visible; /*change back to hidden when done*/
+        width: 3vw;
+        height: 2vw;
+        position: absolute;
+        left: 50%;
+    }
+
+    .imageURLForm .show{
+        visibility: visible;
+    }
 }
