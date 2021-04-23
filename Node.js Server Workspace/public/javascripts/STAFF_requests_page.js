@@ -26,23 +26,28 @@ $(function()
 
     requestButton.addEventListener('click', (e) => {
         console.log("pressed request button");
+
+        /*
         $.getScript('/javascripts/send_email_script.js', function () {//gets function from send_email
             // for each item on request page, get name, quantity, and comments
             //update the return section with order information and show
             
-            let orderData = {itemIds: requested_item_ids, quantity: quantity_textList, comments: comments_textList};
-            console.log(orderData);
-            $.post({
-             traditional: true,
-             url: '/emailOrder',    // url
-             data: orderData,
-             dataType: 'json',
-             success: function(data, ) {// success callback
-                 sendEmail(data);//calls the function with the body argument filled out
-             }
-           }).done(function() { alert('Successfully sent order!'); })
-           .fail(function(jqxhr, settings, ex) { alert('Failed to send order, ' + ex); });   
+            
         });
+        */
+
+        //let orderData = {itemIds: requested_item_ids, quantity: quantity_textList, comments: comments_textList};
+        //console.log(orderData);
+        $.post({
+            traditional: true,
+            url: '/emailOrder',    // url
+            //data: orderData,
+            //dataType: 'json',
+            success: function(data, ) {// success callback
+                //sendEmail(data);//calls the function with the body argument filled out
+            }
+        }).done(function() { alert('Successfully sent order!'); })
+        .fail(function(jqxhr, settings, ex) { alert('Failed to send order, ' + ex); });   
         
     });
 
