@@ -26,14 +26,17 @@ $(document).ready(function()
    */
 // Check if the form is submitted 
 
-function myFunction() {
-    var x = document.getElementById("URLForm");
-    var text = "";
-    var i;
-    for (i = 0; i < x.length ;i++) {
-        text += x.elements[i].value + "<br>";
-      }
-      console.log(text);
+    function insertImageFunction() {
+        //var x = document.getElementById("URLForm");
+        //var text = "";
+        //var i;
+   // for (i = 0; i < x.length ;i++) {
+       // text += x.elements[i].value + "<br>";
+     // }
+     //
+      var text = "";
+      var text = document.getElementById("insertedImageURL").value; 
+      console.log(text + "LOOK HERE");
     }
 
     /* Replaces destination image with uploaded input image */
@@ -184,7 +187,7 @@ function myFunction() {
         // send item with image url
         // get existing item data and add url for picture
         var insertImageInfo = { 
-            item_key:itemKey, model_num:brandAndModel[1], brand:brandAndModel[0], picture:null, //CHANGE
+            item_key:itemKey, model_num:brandAndModel[1], brand:brandAndModel[0], picture:text, //CHANGE
             category:cats, description:savedJsonObj.data[4].Text, reservation_length:null, 
             uses:savedJsonObj.data[2].Text, accessories:null
         }
@@ -203,5 +206,8 @@ function myFunction() {
             alert("Couldn't access server." + ex);
         });
     }
+    
+    
+    $(".urlSubmitButton").on("click", insertImageFunction); 
     
 });
