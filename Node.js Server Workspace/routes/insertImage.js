@@ -1,6 +1,7 @@
-//Author: Alex Junkins, Adrian Muth, Daniel Co and Justin Cao, William Lau, Haley Welliver, Malia L
-//Version: April 5 2021
-//A router for the ADMIN_catalog to request a new item be made
+//Author: 
+//Version: April 21 2021
+// A router for sending a request to update the admin individual page image
+// Copied from addItem.js
 var express = require('express');
 var router = express.Router();
 var serverfunctions = require('./dbms.js');
@@ -22,7 +23,7 @@ router.post('/', function(req, res, next) {
     var item_key = -1; //if an item is added with the key -1, there was an error
     var model_num = req.body.model_num;
     var brand = req.body.brand;
-    var picture = ""; //does not currently use pictures, set to an empty string by default
+    var picture = req.body.picture; // inserts url for picture ?
     var category = req.body.category;
     var description = req.body.description;
     var reservationLength = 0; // inserts reservation length 0 by default

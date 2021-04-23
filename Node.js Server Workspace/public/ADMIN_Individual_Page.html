@@ -36,9 +36,15 @@
         <!-- Big image of item-->
         <div style="position: relative;">
           <img id="mainImage" src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg" alt="dslr_camera" >
-          <input type="file" class="ADMIN imageEditIconLink" accept="image/png, image/jpeg">
-            <img  class="ADMIN imageEditIcon" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png">
+          <input type="button" class="ADMIN imageEditIconLink" accept="image/png, image/jpeg">
+            <img  class="ADMIN imageEditIcon" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png" onclick="openURLForm()">
           </input>
+          <div class="imageURLForm" id="imageURLForm"></div>
+          <form id="URLForm"> <!--CHANGE THIS LATER-->
+            <label for="insertedImageURL">URL:</label>
+            <input type="text" id="insertedImageURL" name="insertedImageURL"><br><br> 
+            <input type="submit" value="Submit">
+          </form>
         </div>
 
         <!-- Smaller alternative images of item-->
