@@ -18,6 +18,9 @@ $(function () {
     const deleteRestoreButton = document.getElementById('deleteButton');
 
     var placeholderImage = "https://lh3.googleusercontent.com/GQIuf05jvVfDru6tdwR_zEsRhNj59K3QKANkpQCS4cxinfu4DiwkCFFM0oi71calYudq9D4-jjwFYv1U0raDqP4blg0SkR3wQRLN4CmL1bHeLdmrnsFxMLiWo0ttWxLmfVNdIKz0KAAn7iSBs3NsOoCP7mQpnvdRdWWjy6DChe_E_BFOOxwfM01P5BwYy_FyHtWaYziquGADRjymlp9Xls_H-67k7JMFU8E3FRW4ZA1-rAk2VWmccJW3kQEwRzvL0zOmfss47m6rvKQXRZCdpNFgfsLxfPhmFfxNg8i5NUjgXFwTlkg4uLsklfeWRqG87K0snnoy-KuTj040_2PuicI9LQuMo5UwaGNReCGfOb5fEgy_ogXfmlUZWwENyqnnlHXYEHaYokz8HajekTkVo-apRo88_l9mKrHZbMHra9ukgJj0T878vC-_o4AKxkLSKZvF_l54RTlGM5sO5ET2M68uHensYDY9jl_-Hf9nhQyA_gLxQNtZkzX3rkm_WK3_br1hzz9XDQxGEaPKVvtp-ZE-oOQvCbme6h_y0kVS0MQ5Esvi1YHMHSfr2ddgVZvsMWSbwLWwUkHQUctFNB8UlgdavPGFcy5aCR27sdJbqB8Ea0NOOMn9DperBRpoFRw8hSt1M0mvaaaqfRlJtKPGihnkhxgA_taDfAchqrG9xxPayCXtXt50RS49VyJM5bdU4d7wlNTp5OWsY_8KaoSwe9yW=w2454-h1642-no?authuser=0";
+
+    //Initiates an array of alternate images
+    let AlternativeImagesArray = [];
     
     //Delete/Restore button functionality is only allowed on the ADMIN version of the individual page
     if(deleteRestoreButton != null){
@@ -154,9 +157,18 @@ $(function () {
                     //get the first image where item key matches image's key number
                     for(let j = 0; j < productImageArray.length; j++){
                         if (k == productImageArray[j].key_number){
-                            img = productImageArray[j].image;
+                            if(img == null)
+                            {   
+                                console.log("Image found");
+                                img = productImageArray[j].image;
+                            }
+                            else 
+                            {
+                                console.log("Main image already found; looking for alternatives...");
+                                AlternativeImagesArray.push(productImageArray[j].image);
+                            }
+                            
                             console.log("Found image for " + bn + ": " + img);
-                            break;
                         }
                     }
                     if (img == null){

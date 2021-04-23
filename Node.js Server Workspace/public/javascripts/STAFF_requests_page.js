@@ -12,12 +12,38 @@ $(function()
     var placeholderImage = "https://www.universitycounselingjobs.com/institution/logo/logo2(4).png";
 
     let itemListHtml = document.getElementById("item_list");
+    
+    //storing the dropdown list elements
+    var quantity_list;
+    
+    //storing the actual quantity 
+    var quantity_textList;
+
+    var comments_list;
+    var comments_textList;
+    
+    let requested_item_ids;
 
     requestButton.addEventListener('click', (e) => {
         console.log("pressed request button");
         $.getScript('/javascripts/send_email_script.js', function () {//gets function from send_email
-          sendEmail("Body Test");//calls the function with the body argument filled out
+            // for each item on request page, get name, quantity, and comments
+            //update the return section with order information and show
+            
+            let orderData = {itemIds: requested_item_ids, quantity: quantity_textList, comments: comments_textList};
+            console.log(orderData);
+            $.post({
+             traditional: true,
+             url: '/emailOrder',    // url
+             data: orderData,
+             dataType: 'json',
+             success: function(data, ) {// success callback
+                 sendEmail(data);//calls the function with the body argument filled out
+             }
+           }).done(function() { alert('Successfully sent order!'); })
+           .fail(function(jqxhr, settings, ex) { alert('Failed to send order, ' + ex); });   
         });
+        
     });
 
     /*
@@ -25,7 +51,7 @@ $(function()
     */
     function DisplayRequests() {
         //load array of requested items from sessionStorage
-        let requested_item_ids = JSON.parse(sessionStorage.getItem("requested_item_ids"));
+        requested_item_ids = JSON.parse(sessionStorage.getItem("requested_item_ids"));
         if (sessionStorage.getItem("requested_item_ids")) {
 
             //check that at least one item has been requested
@@ -48,7 +74,7 @@ $(function()
                                         <tr>
                                             <td>
                                                 <!--select input type quantity Options-->
-                                                <select name="drop-down-list" id="numOfCheesecakes">
+                                                <select name="drop-down-list" id="itemQuantity">
                                                     <option value="1" id="1">1</option>
                                                     <option value="2" id="2">2</option>
                                                     <option value="3" id="3">3</option>
@@ -76,6 +102,22 @@ $(function()
         }
         document.getElementById("totalItems").innerHTML = "Total items: " + requested_item_ids.length;
         removeButton = document.getElementsByClassName('remove');
+        quantity_list = document.getElementByClassName("itemQuantity");
+        comments_list = document.getElementByClassName("comments");
+        
+        // iterates through item quantities
+        for (let i = 0; i < quantity_list.length; i++) {
+            idx = quantity_list[i].selectedIndex;
+            quantity_textList[i] = quantity_list.options[idx].text;
+        }
+
+        // iterates through item comments
+        for (let i = 0; i < comments_list.length; i++) {
+            idx = comments_list[i].selectedIndex;
+            comments_textList[i] = comments_list.options[idx].text;
+        }
+
+        //set up item remove button listeners
         console.log("remove button length: " + removeButton.length);
         for(let i = 0; i < removeButton.length ; i++){
             removeButton[i].addEventListener('click', (e) => {
@@ -89,7 +131,7 @@ $(function()
         if (sessionStorage.getItem("requested_item_ids"))
         {
             //Check whether or not the current item is in the request array
-            let requested_item_ids = JSON.parse(sessionStorage.getItem("requested_item_ids"));
+            lrequested_item_ids = JSON.parse(sessionStorage.getItem("requested_item_ids"));
             //Removes the current item's id to the session storage's request array
             requested_item_ids.splice(i, 1);
             sessionStorage.setItem("requested_item_ids",JSON.stringify(requested_item_ids));
