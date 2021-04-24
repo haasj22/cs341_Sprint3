@@ -27,16 +27,11 @@ $(document).ready(function()
 // Check if the form is submitted 
 
     function insertImageFunction() {
-        //var x = document.getElementById("URLForm");
-        //var text = "";
-        //var i;
-   // for (i = 0; i < x.length ;i++) {
-       // text += x.elements[i].value + "<br>";
-     // }
-     //
       var text = "";
       var text = document.getElementById("insertedImageURL").value; 
-      console.log(text + "LOOK HERE");
+      console.log(text);
+
+      insertImageUrl(text);
     }
 
     /* Replaces destination image with uploaded input image */
@@ -175,11 +170,24 @@ $(document).ready(function()
 
     // show the form asking for a url in order to change images on admin individual page
     function openURLForm() {
+
+        
+
         var URLForm = document.getElementById("imageURLForm");
         URLForm.classList.toggle("show");
     }
 
-    function insertImageUrl() {
+    function insertImageUrl(text) {
+
+        var editElem = document.getElementsByClassName("infoText");
+
+        var savedJsonObj = { data: []};
+        for (let i = 0; i < editElem.length;i++)
+        {
+            savedJsonObj.data.push({"Section": $($(editElem).prev().prev()[i]).text(), "Text": editElem[i].innerHTML});
+        }
+        console.log(savedJsonObj);
+
         var itemKey = location.search.substring(1);
         var brandAndModel = savedJsonObj.data[0].Text.split("/");
         var cats = "";
@@ -194,12 +202,14 @@ $(document).ready(function()
 
         //send the JSON to the SQL server with a post request
         console.log("Attempting to insert image with POST");
+        //console.log(JSON.stringify(insertImageInfo));
         $.post({
             traditional: true,
             url: '/insertImage',    // url
             data: insertImageInfo,
             dataType: 'json',
-            success: function(data, ) {// success callback
+            success: function(data, ) { // success callback
+                console.log("successfull accessed server");
                 successAdd(data);
             }
         }).fail(function(jqxhr, settings, ex) {
@@ -209,5 +219,6 @@ $(document).ready(function()
     
     
     $(".urlSubmitButton").on("click", insertImageFunction); 
+     
     
 });
