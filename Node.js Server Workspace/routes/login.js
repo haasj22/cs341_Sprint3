@@ -53,18 +53,24 @@ router.post('/', function(req, res, next) {
             loginMatch = false;
             user.email = "email";
             user.password = "pass";
-            console.log("redirecting to admin page");
-            res.redirect("ADMIN_catalog.html");
+            let resObj = {"success": true, "redirect": "ADMIN_catalog.html", "username": "email", "password": "pass", "error": ""};
+            // console.log("redirecting to admin page");
+            // res.redirect("ADMIN_catalog.html");
+            res.json(resObj);
         } else if(loginMatch == true) {
             isAdmin = false;
             loginMatch = false;
             user.email = "email";
             user.password = "pass";
-            console.log("redirecting to staff page");
-            res.redirect("STAFF_catalog.html");
+            let resObj = {"success": true, "redirect": "STAFF_catalog.html", "username": "email", "password": "pass", "error": ""};
+            // console.log("redirecting to staff page");
+            // res.redirect("STAFF_catalog.html");
+            res.json(resObj);
         } else {
-            console.log("Doesn't match a user!");
-            // alert("Not a user!");
+            let resObj = {"success": false, "redirect": "login.html", "username": "", "password": "", "error": "Incorrect username or password"};
+            // console.log("Doesn't match a user!");
+            // res.redirect("login.html");
+            res.json(resObj);
         }
     };
 });
