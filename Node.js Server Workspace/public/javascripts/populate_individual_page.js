@@ -14,6 +14,7 @@ $(function () {
     const accessoriesText = document.getElementById('accessoriesText');
     const descriptionText = document.getElementById('descriptionText');
     const similarItems = document.getElementById('similarItemsWrapper');
+    const imageUrl = document.getElementById('mainImage');
 
     const deleteRestoreButton = document.getElementById('deleteButton');
 
@@ -304,6 +305,69 @@ $(function () {
         //     } else {
         //         document.getElementById(similarImagesDisplay[j]).src = similarImagesArray[j];
     }
+
+   /**
+   * CREATING VARIABLE TO INSERT IMAGE INTO DATABASE
+   * FROM INDIVIDUAL PAGE 
+   *    MALIA
+   */
+     function insertImageFunction() {
+        var text = "";
+        var text = document.getElementById("insertedImageURL").value; 
+        console.log(text);
+        insertImageUrl(text);
+    }
+
+    function insertImageUrl(text) {
+        var editElem = document.getElementsByClassName("infoText");
+
+        var savedJsonObj = { data: []};
+        for (let i = 0; i < editElem.length;i++)
+        {
+            savedJsonObj.data.push({"Section": $($(editElem).prev().prev()[i]).text(), "Text": editElem[i].innerHTML});
+        }
+        console.log(savedJsonObj);
+
+        var itemKey = location.search.substring(1);
+        var brandAndModel = savedJsonObj.data[0].Text.split("/");
+        var cats = "";
+
+        // send item with image url
+        // get existing item data and add url for picture
+        var insertImageInfo = { 
+            item_key:itemKey, model_num:brandAndModel[1], brand:brandAndModel[0], picture:text, //CHANGE
+            category:cats, description:savedJsonObj.data[4].Text, reservation_length:null, 
+            uses:savedJsonObj.data[2].Text, accessories:null
+        }
+
+        //send the JSON to the SQL server with a post request
+        console.log("Attempting to insert image with POST");
+        //console.log(JSON.stringify(insertImageInfo));
+        $.post({
+            traditional: true,
+            url: '/insertImage',    // url
+            data: insertImageInfo,
+            dataType: 'json',
+            success: function(data, ) { // success callback
+                console.log("successfully accessed server");
+                updateImage(data);
+            }
+        }).fail(function(jqxhr, settings, ex) {
+            alert("Couldn't access server." + ex);
+        });
+    }
+    
+    /*
+    updateImage function takes a user provided url and sets it as the image source for the individual page's main image
+     */
+    function updateImage(item) {
+        console.log(imageUrl);
+        console.log(item.picture);
+        document.getElementById('mainImage').src = item.picture; // NEED TO CHECK IF PICTURE IS ACTUALLY A URL
+
+    }
+    
+    $(".urlSubmitButton").on("click", insertImageFunction);
 
     //load items when page starts 
     loadItems();

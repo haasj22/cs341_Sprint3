@@ -19,19 +19,6 @@ $(document).ready(function()
         ChangeImage(this,$(this).prev());
     });
 
-  /**
-   * CREATING VARIABLE TO INSERT IMAGE INTO DATABASE
-   * FROM INDIVIDUAL PAGE 
-   *    MALIA
-   */
-    function insertImageFunction() {
-      var text = "";
-      var text = document.getElementById("insertedImageURL").value; 
-      console.log(text);
-
-      insertImageUrl(text);
-    }
-
     /* Replaces destination image with uploaded input image */
     function ChangeImage(input,destination) {
 
@@ -177,9 +164,21 @@ $(document).ready(function()
         document.getElementById("myForm").style.display = "none";
       }
 
+    
+    /**
+   * CREATING VARIABLE TO INSERT IMAGE INTO DATABASE
+   * FROM INDIVIDUAL PAGE 
+   *    MALIA
+   */
+  /*
+    function insertImageFunction() {
+        var text = "";
+        var text = document.getElementById("insertedImageURL").value; 
+        console.log(text);
+        insertImageUrl(text);
+    }
 
     function insertImageUrl(text) {
-
         var editElem = document.getElementsByClassName("infoText");
 
         var savedJsonObj = { data: []};
@@ -203,6 +202,7 @@ $(document).ready(function()
 
         //send the JSON to the SQL server with a post request
         console.log("Attempting to insert image with POST");
+        console.log(insertImageInfo);
         //console.log(JSON.stringify(insertImageInfo));
         $.post({
             traditional: true,
@@ -219,7 +219,7 @@ $(document).ready(function()
     }
     
     
-    $(".urlSubmitButton").on("click", insertImageFunction); 
+    $(".urlSubmitButton").on("click", insertImageFunction); */
     $(".ADMIN imageEditIcon").on("click", openForm);
     
 });
