@@ -20,12 +20,10 @@ $(document).ready(function()
     });
 
   /**
-   * INSERTING IMAGE INTO DATABASE
+   * CREATING VARIABLE TO INSERT IMAGE INTO DATABASE
    * FROM INDIVIDUAL PAGE 
    *    MALIA
    */
-// Check if the form is submitted 
-
     function insertImageFunction() {
       var text = "";
       var text = document.getElementById("insertedImageURL").value; 
@@ -169,13 +167,16 @@ $(document).ready(function()
     }
 
     // show the form asking for a url in order to change images on admin individual page
-    function openURLForm() {
-
-        
-
-        var URLForm = document.getElementById("imageURLForm");
+    //function to open the URL form to change images on admin individual page
+    function openForm() {
+        var URLForm = document.getElementById("myForm").style.display = "block";
         URLForm.classList.toggle("show");
-    }
+      }
+    //function to close the URL form on admin indivifula page.
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+      }
+
 
     function insertImageUrl(text) {
 
@@ -219,6 +220,6 @@ $(document).ready(function()
     
     
     $(".urlSubmitButton").on("click", insertImageFunction); 
-     
+    $(".ADMIN imageEditIcon").on("click", openForm);
     
 });
