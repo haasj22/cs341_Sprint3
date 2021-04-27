@@ -36,6 +36,20 @@ $(function()
             
         });
         */
+
+        //define quantity_intList and comments_textList because for some reason they aren't already
+        quantity_list = document.getElementByClassName("itemQuantity");
+        comments_list = document.getElementByClassName("comments");
+        // iterates through item quantities
+        for (let i = 0; i < quantity_list.length; i++) {
+            idx = quantity_list[i].selectedIndex;
+            quantity_intList[i] = parseInt(quantity_list.options[idx].text);
+        }
+        // iterates through item comments
+        for (let i = 0; i < comments_list.length; i++) {
+            idx = comments_list[i].selectedIndex;
+            comments_textList[i] = comments_list.options[idx].text;
+        }
         
         //retrieve and reformat requested item data
         var itemArray = [requested_item_ids.length];
