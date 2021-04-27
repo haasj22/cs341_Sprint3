@@ -1,5 +1,5 @@
 //Author: Alex Junkins, Adrian Muth, Reggie Nillo and Justin Cao
-//Version: April 15 2021
+//Version: April 27 2021
 //A router for the staff request page to send requests as an email
 var express = require('express');
 var router = express.Router();
@@ -12,8 +12,14 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-var nodemailer = require('nodemailer');
+//email function retrieved from this tutorial:
+//https://www.w3schools.com/nodejs/nodejs_email.asp
 
+//import email module
+var nodemailer = require('nodemailer');
+const { json } = require('body-parser');
+
+//create email variables
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -25,15 +31,16 @@ var transporter = nodemailer.createTransport({
 var mailOptions = {
     from: 'thisisatestforsprint4@gmail.com',
     to: 'thisisatestforsprint4@gmail.com',
-    subject: 'Who wrote this awful code',
-    text: ""
+    subject: '',
+    text: '',
 };
 
 
-function sendEmailViaServer(b){
+function sendEmailViaServer(body, requestee){
     
-    console.log("Using the Node.js server to send an email with body: " + b);
-    mailOptions.text = b;
+    console.log("Using the Node.js server to send an email with body: " + body + " from user " + requestee);
+    mailOptions.subject = "UP Equipment Rental Website request from " + requestee;
+    mailOptions.text = body;
 
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {
@@ -48,7 +55,63 @@ function sendEmailViaServer(b){
 router.post('/', function(req, res, next) {
     console.log("Received email order request.");
 
-    sendEmailViaServer("Hi, mom!");
+    //item numbers(quantity), names, and IDs/itemKeys
+    //comments, requestee (currently impossible without SSO login)
+
+    //assuming these are in a json object in this format
+    /*
+    var jsonObj = {
+        requestee: string, null w/o sign-on feature,
+        itemArray: [
+            item1 = "key1*itemName1*quant1*comment1"
+            item2 = "key2*itemName2*quant1*comment2"
+            ...
+        ]
+    };
+    */
+
+    //retrieve data variables
+    var jsonObj = req.body;
+    var requestee = req.body.requestee;
+    console.log("Requestee: " + requestee)
+    var itemsDataArray = req.body.itemArray;
+    console.log("Item Array: " + itemsDataArray)
+
+    //construct intial string line
+    var emailString = "User '" + requestee + "' has requested items from the University of Portland Equipment Rental Request Website:\n\n";
+
+    //convert data variables into email script lines
+    var emailStringLines = [itemsDataArray.length];
+    for (var i = 0; i < itemsDataArray.length; i++) {
+        console.log("Item " + (i+1));
+        splitString = itemsDataArray[i].split("*");
+        key = splitString[0];
+        console.log("\tKey: " + key);
+        itemName = splitString[1];
+        console.log("\tName: " + itemName);
+        quant = splitString[2];
+        console.log("\tQuantity: " + quant);
+        comment = splitString[3];
+        console.log("\tComment: " + comment);
+        emailStringLine = "Item '" + itemName + "' with ID key number '" + key+ "'. Quantity: " + quant + ".\nComment: '" + comment + "'\n";
+        emailStringLines[i] = emailStringLine;
+    }
+
+    //combine data script lines with opening lines and append closing line
+    for (var j = 0; j < emailStringLines.length; j++){
+        emailString = emailString + emailStringLines[j];
+    }
+    emailString = emailString + "\nNote: Logged-in user currently cannot be read. We're working to fix this. Thank you for your patience.\nSent automatically by the rental site."
+
+    console.log("\nFinal email string:\n-");
+    console.log(emailString);
+    console.log("-");
+
+    //send email
+    //sendEmailViaServer(emailString, requestee);
+
+    success=true;
+    res.send(success);
     
 });
 

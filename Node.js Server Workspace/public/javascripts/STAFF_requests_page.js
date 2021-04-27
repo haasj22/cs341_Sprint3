@@ -1,5 +1,6 @@
 // File initialized by Trey Dettmer
-//File edited by Wiliam Cloutier
+//File edited by Wiliam Cloutier, Alex Junkins, Daniel Co, Adrian Muth, Reggie Nillo
+//Version: April 27 2021
 $(function()
 {
 
@@ -17,7 +18,7 @@ $(function()
     var quantity_list;
     
     //storing the actual quantity 
-    var quantity_textList;
+    var quantity_intList;
 
     var comments_list;
     var comments_textList;
@@ -26,7 +27,7 @@ $(function()
 
     requestButton.addEventListener('click', (e) => {
         console.log("pressed request button");
-
+        var someEmail = "unknown_user@up.edu";
         /*
         $.getScript('/javascripts/send_email_script.js', function () {//gets function from send_email
             // for each item on request page, get name, quantity, and comments
@@ -35,20 +36,56 @@ $(function()
             
         });
         */
+        
+        //retrieve and reformat requested item data
+        var itemArray = [requested_item_ids.length];
+        requested_item_ids = JSON.parse(sessionStorage.getItem("requested_item_ids"));
+        console.log("Requested Item IDs: " + requested_item_ids)
+        for (var i = 0; i < requested_item_ids.length; i++) {
+            //Find the item in the catalog from its id
+            let item = CatalogItemsFull.find(productJson => productJson.itemKey == requested_item_ids[i]);
 
-        //let orderData = {itemIds: requested_item_ids, quantity: quantity_textList, comments: comments_textList};
-        //console.log(orderData);
+            //fetch necessary item data
+            var key = requested_item_ids[i];
+            var itemName = item.name;
+            var quant = quantity_intList[i]
+            var comment = comments_textList[i]
+
+            //combine data into parseable string for sending in POST
+            //results in a string in this format: "key*itemName*quantity*comment" that is separatable by .split('*')
+            itemArray[i] = "" + key + "*" + itemName + "*" + quant + "*" + comment + "";
+        }
+        console.log(itemArray);
+
+        //construct JSON object
+        var requestInfo = {
+            "requestee": someEmail,
+            "itemArray": itemArray
+        };
+
+
+        //dummy JSON construction
+        var testItem1 = "1*Item One*2*Hi, mom";
+        var testItem2 = "2*Item Two*1*I am so damn hungry";
+        var testItem3 = "3*Item Three*5*I am ded";
+        testItemArray = [testItem1, testItem2, testItem3];
+        var dummyJson = {
+            "requestee": someEmail,
+            "itemArray": testItemArray
+        };
+
+        //send Json object
         $.post({
             traditional: true,
             url: '/emailOrder',    // url
-            //data: orderData,
-            //dataType: 'json',
+            data: dummyJson,
+            dataType: 'json',
             success: function(data, ) {// success callback
                 //sendEmail(data);//calls the function with the body argument filled out
+                console.log("Email sent successfully");
             }
         }).done(function() { alert('Successfully sent order!'); })
         .fail(function(jqxhr, settings, ex) { alert('Failed to send order, ' + ex); });   
-        
     });
 
     /*
@@ -110,10 +147,11 @@ $(function()
         quantity_list = document.getElementByClassName("itemQuantity");
         comments_list = document.getElementByClassName("comments");
         
+        var idx;
         // iterates through item quantities
         for (let i = 0; i < quantity_list.length; i++) {
             idx = quantity_list[i].selectedIndex;
-            quantity_textList[i] = quantity_list.options[idx].text;
+            quantity_intList[i] = parseInt(quantity_list.options[idx].text);
         }
 
         // iterates through item comments
