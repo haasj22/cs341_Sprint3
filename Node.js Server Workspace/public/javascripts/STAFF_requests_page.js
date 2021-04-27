@@ -1,5 +1,6 @@
 // File initialized by Trey Dettmer
-
+//File edited by Wiliam Cloutier, Alex Junkins, Daniel Co, Adrian Muth, Reggie Nillo
+//Version: April 27 2021
 $(function()
 {
 
@@ -10,12 +11,81 @@ $(function()
     var removeButton = null;
     //an image of the university logo
     var placeholderImage = "https://www.universitycounselingjobs.com/institution/logo/logo2(4).png";
-    
+
     let itemListHtml = document.getElementById("item_list");
+    
+    //storing the dropdown list elements
+    var quantity_list;
+    
+    //storing the actual quantity 
+    var quantity_intList;
+
+    var comments_list;
+    var comments_textList;
+    
+    let requested_item_ids;
 
     requestButton.addEventListener('click', (e) => {
         console.log("pressed request button");
-        //sendEmail();
+        var someEmail = "unknown_user@up.edu";
+        /*
+        $.getScript('/javascripts/send_email_script.js', function () {//gets function from send_email
+            // for each item on request page, get name, quantity, and comments
+            //update the return section with order information and show
+            
+            
+        });
+        */
+        
+        //retrieve and reformat requested item data
+        var itemArray = [requested_item_ids.length];
+        requested_item_ids = JSON.parse(sessionStorage.getItem("requested_item_ids"));
+        console.log("Requested Item IDs: " + requested_item_ids)
+        for (var i = 0; i < requested_item_ids.length; i++) {
+            //Find the item in the catalog from its id
+            let item = CatalogItemsFull.find(productJson => productJson.itemKey == requested_item_ids[i]);
+
+            //fetch necessary item data
+            var key = requested_item_ids[i];
+            var itemName = item.name;
+            var quant = quantity_intList[i]
+            var comment = comments_textList[i]
+
+            //combine data into parseable string for sending in POST
+            //results in a string in this format: "key*itemName*quantity*comment" that is separatable by .split('*')
+            itemArray[i] = "" + key + "*" + itemName + "*" + quant + "*" + comment + "";
+        }
+        console.log(itemArray);
+
+        //construct JSON object
+        var requestInfo = {
+            "requestee": someEmail,
+            "itemArray": itemArray
+        };
+
+
+        //dummy JSON construction
+        var testItem1 = "1*Item One*2*Hi, mom";
+        var testItem2 = "2*Item Two*1*I am so damn hungry";
+        var testItem3 = "3*Item Three*5*I am ded";
+        testItemArray = [testItem1, testItem2, testItem3];
+        var dummyJson = {
+            "requestee": someEmail,
+            "itemArray": testItemArray
+        };
+
+        //send Json object
+        $.post({
+            traditional: true,
+            url: '/emailOrder',    // url
+            data: dummyJson,
+            dataType: 'json',
+            success: function(data, ) {// success callback
+                //sendEmail(data);//calls the function with the body argument filled out
+                console.log("Email sent successfully");
+            }
+        }).done(function() { alert('Successfully sent order!'); })
+        .fail(function(jqxhr, settings, ex) { alert('Failed to send order, ' + ex); });   
     });
 
     /*
@@ -23,9 +93,9 @@ $(function()
     */
     function DisplayRequests() {
         //load array of requested items from sessionStorage
-        let requested_item_ids = JSON.parse(sessionStorage.getItem("requested_item_ids"));
+        requested_item_ids = JSON.parse(sessionStorage.getItem("requested_item_ids"));
         if (sessionStorage.getItem("requested_item_ids")) {
-            
+
             //check that at least one item has been requested
             if (requested_item_ids.length > 0)
             {
@@ -36,8 +106,8 @@ $(function()
                         item.image = placeholderImage;
                     }
                     return `
-                    <li>${item.name} 
-                        <button class="remove">Remove Item</button> 
+                    <li>${item.name}
+                        <button class="remove">Remove Item</button>
 
                         <table> <!--table-->
                             <caption>Quantity</caption>
@@ -46,7 +116,7 @@ $(function()
                                         <tr>
                                             <td>
                                                 <!--select input type quantity Options-->
-                                                <select name="drop-down-list" id="numOfCheesecakes">
+                                                <select name="drop-down-list" id="itemQuantity">
                                                     <option value="1" id="1">1</option>
                                                     <option value="2" id="2">2</option>
                                                     <option value="3" id="3">3</option>
@@ -74,12 +144,29 @@ $(function()
         }
         document.getElementById("totalItems").innerHTML = "Total items: " + requested_item_ids.length;
         removeButton = document.getElementsByClassName('remove');
+        quantity_list = document.getElementByClassName("itemQuantity");
+        comments_list = document.getElementByClassName("comments");
+        
+        var idx;
+        // iterates through item quantities
+        for (let i = 0; i < quantity_list.length; i++) {
+            idx = quantity_list[i].selectedIndex;
+            quantity_intList[i] = parseInt(quantity_list.options[idx].text);
+        }
+
+        // iterates through item comments
+        for (let i = 0; i < comments_list.length; i++) {
+            idx = comments_list[i].selectedIndex;
+            comments_textList[i] = comments_list.options[idx].text;
+        }
+
+        //set up item remove button listeners
         console.log("remove button length: " + removeButton.length);
         for(let i = 0; i < removeButton.length ; i++){
             removeButton[i].addEventListener('click', (e) => {
                 console.log("pressed a remove button");
                 removeItemFromRequests(i);
-            }); 
+            });
         }
     }
 
@@ -87,13 +174,13 @@ $(function()
         if (sessionStorage.getItem("requested_item_ids"))
         {
             //Check whether or not the current item is in the request array
-            let requested_item_ids = JSON.parse(sessionStorage.getItem("requested_item_ids"));
+            lrequested_item_ids = JSON.parse(sessionStorage.getItem("requested_item_ids"));
             //Removes the current item's id to the session storage's request array
             requested_item_ids.splice(i, 1);
             sessionStorage.setItem("requested_item_ids",JSON.stringify(requested_item_ids));
             location.reload();
         }
-        else{ 
+        else{
             alert("Cart is empty!");
         }
     }
@@ -101,10 +188,10 @@ $(function()
     /*
     Copied from STAFF_search.js
     loadItems is the first method called when the script is run. This method populates our CatalogItems array
-    and makes a call to displays all items contained. 
+    and makes a call to displays all items contained.
     */
     const loadItems = async () => {
-       
+
         // if items have already been loaded during the session, retrieve them from sessionStorage
         if (sessionStorage.getItem("catalog_items"))
         {
@@ -114,7 +201,7 @@ $(function()
             DisplayRequests();
 
         }
-        else 
+        else
         {
             //Populate CatalogItemsFull with data from the SQL server
             //only do so if the variable is empty (the data has not been loaded yet)
@@ -141,7 +228,7 @@ $(function()
   };
   /*
   Copied from STAFF_search.js
-  A helper function to read items from the database format into the local CatalogItems format 
+  A helper function to read items from the database format into the local CatalogItems format
   and load into CatalogItemsFull
   */
   function readServerData(data) {
@@ -200,26 +287,12 @@ $(function()
           CatalogItemsFull[i] = productjson;
       }
       console.log("Item loading complete!");
-      
-      
+
+
       //update page with requested items
       DisplayRequests();
   }
 
-  function sendEmail() { 
-      Email.send({ 
-        Host: "smtp.gmail.com", 
-        Username: "hanshaas4321@gmail.com", 
-        Password: "password", 
-        To: 'hanshaas4321@gmail.com',
-        From: "hanshaas4321@gmail.com", 
-        Subject: "Camera checked out", 
-        Body: "(1) JVC Camera has been requested by Staff Member 'x' ", 
-      }) 
-        .then(function (message) { 
-          alert("mail sent successfully") 
-        }); 
-  } 
   //load items from database
   loadItems();
 });
