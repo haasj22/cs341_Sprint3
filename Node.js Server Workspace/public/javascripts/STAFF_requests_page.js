@@ -38,8 +38,8 @@ $(function()
         */
 
         //define quantity_intList and comments_textList because for some reason they aren't already
-        quantity_list = document.getElementByClassName("itemQuantity");
-        comments_list = document.getElementByClassName("comments");
+        quantity_list = document.getElementsByClassName("itemQuantity");
+        comments_list = document.getElementsByClassName("comments");
         // iterates through item quantities
         for (let i = 0; i < quantity_list.length; i++) {
             idx = quantity_list[i].selectedIndex;
@@ -158,8 +158,8 @@ $(function()
         }
         document.getElementById("totalItems").innerHTML = "Total items: " + requested_item_ids.length;
         removeButton = document.getElementsByClassName('remove');
-        quantity_list = document.getElementByClassName("itemQuantity");
-        comments_list = document.getElementByClassName("comments");
+        quantity_list = document.getElementsByClassName("itemQuantity");
+        comments_list = document.getElementsByClassName("comments");
         
         var idx;
         // iterates through item quantities
