@@ -311,13 +311,20 @@ $(function () {
    * FROM INDIVIDUAL PAGE 
    *    MALIA
    */
+
+   /*
+   insertImageFunction retrieves url from form and calls insertImageUrl to send the url to the database
+   */
      function insertImageFunction() {
         var text = "";
-        var text = document.getElementById("insertedImageURL").value; 
+        text = document.getElementById("insertedImageURL").value; 
         console.log(text);
         insertImageUrl(text);
     }
 
+    /*
+    insertImageUrl sends a post request containing the url that a user wants to use for the individual page main image
+     */
     function insertImageUrl(text) {
         var editElem = document.getElementsByClassName("infoText");
 
@@ -361,13 +368,21 @@ $(function () {
     updateImage function takes a user provided url and sets it as the image source for the individual page's main image
      */
     function updateImage(item) {
-        console.log(imageUrl);
         console.log(item.picture);
         document.getElementById('mainImage').src = item.picture; // NEED TO CHECK IF PICTURE IS ACTUALLY A URL
-
     }
     
-    $(".urlSubmitButton").on("click", insertImageFunction);
+    /*
+    updateImageTest (TO BE REMOVED) TEST for updating image with url, does not send post request
+    */
+    function updateImageTest() {
+        var url = "";
+        url = document.getElementById("insertedImageURL").value; 
+        document.getElementById('mainImage').src = url;
+    }
+    
+    //$(".urlSubmitButton").on("click", insertImageFunction);
+    $(".urlSubmitButton").on("click", updateImageTest); // CALL TEST FUNCTION
 
     //load items when page starts 
     loadItems();
