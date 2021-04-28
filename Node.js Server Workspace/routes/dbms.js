@@ -14,14 +14,14 @@
  var mysql = require('mysql'),
      async = require('async');
  
- //var host = "35.199.150.34";    //from GCloud instance (change to match your db)
- //var database = "Sprint4";  //database name
- //var user = "root";         //username (change to match your db)
- //var password = "cs341_v3";  //password (change to match your db, yes this is very poor practice)
- var host = "104.198.13.9";
- var database = "Sprint3";
- var user = "root";
- var password = "cs341sprint4";
+ var host = "35.197.43.63";    //from GCloud instance (change to match your db)
+ var database = "Sprint4_v2";  //database name
+ var user = "root";         //username (change to match your db)
+ var password = "cs341_v4";  //password (change to match your db, yes this is very poor practice)
+//  var host = "104.198.13.9";
+//  var database = "Sprint3";
+//  var user = "root";
+//  var password = "cs341sprint4";
 
  //change the above to not be poor practice
  
