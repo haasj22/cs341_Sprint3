@@ -3,7 +3,6 @@
 //A router for the staff request page to send requests as an email
 var express = require('express');
 var router = express.Router();
-var emailScript = require('./sendEmailScript.js');
 const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({
@@ -19,23 +18,29 @@ app.use(bodyParser.json());
 var nodemailer = require('nodemailer');
 const { json } = require('body-parser');
 
+//success variable
+var success;
+
 //create email variables
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'thisisatestforsprint4@gmail.com',
-        pass: 'sprintFOUR4!'
+        //user: 'thisisatestforsprint4@gmail.com',
+        //pass: 'sprintFOUR4!'
+        user: 'UP.AVS.Item.Request.Bot@gmail.com',
+        pass: 'Goodbye-Software-Engineering'
     }
 });
 
 var mailOptions = {
-    from: 'thisisatestforsprint4@gmail.com',
-    to: 'thisisatestforsprint4@gmail.com',
+    from: 'UP.AVS.Item.Request.Bot@gmail.com',
+    to: 'thisisatestforsprint4@gmail.com, UP.AVS.Item.Request.Bot@gmail.com', //THIS IS WHO WE WANT TO SEND IT TO, FOR TEST PURPOSES, SEND IT TO YOUR UP ACCOUNT, FOR ACTUAL, SEND TO av@up.edu
     subject: '',
     text: '',
 };
 
 
+//a function to send an email to the designated address 
 function sendEmailViaServer(body, requestee){
     
     console.log("Using the Node.js server to send an email with body: " + body + " from user " + requestee);
@@ -45,8 +50,10 @@ function sendEmailViaServer(body, requestee){
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {
           console.log(error);
+          success = false;
         } else {
           console.log('Email sent: ' + info.response);
+          success = true;
         }
     });
 }
@@ -55,20 +62,15 @@ function sendEmailViaServer(body, requestee){
 router.post('/', function(req, res, next) {
     console.log("Received email order request.");
 
-    //item numbers(quantity), names, and IDs/itemKeys
-    //comments, requestee (currently impossible without SSO login)
-
-    //assuming these are in a json object in this format
-    /*
-    var jsonObj = {
-        requestee: string, null w/o sign-on feature,
+    //assuming these are in a json object in this format:
+    /* var jsonObj = {
+        requestee: string, (null w/o sign-on feature)
         itemArray: [
-            item1 = "key1*itemName1*quant1*comment1"
-            item2 = "key2*itemName2*quant1*comment2"
+            item1 = "key1*itemName1*quant1*comment1",
+            item2 = "key2*itemName2*quant1*comment2",
             ...
         ]
-    };
-    */
+    }; */
 
     //retrieve data variables
     var jsonObj = req.body;
@@ -93,7 +95,7 @@ router.post('/', function(req, res, next) {
         console.log("\tQuantity: " + quant);
         comment = splitString[3];
         console.log("\tComment: " + comment);
-        emailStringLine = "Item '" + itemName + "' with ID key number '" + key+ "'. Quantity: " + quant + ".\nComment: '" + comment + "'\n";
+        emailStringLine = "Item '" + itemName + "' with ID key number '" + key+ "'. Quantity: " + quant + ".\nComment: '" + comment + "'\n\n";
         emailStringLines[i] = emailStringLine;
     }
 
@@ -108,11 +110,10 @@ router.post('/', function(req, res, next) {
     console.log("-");
 
     //send email
-    //sendEmailViaServer(emailString, requestee);
+    sendEmailViaServer(emailString, requestee);
 
-    success=true;
+    //report success value
     res.send(success);
-    
 });
 
 module.exports = router;

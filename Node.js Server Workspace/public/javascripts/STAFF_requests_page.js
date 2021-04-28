@@ -14,28 +14,29 @@ $(function()
 
     let itemListHtml = document.getElementById("item_list");
     
-    //storing the dropdown list elements
+    //the dropdown list elements
     var quantity_list;
-    
-    //storing the actual quantity 
+    //the actual quantity 
     var quantity_intList;
 
+    //the text areas for comments
     var comments_list;
+    //the actual comments
     var comments_textList;
     
+    //list of requested item ids from session storage
     let requested_item_ids;
 
+    //The function that runs when the 'request' button is pressed
     requestButton.addEventListener('click', (e) => {
         console.log("pressed request button");
+
+        //temporary placeholder email because single-sign-on (SSO) is not currently working
         var someEmail = "unknown_user@up.edu";
-        /*
-        $.getScript('/javascripts/send_email_script.js', function () {//gets function from send_email
-            // for each item on request page, get name, quantity, and comments
-            //update the return section with order information and show
-            
-            
-        });
-        */
+        
+        //update quantity and comment recording
+        updateQuantities();
+        updateComments();
         
         //retrieve and reformat requested item data
         var itemArray = [requested_item_ids.length];
@@ -63,11 +64,10 @@ $(function()
             "itemArray": itemArray
         };
 
-
-        //dummy JSON construction
-        var testItem1 = "1*Item One*2*Hi, mom";
-        var testItem2 = "2*Item Two*1*I am so damn hungry";
-        var testItem3 = "3*Item Three*5*I am ded";
+        //dummy JSON construction - for use in debugging
+        var testItem1 = "1*Item One*2*Comment 1";
+        var testItem2 = "2*Item Two*1*Comment 2";
+        var testItem3 = "3*Item Three*5*Comment 3";
         testItemArray = [testItem1, testItem2, testItem3];
         var dummyJson = {
             "requestee": someEmail,
@@ -78,7 +78,7 @@ $(function()
         $.post({
             traditional: true,
             url: '/emailOrder',    // url
-            data: dummyJson,
+            data: requestInfo,
             dataType: 'json',
             success: function(data, ) {// success callback
                 //sendEmail(data);//calls the function with the body argument filled out
@@ -87,6 +87,46 @@ $(function()
         }).done(function() { alert('Successfully sent order!'); })
         .fail(function(jqxhr, settings, ex) { alert('Failed to send order, ' + ex); });   
     });
+
+
+    //a function to update the currently-selected amount of requested items
+    function updateQuantities(){
+        //retrieve raw HTML list of quantity elements
+        quantity_list = document.getElementsByClassName("itemQuantity");
+        quantity_intList = [quantity_list.length];
+        
+        console.log("quantity list length: " + quantity_list.length);
+
+        // iterates through item quantities to find and record integer values
+        var idx;
+        for (let i = 0; i < quantity_list.length; i++) {
+            idx = quantity_list[i].selectedIndex;
+            quantity_intList[i] = parseInt(quantity_list[i].options[idx].text);
+        }
+
+        console.log("quantity int list: " + quantity_intList);
+    }
+
+
+    //a function to update the current comments for the requested items
+    function updateComments(){
+        //retrieve raw HTML list of comment elements
+        comments_list = document.getElementsByClassName("comments");
+        comments_textList = [comments_list.length];
+
+        console.log("comments list length: " + quantity_list.length);
+
+        // iterates through item comments to find and record string values
+        for (let i = 0; i < comments_list.length; i++) {
+            comments_textList[i] = comments_list[i].value;
+            if (comments_textList[i] == "" || comments_textList[i] == undefined){
+                comments_textList[i] = "No comments."
+            }
+        }
+        
+        console.log("comments text list: " + comments_textList);
+    }
+
 
     /*
     This method updates the displayed requests with the actual requests saved in sessionStorage
@@ -116,7 +156,7 @@ $(function()
                                         <tr>
                                             <td>
                                                 <!--select input type quantity Options-->
-                                                <select name="drop-down-list" id="itemQuantity">
+                                                <select name="drop-down-list" id="itemQuantity" class="itemQuantity">
                                                     <option value="1" id="1">1</option>
                                                     <option value="2" id="2">2</option>
                                                     <option value="3" id="3">3</option>
@@ -129,7 +169,7 @@ $(function()
                                 </th>
                         </table>
 
-                        <textarea id="comments" name="comments" rows="3" cols="10"
+                        <textarea id="comments" name="comments" rows="3" cols="10" class="comments"
                         placeholder="Enter any comments here"></textarea>
                         <label for="Comments:">Comments:</label>
 
@@ -142,25 +182,12 @@ $(function()
                 itemListHtml.innerHTML = htmlString;
             }
         }
-        document.getElementById("totalItems").innerHTML = "Total items: " + requested_item_ids.length;
-        removeButton = document.getElementsByClassName('remove');
-        quantity_list = document.getElementByClassName("itemQuantity");
-        comments_list = document.getElementByClassName("comments");
         
-        var idx;
-        // iterates through item quantities
-        for (let i = 0; i < quantity_list.length; i++) {
-            idx = quantity_list[i].selectedIndex;
-            quantity_intList[i] = parseInt(quantity_list.options[idx].text);
-        }
-
-        // iterates through item comments
-        for (let i = 0; i < comments_list.length; i++) {
-            idx = comments_list[i].selectedIndex;
-            comments_textList[i] = comments_list.options[idx].text;
-        }
+        //Display total items in the request list
+        document.getElementById("totalItems").innerHTML = "Total items: " + requested_item_ids.length;
 
         //set up item remove button listeners
+        removeButton = document.getElementsByClassName('remove');
         console.log("remove button length: " + removeButton.length);
         for(let i = 0; i < removeButton.length ; i++){
             removeButton[i].addEventListener('click', (e) => {
@@ -170,18 +197,21 @@ $(function()
         }
     }
 
+    //function that removes an item from the request list and reloads the page
     function removeItemFromRequests(i) {
+        //Item(s) are in the request list
         if (sessionStorage.getItem("requested_item_ids"))
         {
             //Check whether or not the current item is in the request array
-            lrequested_item_ids = JSON.parse(sessionStorage.getItem("requested_item_ids"));
+            requested_item_ids = JSON.parse(sessionStorage.getItem("requested_item_ids"));
             //Removes the current item's id to the session storage's request array
             requested_item_ids.splice(i, 1);
             sessionStorage.setItem("requested_item_ids",JSON.stringify(requested_item_ids));
+            //reload the page to apply changes
             location.reload();
         }
-        else{
-            alert("Cart is empty!");
+        else{ //Empty request list
+            alert("Request list is empty!");
         }
     }
 
@@ -226,6 +256,7 @@ $(function()
 
         }
   };
+  
   /*
   Copied from STAFF_search.js
   A helper function to read items from the database format into the local CatalogItems format
