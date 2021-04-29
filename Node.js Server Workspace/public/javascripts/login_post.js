@@ -10,7 +10,7 @@ $(function()
         let password = document.getElementById("password").value
 
         let obj = {"emailaddress": username, "password": password};
-        console.log("sending");
+
         $.post('/login',obj,function(data,status){
             HandleServerResponse(data,status);
         });
@@ -19,7 +19,7 @@ $(function()
 
     function HandleServerResponse(data,status)
     {
-        console.log("TESTING");
+
         if (status == "error")
         {
             console.log("Error sending post request");
