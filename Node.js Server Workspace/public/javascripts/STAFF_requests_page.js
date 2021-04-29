@@ -195,11 +195,17 @@ $(function()
                 itemListHtml.innerHTML = htmlString;
             }
         }
-        
-        //Display total items in the request list
-        document.getElementById("totalItems").innerHTML = "Total items: " + requested_item_ids.length;
 
-        //set up item remove button listeners
+        if (requested_item_ids != null && requested_item_ids.length > 0)
+        {
+            //Display total items in the request list
+            document.getElementById("totalItems").innerHTML = "Total items: " + requested_item_ids.length;
+        }
+        else 
+        {
+            document.getElementById("totalItems").innerHTML = "Total items: 0";
+        }
+
         removeButton = document.getElementsByClassName('remove');
         console.log("remove button length: " + removeButton.length);
         for(let i = 0; i < removeButton.length ; i++){
