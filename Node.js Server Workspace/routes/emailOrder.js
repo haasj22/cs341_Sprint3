@@ -25,8 +25,6 @@ var success;
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        //user: 'thisisatestforsprint4@gmail.com',
-        //pass: 'sprintFOUR4!'
         user: 'UP.AVS.Item.Request.Bot@gmail.com',
         pass: 'Goodbye-Software-Engineering'
     }
@@ -34,7 +32,7 @@ var transporter = nodemailer.createTransport({
 
 var mailOptions = {
     from: 'UP.AVS.Item.Request.Bot@gmail.com',
-    to: 'thisisatestforsprint4@gmail.com, UP.AVS.Item.Request.Bot@gmail.com', //THIS IS WHO WE WANT TO SEND IT TO, FOR TEST PURPOSES, SEND IT TO YOUR UP ACCOUNT, FOR ACTUAL, SEND TO av@up.edu
+    to: 'av@up.edu, UP.AVS.Item.Request.Bot@gmail.com', //to be sent to the official account, as well as recorded by the email bot.
     subject: '',
     text: '',
 };
@@ -103,7 +101,7 @@ router.post('/', function(req, res, next) {
     for (var j = 0; j < emailStringLines.length; j++){
         emailString = emailString + emailStringLines[j];
     }
-    emailString = emailString + "\nNote: Logged-in user currently cannot be read. We're working to fix this. Thank you for your patience.\nSent automatically by the rental site."
+    emailString = emailString + "\nNote: Logged-in user currently cannot be read. We're working to fix this. Thank you for your patience.\nSent automatically by the rental site. Please do not respond to this email."
 
     console.log("\nFinal email string:\n-");
     console.log(emailString);

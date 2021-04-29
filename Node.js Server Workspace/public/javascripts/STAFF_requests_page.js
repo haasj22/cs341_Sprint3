@@ -31,8 +31,13 @@ $(function()
     requestButton.addEventListener('click', (e) => {
         console.log("pressed request button");
 
-        //temporary placeholder email because single-sign-on (SSO) is not currently working
+        //get the email entered by the user
         var someEmail = "unknown_user@up.edu";
+        someEmail = getEnteredEmail();
+        if (someEmail == ""){
+            alert("Please enter an email address.");
+            return;
+        }
         
         //update quantity and comment recording
         updateQuantities();
@@ -87,6 +92,14 @@ $(function()
         }).done(function() { alert('Successfully sent order!'); })
         .fail(function(jqxhr, settings, ex) { alert('Failed to send order, ' + ex); });   
     });
+
+
+    //a function to retrieve the entered email address
+    function getEnteredEmail(){
+        emailTextBox = document.getElementById("email");
+        emailString = emailTextBox.value.trim();
+        return emailString;
+    }
 
 
     //a function to update the currently-selected amount of requested items
@@ -169,7 +182,7 @@ $(function()
                                 </th>
                         </table>
 
-                        <textarea id="comments" name="comments" rows="3" cols="10" class="comments"
+                        <textarea id="comments" name="comments" rows="2" cols="20" class="comments"
                         placeholder="Enter any comments here"></textarea>
                         <label for="Comments:">Comments:</label>
 
