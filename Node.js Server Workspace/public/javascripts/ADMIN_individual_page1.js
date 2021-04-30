@@ -73,7 +73,7 @@ $(document).ready(function()
 
         //checking for valid categories
         for (let k = 0; k < catsRaw.length; k++){
-            var catInsensitive = catsRaw[k].toLowerCase().replaceAll("&nbsp;", "").replaceAll(" ", "");
+            var catInsensitive = catsRaw[k].toLowerCase().replaceAll("&nbsp;", "").replaceAll(" ", "").replaceAll("<br>", "");
             if (!checkValidCategory(catInsensitive)){
                 alert("You've included an invalid category: '" + catsRaw[k] + "'\nPlease enter in this format: 'Category1, Category2, Category3'\n\nValid categories: Conferencing, Streaming, Recording, Presentation, Audio, Computers\nCategories are case insensitive.");
                 return;
