@@ -25,7 +25,7 @@ router.post('/', function(req, res, next) {
     console.log("recieved login request.");
     // grabs user input as user info
     user = {email: req.body.emailaddress, password: req.body.password};
-
+    console.log("Provided user username: " + user.email + " password: " + user.password);
     serverfunctions.dbquery("SELECT * FROM USERS;", receiveData);
     function receiveData(error, results) {
 
@@ -54,6 +54,7 @@ router.post('/', function(req, res, next) {
             res.json(resObj);
         } else {
             let resObj = {"success": false, "redirect": "login.html", "username": "", "password": "", "error": "Incorrect username or password"};
+            console.log("not a recognized admin or staff");
             res.json(resObj);
         }
     };

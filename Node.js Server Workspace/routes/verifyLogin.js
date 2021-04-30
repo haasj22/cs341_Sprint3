@@ -23,7 +23,7 @@ router.post('/', function(req, res, next) {
     
     // grabs user input as user info
     var user = {email: req.body.emailaddress, password: req.body.password, url: req.body.url};
-
+    console.log("Verifying login username: " + user.email + " password: " + user.password + " url: " + user.url);
     serverfunctions.dbquery("SELECT * FROM USERS;", receiveData);
     function receiveData(error, results) { 
         // for every user in dattabase, compare to var user
