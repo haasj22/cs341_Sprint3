@@ -36,7 +36,7 @@ router.post('/', function(req, res, next) {
 
     // update the image url
     function updateImageData(error, results) {
-        console.log("1: " + image + " " + item_key + " " + image_id + " ");
+        //console.log("1: " + image + " " + item_key + " " + image_id + " ");
         serverfunctions.dbquery("UPDATE PRODUCTIMAGES SET image = '" + image + "' WHERE key_number= '" + item_key + "' AND image_id= '" + image_id + "';", receiveImageData);
     }
 
@@ -49,7 +49,7 @@ router.post('/', function(req, res, next) {
     // process results from SQL server and send error/results back to client
     function receiveData(error, results) {
         res.send(error);
-        console.log("2: " + image + " " + item_key + " " + image_id + " ");
+        //console.log("2: " + image + " " + item_key + " " + image_id + " ");
         console.log("Finished insert image request.");
     }
 });

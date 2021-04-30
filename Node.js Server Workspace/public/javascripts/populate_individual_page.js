@@ -374,8 +374,7 @@ $(function () {
     updateImage function takes a user provided url and sets it as the image source for the individual page's main image
      */
     function updateImage(item) {
-        console.log(item);
-        console.log("Item key: " +item.item_key);
+        console.log("Item key: " + item.item_key);
         console.log("Item image: " + item.image);
         document.getElementById('mainImage').src = item.image; // NEED TO CHECK IF PICTURE IS ACTUALLY A URL
     }
