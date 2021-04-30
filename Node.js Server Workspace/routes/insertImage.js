@@ -37,7 +37,7 @@ router.post('/', function(req, res, next) {
     // update the image url
     function updateImageData(error, results) {
         //console.log("1: " + image + " " + item_key + " " + image_id + " ");
-        serverfunctions.dbquery("UPDATE PRODUCTIMAGES SET image = '" + image + "' WHERE key_number= '" + item_key + "' AND image_id= '" + image_id + "';", receiveImageData);
+        serverfunctions.dbquery("UPDATE PRODUCTIMAGES SET image = '" + image + "' WHERE key_number= '" + item_key + "' AND image_id= '" + image_id + "';", receiveData);
     }
 
         //Format: key_number  image_id  model  image (the url)
