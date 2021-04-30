@@ -5,7 +5,7 @@
  * which contains the Cheesecake order data.
  *
  * Variables modified by Alex Junkins, Justin Cao, and Adrian Muth
- * Version: March 9, 2021
+ * Version: April 27, 2021
  */
 
  exports.version = '0.0.1';
@@ -14,10 +14,11 @@
  var mysql = require('mysql'),
      async = require('async');
  
- var host = "35.184.141.118";    //from GCloud instance (change to match your db)
- var database = "Sprint3";  //database name
+ var host = "35.197.43.63";    //from GCloud instance (change to match your db)
+ var database = "Sprint4_v2";  //database name
  var user = "root";         //username (change to match your db)
- var password = "cs341_sprint3";  //password (change to match your db, yes this is very poor practice)
+ var password = "cs341_v4";  //password (change to match your db, yes this is very poor practice)
+
 
  //change the above to not be poor practice
  

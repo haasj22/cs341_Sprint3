@@ -315,7 +315,7 @@ $(function () {
    /*
    insertImageFunction retrieves url from form and calls insertImageUrl to send the url to the database
    */
-     function insertImageFunction() {
+    function insertImageFunction() {
         var text = "";
         text = document.getElementById("insertedImageURL").value; 
         console.log(text);
