@@ -34,13 +34,15 @@ $(function()
             let newURL = "mediacatalog.campus.up.edu:3000/" + data.redirect;
             let username = data.username;
             let password = data.password;
-            
+            console.log("new url: " + newURL);
+            console.log(username);
+            console.log(password);
             // save username and password to session storage
             sessionStorage.setItem("username",username);
             sessionStorage.setItem("password",password);
 
             // load new page
-            window.location = newURL;
+            window.location = data.redirect;
             
         }
         else 
