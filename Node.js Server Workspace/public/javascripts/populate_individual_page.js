@@ -360,7 +360,9 @@ $(function () {
             data: insertImageInfo,
             dataType: 'json',
             success: function(data, ) { // success callback
+                console.log("Test item: " + itemKey + " imageurl: " + image);
                 console.log("successfully accessed server");
+
                 updateImage(data);
             }
         }).fail(function(jqxhr, settings, ex) {
@@ -372,6 +374,7 @@ $(function () {
     updateImage function takes a user provided url and sets it as the image source for the individual page's main image
      */
     function updateImage(item) {
+        console.log(item);
         console.log(item.picture);
         document.getElementById('mainImage').src = item.picture; // NEED TO CHECK IF PICTURE IS ACTUALLY A URL
     }
