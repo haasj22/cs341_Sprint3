@@ -338,25 +338,17 @@ $(function () {
     insertImageUrl sends a post request containing the url that a user wants to use for the individual page main image
      */
     function insertImageUrl(text) {
-        var editElem = document.getElementsByClassName("infoText");
-
-        var savedJsonObj = { data: []};
-        for (let i = 0; i < editElem.length;i++)
-        {
-            savedJsonObj.data.push({"Section": $($(editElem).prev().prev()[i]).text(), "Text": editElem[i].innerHTML});
-        }
-        console.log(savedJsonObj);
-
+        
+        // Get the item key
         var itemKey = location.search.substring(1);
-        var brandAndModel = savedJsonObj.data[0].Text.split("/");
-        var cats = "";
 
-        // send item with image url
-        // get existing item data and add url for picture
-        var insertImageInfo = { 
-            item_key:itemKey, model_num:brandAndModel[1], brand:brandAndModel[0], picture:text, //CHANGE
-            category:cats, description:savedJsonObj.data[4].Text, reservation_length:null, 
-            uses:savedJsonObj.data[2].Text, accessories:null
+        // Get the image id to insert the image into and the image url to insert
+        var image_id = 1;
+        var image = text;
+        
+        // contains the item information to insert the image url
+        var insertImageInfo = {
+            key_number:itemKey, image_id, image
         }
 
         //send the JSON to the SQL server with a post request
