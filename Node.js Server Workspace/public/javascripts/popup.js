@@ -10,7 +10,7 @@ $(document).ready(function(){
 	{
 		if (!sessionStorage.getItem("username") || !sessionStorage.getItem("password"))
 		{
-			window.location = "mediacatalog.campus.up.edu:3000/index.html";
+			window.location = "index.html";
 		}
 		else
 		{
@@ -22,7 +22,7 @@ $(document).ready(function(){
 		if (!sessionStorage.getItem("username") || !sessionStorage.getItem("password"))
 		{
 			let idSubstring = window.location.href.split('?');
-			window.location = "mediacatalog.campus.up.edu:3000/VIEWER_individual_page.html?" + idSubstring[idSubstring.length-1];
+			window.location = "VIEWER_individual_page.html?" + idSubstring[idSubstring.length-1];
 		}
 		else
 		{
@@ -34,7 +34,7 @@ $(document).ready(function(){
 		if (!sessionStorage.getItem("username") || !sessionStorage.getItem("password"))
 		{
 			// redirect to viewer catalog since viewer is not allowed to view requests
-			window.location = "mediacatalog.campus.up.edu:3000/index.html";
+			window.location = "index.html";
 		}
 		else
 		{
@@ -66,7 +66,7 @@ $(document).ready(function(){
 			else 
 			{
 				if (!window.location.href.includes(data.page)){
-					window.location.href = "mediacatalog.campus.up.edu:3000/" + data.page;
+					window.location = data.page;
 				}
 			}
 		});

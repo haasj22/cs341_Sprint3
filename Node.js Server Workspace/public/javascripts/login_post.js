@@ -42,7 +42,7 @@ $(function()
             sessionStorage.setItem("password",password);
 
             // load new page
-            window.location = newURL;
+            window.location = data.redirect;
             
         }
         else 
