@@ -10,12 +10,14 @@ var testRouter = require('./routes/test');
 var catalogDataRouter = require('./routes/catalogData');
 var itemDataRouter = require('./routes/itemData');
 var loginRouter = require('./routes/login');
+var verifyLoginRouter = require('./routes/verifyLogin');
 var individualRouter = require('./routes/individualPage');
 var modifyRouter = require('./routes/modify');
 var keyDeleteRouter = require('./routes/keyDelete.js');
 var keyRestoreRouter = require('./routes/keyRestore.js');
 var addItemRouter = require('./routes/addItem.js');
 var insertImageRouter = require('./routes/insertImage.js');
+var emailOrderRouter = require('./routes/emailOrder.js');
 
 var app = express();
 
@@ -35,13 +37,14 @@ app.use('/test', testRouter);
 app.use('/catalogData', catalogDataRouter);
 app.use('/itemData', itemDataRouter);
 app.use('/login', loginRouter);
+app.use('/verifyLogin',verifyLoginRouter);
 app.use('/individualPage', individualRouter);
 app.use('/modify', modifyRouter);
 app.use('/keyDelete', keyDeleteRouter);
 app.use('/keyRestore', keyRestoreRouter);
 app.use('/addItem', addItemRouter);
 app.use('/insertImage', insertImageRouter);
-
+app.use('/emailOrder', emailOrderRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

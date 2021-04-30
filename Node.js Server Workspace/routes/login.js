@@ -21,50 +21,41 @@ router.post('/', function(req, res, next) {
     //in the future, any username/password
     //authentication code would go here.
 
-    // var isStaff = new Boolean(false);
     
     console.log("recieved login request.");
     // grabs user input as user info
     user = {email: req.body.emailaddress, password: req.body.password};
-    console.log(user);
-    //res.redirect("ADMIN_catalog.html");
-
+    console.log("Provided user username: " + user.email + " password: " + user.password);
     serverfunctions.dbquery("SELECT * FROM USERS;", receiveData);
     function receiveData(error, results) {
-        // // results.NAME == req.body.emailaddress && results.PASSWORD == req.body.password; 
-        console.log(error);
-        console.log(results);
+
         // for every user in dattabase, compare to var user
         results.forEach(function(element, index) {
             //converting BIT field into a boolean for comparison
             var adminValue = element.ISADMIN[0] == 1;
-            console.log(element.ISADMIN[0]);
-            console.log(index + "time in the loop " + adminValue);
-            console.log(element.NAME + " " + element.PASSWORD + " " + adminValue );
+
             if (user.email == element.NAME && user.password == element.PASSWORD) {
                 isAdmin = adminValue;
                 loginMatch = true;
             }
-            console.log("isAdmin = " + isAdmin + " loginMatch = " + loginMatch);
         });
         // direct user to correct webpage
         if(isAdmin == true){
             isAdmin = false;
             loginMatch = false;
-            user.email = "email";
-            user.password = "pass";
+            let resObj = {"success": true, "redirect": "ADMIN_catalog.html", "username": user.email, "password": user.password, "error": ""};
             console.log("redirecting to admin page");
-            res.redirect("ADMIN_catalog.html");
+            res.json(resObj);
         } else if(loginMatch == true) {
             isAdmin = false;
             loginMatch = false;
-            user.email = "email";
-            user.password = "pass";
+            let resObj = {"success": true, "redirect": "STAFF_catalog.html", "username": user.email, "password": user.password, "error": ""};
             console.log("redirecting to staff page");
-            res.redirect("STAFF_catalog.html");
+            res.json(resObj);
         } else {
-            console.log("Doesn't match a user!");
-            // alert("Not a user!");
+            let resObj = {"success": false, "redirect": "login.html", "username": "", "password": "", "error": "Incorrect username or password"};
+            console.log("not a recognized admin or staff");
+            res.json(resObj);
         }
     };
 });

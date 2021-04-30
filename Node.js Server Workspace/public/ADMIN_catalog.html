@@ -30,6 +30,8 @@
     <script src="javascripts/ADMIN_catalog.js"></script>
     <!-- Script (This is put on the bottom so the search function can work) -->
     <script src="javascripts/ADMIN_search.js"></script>
+    <!-- Script for login popup window -->
+    <script src="javascripts/popup.js"></script>
 </head>
 <body>
     <!-- Purple top nav bar-->
@@ -183,8 +185,18 @@
                                             <label for="Brand"><b>Brand</b></label>
                                             <input id="input brand" type="text" placeholder="Enter Brand" name="Brand" required>
                                         
-                                            <label for="Categories"><b>Categories</b></label>
-                                            <input id="input categories" type="text" placeholder="Enter Categories" name="Categories" required>
+                                            <label for="categories"><b>Categories</b></label>
+                                            <select name="categories" id="categories" form="categories" style="height: auto; width: 100%;">
+                                                <option selected>Select...</option>
+                                                <option value="Conferencing">Conferencing</option>
+                                                <option value="Streaming">Streaming</option>
+                                                <option value="Recording">Recording</option>
+                                                <option value="Presentation">Presentation</option>
+                                                <option value="Audio">Audio</option>
+                                                <option value="Computers">Computers</option>
+                                                <option value="Video">Video</option>
+                                            </select>
+                                            <br>
                                             
                                             <label for="Uses"><b>Uses</b></label>
                                             <input id="input uses" type="text" placeholder="Enter Uses" name="Uses" required>
@@ -200,7 +212,7 @@
                                             
                                             <button type="submit" class="btn add" id="btn add">Add Item</button>
                                             <button type="button" class="btn cancel" id="btn cancel">Close</button>
-                                            </form>
+                                            
                                         </div>     
 
         </div>

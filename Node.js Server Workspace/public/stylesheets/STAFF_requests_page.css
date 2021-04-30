@@ -213,3 +213,7 @@ footer p {
     display: table-cell;
     vertical-align: middle;
 }
+
+#emailLabel {
+	font-size: 30px;
+}
