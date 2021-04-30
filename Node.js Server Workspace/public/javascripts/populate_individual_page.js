@@ -384,17 +384,8 @@ $(function () {
         document.getElementById('mainImage').src = item.picture; // NEED TO CHECK IF PICTURE IS ACTUALLY A URL
     }
     
-    /*
-    updateImageTest (TO BE REMOVED) TEST for updating image with url, does not send post request
-    */
-    function updateImageTest() {
-        var url = "";
-        url = document.getElementById("insertedImageURL").value; 
-        document.getElementById('mainImage').src = url;
-    }
     
-    //$(".urlSubmitButton").on("click", insertImageFunction);
-    $(".urlSubmitButton").on("click", updateImageTest); // CALL TEST FUNCTION
+    $(".urlSubmitButton").on("click", insertImageFunction);
 
     //load items when page starts 
     loadItems();
