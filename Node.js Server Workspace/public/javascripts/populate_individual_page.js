@@ -340,7 +340,7 @@ $(function () {
     function insertImageUrl(text) {
         
         // Get the item key
-        var itemKey = location.search.substring(1);
+        var item_key = location.search.substring(1);
 
         // Get the image id to insert the image into and the image url to insert
         var image_id = 1;
@@ -348,7 +348,7 @@ $(function () {
         
         // contains the item information to insert the image url
         var insertImageInfo = {
-            key_number:itemKey, image_id, image
+            key_number:item_key, image_id, image
         }
 
         //send the JSON to the SQL server with a post request
@@ -360,7 +360,7 @@ $(function () {
             data: insertImageInfo,
             dataType: 'json',
             success: function(data, ) { // success callback
-                console.log("Test item: " + itemKey + " imageurl: " + image);
+                console.log("Test item: " + item_key + " imageurl: " + image);
                 console.log("successfully accessed server");
 
                 updateImage(data);
@@ -375,7 +375,7 @@ $(function () {
      */
     function updateImage(item) {
         console.log(item);
-        console.log("Item key: " +item.itemKey);
+        console.log("Item key: " +item.item_key);
         console.log("Item image: " + item.image);
         document.getElementById('mainImage').src = item.image; // NEED TO CHECK IF PICTURE IS ACTUALLY A URL
     }

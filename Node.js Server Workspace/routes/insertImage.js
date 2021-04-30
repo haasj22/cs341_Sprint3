@@ -30,14 +30,14 @@ router.post('/', function(req, res, next) {
     var image_id = req.body.image_id;
 
     //retrieve image url from req
-    var picture = req.body.picture;
+    var image = req.body.image;
 
     serverfunctions.dbquery("SELECT * FROM PRODUCTS WHERE item_key = '" + item_key + "';", updateImageData);
 
     // update the image url
     function updateImageData(error, results) {
-        console.log("1: " + picture + " " + item_key + " " + image_id + " ");
-        serverfunctions.dbquery("UPDATE PRODUCTIMAGES SET image = '" + picture + "' WHERE key_number= '" + item_key + "' AND image_id= '" + image_id + "';", receiveImageData);
+        console.log("1: " + image + " " + item_key + " " + image_id + " ");
+        serverfunctions.dbquery("UPDATE PRODUCTIMAGES SET image = '" + image + "' WHERE key_number= '" + item_key + "' AND image_id= '" + image_id + "';", receiveImageData);
     }
 
         //Format: key_number  image_id  model  image (the url)
@@ -47,9 +47,9 @@ router.post('/', function(req, res, next) {
         //        1           3         Brio   https:/...back
 
     // process results from SQL server and send error/results back to client
-    function receiveImageData(error, results) {
+    function receiveData(error, results) {
         res.send(error);
-        console.log("2: " + picture + " " + item_key + " " + image_id + " ");
+        console.log("2: " + image + " " + item_key + " " + image_id + " ");
         console.log("Finished insert image request.");
     }
 });
