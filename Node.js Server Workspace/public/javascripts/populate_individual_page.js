@@ -339,9 +339,9 @@ $(function () {
      */
     function insertImageUrl(text) {
         
-        // Get the item key
-        console.log("The full URL of this page is:<br>" + window.location.href);
-        //var item_key = window.location.href;
+        // Get the item key from the end of the individual page url
+        var url = window.location.href.split('?');
+        var key_number = url[1];
 
         // Get the image id to insert the image into and the image url to insert
         var image_id = 1;
@@ -361,7 +361,7 @@ $(function () {
             data: insertImageInfo,
             dataType: 'json',
             success: function(data, ) { // success callback
-                console.log("Test item: " + item_key + " imageurl: " + image);
+                console.log("Test item: " + key_number + " imageurl: " + image);
                 console.log("successfully accessed server");
                 updateImage(data);
             }
@@ -376,7 +376,7 @@ $(function () {
     function updateImage(data) {
         var item = JSON.stringify(data);
         console.log("Full item: " + item);
-        console.log("Item key: " + item.item_key);
+        console.log("Item key: " + item.key_number);
         console.log("Item image: " + item.image);
         document.getElementById('mainImage').src = item.image; // NEED TO CHECK IF PICTURE IS ACTUALLY A URL
     }

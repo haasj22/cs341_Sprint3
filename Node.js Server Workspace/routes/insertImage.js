@@ -16,12 +16,12 @@ app.use(bodyParser.json());
 router.post('/', function(req, res, next) {
 
     // retrieve needed variables from req
-    var item_key = req.body.item_key;
+    var key_number = req.body.key_number;
     var image_id = req.body.image_id;
     var image = req.body.image;
 
     // update the image url
-    serverfunctions.dbquery("UPDATE PRODUCTIMAGES SET image = '" + image + "' WHERE key_number= '" + item_key + "' AND image_id= '" + image_id + "';", receiveData);
+    serverfunctions.dbquery("UPDATE PRODUCTIMAGES SET image = '" + image + "' WHERE key_number= '" + key_number + "' AND image_id= '" + image_id + "';", receiveData);
 
     //Format: key_number  image_id  model  image (the url)
     //Ex. for logitech brio
