@@ -376,7 +376,7 @@ $(function () {
     function updateImage(data) {
         console.log("data after post: " + data);
         console.log("url after post: " + data.image);
-        document.getElementById('mainImage').src = item.image; // NEED TO CHECK IF PICTURE IS ACTUALLY A URL
+        document.getElementById('mainImage').src = data.image; // NEED TO CHECK IF PICTURE IS ACTUALLY A URL
     }
     
     
