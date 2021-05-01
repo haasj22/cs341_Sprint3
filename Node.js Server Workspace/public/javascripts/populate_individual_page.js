@@ -319,11 +319,9 @@ $(function () {
     }
 
    /**
-   * CREATING VARIABLE TO INSERT IMAGE INTO DATABASE
-   * FROM INDIVIDUAL PAGE 
-   *    MALIA
-   */
-
+    * Functions to retrieve a url from the enter Image URL form and upload it to the database
+    * Author: Malia Lundstrom, Daniel Co, Haley Welliver, William Lau
+    */
    /*
    insertImageFunction retrieves url from form and calls insertImageUrl to send the url to the database
    */
@@ -363,6 +361,7 @@ $(function () {
             success: function(data, ) { // success callback
                 console.log("Test item: " + key_number + " imageurl: " + image);
                 console.log("successfully accessed server");
+                successfulUpdateImage();
             }
         }).fail(function(jqxhr, settings, ex) {
             alert("Couldn't access server." + ex);
@@ -370,12 +369,10 @@ $(function () {
     }
     
     /*
-    updateImage function takes a user provided url and sets it as the image source for the individual page's main image
+    successfulUpdateImage notifies the admin user when an image url is successfully updated in the database
      */
-    function updateImage(data) {
-        console.log("data after post: " + data);
-        console.log("url after post: " + data.image);
-        document.getElementById('mainImage').src = data.image; // NEED TO CHECK IF PICTURE IS ACTUALLY A URL
+    function successfulUpdateImage() {
+        alert('The image has been updated. Please refresh the page to see the new image');
     }
     
     
