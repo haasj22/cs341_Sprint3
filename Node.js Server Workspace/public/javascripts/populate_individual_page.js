@@ -363,7 +363,6 @@ $(function () {
             success: function(data, ) { // success callback
                 console.log("Test item: " + key_number + " imageurl: " + image);
                 console.log("successfully accessed server");
-                updateImage(data);
             }
         }).fail(function(jqxhr, settings, ex) {
             alert("Couldn't access server." + ex);

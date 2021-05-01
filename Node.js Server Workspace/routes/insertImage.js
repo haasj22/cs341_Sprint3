@@ -20,17 +20,8 @@ router.post('/', function(req, res, next) {
     var image_id = req.body.image_id;
     var image = req.body.image;
 
-    // store variables in json to send back
-    var imageObj = {
-        errorProduct:null,
-        errorImage:null,
-        key_number,
-        image_id,
-        image
-    };
-
     // update the image url
-    serverfunctions.dbquery("UPDATE PRODUCTIMAGES SET image = '" + image + "' WHERE key_number= '" + key_number + "' AND image_id= '" + image_id + "';", receiveData);
+    serverfunctions.dbquery("UPDATE PRODUCTIMAGES SET image = '" + image + "' WHERE key_number= " + key_number + " AND image_id= " + image_id + ";", receiveData);
 
     //Format: key_number  image_id  model  image (the url)
     //Ex. for logitech brio
@@ -41,7 +32,6 @@ router.post('/', function(req, res, next) {
     // process results from SQL server and send error/results back to client
     function receiveData(error, results) {
         res.send(error);
-        res.json(imageObj);
     }
 });
 
