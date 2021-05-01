@@ -349,7 +349,7 @@ $(function () {
         
         // contains the item information to insert the image url
         var insertImageInfo = {
-            key_number:item_key, image_id, image
+            key_number, image_id, image
         }
 
         //send the JSON to the SQL server with a post request
