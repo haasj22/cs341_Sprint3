@@ -12,46 +12,29 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-//a variable to hold the data
-const orderObj = {
-    errorProduct:null,
-    errorImage:null,
-    productData:[],
-    imageData:[]
-};
-
 //POST reciever, request the product data from the server
 router.post('/', function(req, res, next) {
 
-    //retrieve the key from req
+    // retrieve needed variables from req
     var item_key = req.body.item_key;
-
-    //the first image slot (main image) should be updated currently
     var image_id = req.body.image_id;
-
-    //retrieve image url from req
     var image = req.body.image;
 
-    serverfunctions.dbquery("SELECT * FROM PRODUCTS WHERE item_key = '" + item_key + "';", updateImageData);
-
     // update the image url
-    function updateImageData(error, results) {
-        //console.log("1: " + image + " " + item_key + " " + image_id + " ");
-        serverfunctions.dbquery("UPDATE PRODUCTIMAGES SET image = '" + image + "' WHERE key_number= '" + item_key + "' AND image_id= '" + image_id + "';", receiveData);
-    }
+    serverfunctions.dbquery("UPDATE PRODUCTIMAGES SET image = '" + image + "' WHERE key_number= '" + item_key + "' AND image_id= '" + image_id + "';", receiveData);
 
-        //Format: key_number  image_id  model  image (the url)
-        //Ex. for logitech brio
-        //        1           1         Brio   https:/...main
-        //        1           2         Brio   https:/...front
-        //        1           3         Brio   https:/...back
+    //Format: key_number  image_id  model  image (the url)
+    //Ex. for logitech brio
+    //        1           1         Brio   https:/...main
+    //        1           2         Brio   https:/...front
+    //        1           3         Brio   https:/...back
 
     // process results from SQL server and send error/results back to client
     function receiveData(error, results) {
         res.send(error);
-        //console.log("2: " + image + " " + item_key + " " + image_id + " ");
-        console.log("Finished insert image request.");
     }
 });
+
+// mediacatalog.campus.up.edu:3000/ADMIN_Individual_Page.html?1
 
 module.exports = router;

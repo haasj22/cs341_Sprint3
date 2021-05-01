@@ -340,9 +340,8 @@ $(function () {
     function insertImageUrl(text) {
         
         // Get the item key
-        //document.getElementById("").innerHTML = "The full URL of this page is:<br>" + window.location.href;
         console.log("The full URL of this page is:<br>" + window.location.href);
-        var item_key = window.location.href;
+        //var item_key = window.location.href;
 
         // Get the image id to insert the image into and the image url to insert
         var image_id = 1;

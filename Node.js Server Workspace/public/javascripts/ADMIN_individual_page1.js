@@ -164,62 +164,6 @@ $(document).ready(function()
         document.getElementById("myForm").style.display = "none";
       }
 
-    
-    /**
-   * CREATING VARIABLE TO INSERT IMAGE INTO DATABASE
-   * FROM INDIVIDUAL PAGE 
-   *    MALIA
-   */
-  /*
-    function insertImageFunction() {
-        var text = "";
-        var text = document.getElementById("insertedImageURL").value; 
-        console.log(text);
-        insertImageUrl(text);
-    }
-
-    function insertImageUrl(text) {
-        var editElem = document.getElementsByClassName("infoText");
-
-        var savedJsonObj = { data: []};
-        for (let i = 0; i < editElem.length;i++)
-        {
-            savedJsonObj.data.push({"Section": $($(editElem).prev().prev()[i]).text(), "Text": editElem[i].innerHTML});
-        }
-        console.log(savedJsonObj);
-
-        var itemKey = location.search.substring(1);
-        var brandAndModel = savedJsonObj.data[0].Text.split("/");
-        var cats = "";
-
-        // send item with image url
-        // get existing item data and add url for picture
-        var insertImageInfo = { 
-            item_key:itemKey, model_num:brandAndModel[1], brand:brandAndModel[0], picture:text, //CHANGE
-            category:cats, description:savedJsonObj.data[4].Text, reservation_length:null, 
-            uses:savedJsonObj.data[2].Text, accessories:null
-        }
-
-        //send the JSON to the SQL server with a post request
-        console.log("Attempting to insert image with POST");
-        console.log(insertImageInfo);
-        //console.log(JSON.stringify(insertImageInfo));
-        $.post({
-            traditional: true,
-            url: '/insertImage',    // url
-            data: insertImageInfo,
-            dataType: 'json',
-            success: function(data, ) { // success callback
-                console.log("successfull accessed server");
-                successAdd(data);
-            }
-        }).fail(function(jqxhr, settings, ex) {
-            alert("Couldn't access server." + ex);
-        });
-    }
-    
-    
-    $(".urlSubmitButton").on("click", insertImageFunction); */
     $(".ADMIN imageEditIcon").on("click", openForm);
     
 });
