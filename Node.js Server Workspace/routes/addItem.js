@@ -1,4 +1,4 @@
-//Author: Alex Junkins, Adrian Muth, Daniel Co and Justin Cao
+//Author: Alex Junkins, Adrian Muth, Daniel Co and Justin Cao, William Lau, Haley Welliver, Malia L
 //Version: April 5 2021
 //A router for the ADMIN_catalog to request a new item be made
 var express = require('express');
