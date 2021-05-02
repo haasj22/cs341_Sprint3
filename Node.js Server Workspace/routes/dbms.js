@@ -14,6 +14,7 @@
  var mysql = require('mysql'),
      async = require('async');
  
+ //the Sprint4-Final-GC database
  var host = "35.197.43.63";    //from GCloud instance (change to match your db)
  var database = "Sprint4_v2";  //database name
  var user = "root";         //username (change to match your db)

@@ -18,7 +18,7 @@ $(function () {
 
     const deleteRestoreButton = document.getElementById('deleteButton');
 
-    var placeholderImage = "https://www.giving.up.edu/s/1797/images/logo.png";
+    var placeholderImage = "https://www.universitycounselingjobs.com/institution/logo/logo2(4).png";
 
     //Initiates an array of alternate images
     let AlternativeImagesArray = [];
