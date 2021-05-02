@@ -5,7 +5,7 @@
   <head>
     <link rel="stylesheet" href="stylesheets/ADMIN_individual_page.css">
     <!--include Jquery, this should be installed locally but we can fetch it for now-->
-    <script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"/></script>
+    <script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="javascripts/populate_individual_page.js"></script>
     <script src="javascripts/ADMIN_individual_page1.js"></script>
       <!-- Script for login popup window -->
@@ -13,6 +13,17 @@
       <!-- Script for logout button -->
       <script src="javascripts/logout.js"></script>
   </head>
+
+  <!--Testing popup. WILL DELETE IT LATER AND MOVE THE CODE TO JS FILE-->
+  <script>
+    function openForm() {
+      document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+    }
+    </script>
 
   <body>
     <!-- Purple top nav bar-->
@@ -41,32 +52,25 @@
         <!-- Big image of item-->
         <div style="position: relative;">
           <img id="mainImage" src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg" alt="dslr_camera" >
-          <input type="file" class="ADMIN imageEditIconLink" accept="image/png, image/jpeg">
-            <img  class="ADMIN imageEditIcon" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png">
+          <input type="button" class="ADMIN imageEditIconLink" accept="image/png, image/jpeg">
+            <img  class="ADMIN imageEditIcon" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png" onclick="openURLForm()">
           </input>
-        </div>
+          <div class="imageURLForm" id="imageURLForm"></div>
+           <!--insert image popup-->
+           <button class="open-button" onclick="openForm()">Enter image URL</button>
 
-        <!-- Smaller alternative images of item-->
-        <!-- <div id="altImages">
-          <div style="position: relative;">
-            <img class="altImage" src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg" alt="dslr_camera">
-            <input type="file" class="ADMIN altImageEditIconLink" accept="image/png, image/jpeg">
-              <img class="ADMIN altImageEditIcon" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png">
-            </input>
-          </div>
-          <div style="position: relative;">
-            <img class="altImage" src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg" alt="dslr_camera">
-            <input type="file" class="ADMIN altImageEditIconLink" accept="image/png, image/jpeg">
-              <img class="ADMIN altImageEditIcon" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png">
-            </input>
-          </div>
-          <div style="position: relative;">
-            <img class="altImage" src="https://static.bhphoto.com/images/images2500x2500/canon_1263c006_eos_80d_dslr_camera_1455767513000_1225877.jpg" alt="dslr_camera">
-            <input type="file" class="ADMIN altImageEditIconLink" accept="image/png, image/jpeg">
-              <img class="ADMIN altImageEditIcon" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png">
-            </input>
-          </div>
-        </div> -->
+           <div class="form-popup" id="myForm">
+             <form class="form-container">
+               <h1>Add New Image to Product</h1>
+               <label for="url"><b>URL</b></label>
+               <input type="text" id="insertedImageURL" placeholder="Enter URL" name="insertedImageURL" required>
+               <button type="button" id="urlSubmitButton" class="urlSubmitButton" value="Submit">
+
+               <!--<button type="submit" class="btn">Submit URL</button>
+               <button type="button" class="btn cancel" onclick="closeForm()">Close</button>-->
+             </form>
+           </div>
+        </div>
 
       </div>
 
@@ -74,7 +78,7 @@
       <div class="productInfo">
 
           <div>
-            <h1 class="statTitle" style="margin-top: 0;">Model/Brand</h1>
+            <h1 class="statTitle" style="margin-top: 0;">Brand/Model</h1>
             <img class="ADMIN textEditIcon" src="https://cdn0.iconfinder.com/data/icons/glyphpack/19/edit-512.png" alt="edit" >
             <p class="infoText" contenteditable="true" id="modelText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit saepe veniam, vero in deserunt laudantium suscipit repellat similique nemo nam numquam. Atque temporibus maiores impedit suscipit inventore, enim esse sed.</p>
           </div>

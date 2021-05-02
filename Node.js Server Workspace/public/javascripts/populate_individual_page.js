@@ -14,6 +14,7 @@ $(function () {
     const accessoriesText = document.getElementById('accessoriesText');
     const descriptionText = document.getElementById('descriptionText');
     const similarItems = document.getElementById('similarItemsWrapper');
+    const imageUrl = document.getElementById('mainImage');
 
     const deleteRestoreButton = document.getElementById('deleteButton');
 
@@ -316,6 +317,66 @@ $(function () {
         //     } else {
         //         document.getElementById(similarImagesDisplay[j]).src = similarImagesArray[j];
     }
+
+   /**
+    * Functions to retrieve a url from the enter Image URL form and upload it to the database
+    * Author: Malia Lundstrom, Daniel Co, Haley Welliver, William Lau
+    */
+   /*
+   insertImageFunction retrieves url from form and calls insertImageUrl to send the url to the database
+   */
+    function insertImageFunction() {
+        var text = "";
+        text = document.getElementById("insertedImageURL").value; 
+        console.log(text);
+        insertImageUrl(text);
+    }
+
+    /*
+    insertImageUrl sends a post request containing the url that a user wants to use for the individual page main image
+     */
+    function insertImageUrl(text) {
+        
+        // Get the item key from the end of the individual page url
+        var url = window.location.href.split('?');
+        var key_number = url[1];
+
+        // Get the image id to insert the image into and the image url to insert
+        var image_id = 1;
+        var image = text;
+        
+        // contains the item information to insert the image url
+        var insertImageInfo = {
+            key_number, image_id, image
+        }
+
+        //send the JSON to the SQL server with a post request
+        console.log("Attempting to insert image with POST");
+        //console.log(JSON.stringify(insertImageInfo));
+        $.post({
+            traditional: true,
+            url: '/insertImage',    // url
+            data: insertImageInfo,
+            dataType: 'json',
+            success: function(data, ) { // success callback
+                console.log("Test item: " + key_number + " imageurl: " + image);
+                console.log("successfully accessed server");
+                successfulUpdateImage();
+            }
+        }).fail(function(jqxhr, settings, ex) {
+            alert("Couldn't access server." + ex);
+        });
+    }
+    
+    /*
+    successfulUpdateImage notifies the admin user when an image url is successfully updated in the database
+     */
+    function successfulUpdateImage() {
+        alert('The image has been updated. Please refresh the page to see the new image');
+    }
+    
+    
+    $(".urlSubmitButton").on("click", insertImageFunction);
 
     //load items when page starts 
     loadItems();

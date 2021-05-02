@@ -16,6 +16,7 @@ var modifyRouter = require('./routes/modify');
 var keyDeleteRouter = require('./routes/keyDelete.js');
 var keyRestoreRouter = require('./routes/keyRestore.js');
 var addItemRouter = require('./routes/addItem.js');
+var insertImageRouter = require('./routes/insertImage.js');
 var emailOrderRouter = require('./routes/emailOrder.js');
 
 var app = express();
@@ -42,9 +43,8 @@ app.use('/modify', modifyRouter);
 app.use('/keyDelete', keyDeleteRouter);
 app.use('/keyRestore', keyRestoreRouter);
 app.use('/addItem', addItemRouter);
+app.use('/insertImage', insertImageRouter);
 app.use('/emailOrder', emailOrderRouter);
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

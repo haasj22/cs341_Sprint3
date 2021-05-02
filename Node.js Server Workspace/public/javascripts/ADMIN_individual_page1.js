@@ -19,7 +19,6 @@ $(document).ready(function()
         ChangeImage(this,$(this).prev());
     });
 
-
     /* Replaces destination image with uploaded input image */
     function ChangeImage(input,destination) {
 
@@ -154,5 +153,17 @@ $(document).ready(function()
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    // show the form asking for a url in order to change images on admin individual page
+    //function to open the URL form to change images on admin individual page
+    function openForm() {
+        var URLForm = document.getElementById("myForm").style.display = "block";
+        URLForm.classList.toggle("show");
+      }
+    //function to close the URL form on admin indivifula page.
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+      }
 
+    $(".ADMIN imageEditIcon").on("click", openForm);
+    
 });
