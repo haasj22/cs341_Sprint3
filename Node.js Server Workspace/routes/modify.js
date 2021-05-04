@@ -28,11 +28,11 @@ router.post('/', function(req, res, next) {
     var d = req.body.description;
     var rl; // does not use
     var u = req.body.uses;
-    var a; //does not use
+    var a = req.body.accessories; //does not use
 
     //step 2 Send command to database
     serverfunctions.dbquery("UPDATE PRODUCTS SET model_num ='" + mn + "', brand ='" + b + "', category ='" + c 
-        +  "', description ='" + d + "', uses ='" + u + "' WHERE item_key = '" + ik + "';", receiveData);
+        +  "', description ='" + d + "', uses ='" + u + "', accessories ='" + a + "' WHERE item_key = '" + ik + "';", receiveData);
 
     // step 3 fn process the results from the SQL Server and send the error value to the client
     function receiveData(error, results){

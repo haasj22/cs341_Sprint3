@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 //import email module
 var nodemailer = require('nodemailer');
 const { json } = require('body-parser');
+const e = require('express');
 
 //success variable
 var success;
@@ -32,7 +33,7 @@ var transporter = nodemailer.createTransport({
 
 var mailOptions = {
     from: 'UP.AVS.Item.Request.Bot@gmail.com',
-    to: 'av@up.edu, UP.AVS.Item.Request.Bot@gmail.com', //to be sent to the official account, as well as recorded by the email bot.
+    to: 'av@up.edu, UP.AVS.Item.Request.Bot@gmail.com', //to be sent to the official account, av@up.edu, as well as recorded by the email bot
     subject: '',
     text: '',
 };
@@ -63,6 +64,7 @@ router.post('/', function(req, res, next) {
     //assuming these are in a json object in this format:
     /* var jsonObj = {
         requestee: string, (null w/o sign-on feature)
+        itemCount: int, (number of items requested)
         itemArray: [
             item1 = "key1*itemName1*quant1*comment1",
             item2 = "key2*itemName2*quant1*comment2",
@@ -72,13 +74,27 @@ router.post('/', function(req, res, next) {
 
     //retrieve data variables
     var jsonObj = req.body;
-    var requestee = req.body.requestee;
+    var requestee = jsonObj.requestee;
     console.log("Requestee: " + requestee)
-    var itemsDataArray = req.body.itemArray;
-    console.log("Item Array: " + itemsDataArray)
+    var itemCount = jsonObj.itemCount;
+    console.log("Item Count: " + itemCount)
+    var itemsDataArrayRaw = jsonObj.itemArray;
+    console.log("Item Array: " + itemsDataArrayRaw)
 
     //construct intial string line
     var emailString = "User '" + requestee + "' has requested items from the University of Portland Equipment Rental Request Website:\n\n";
+
+    //check item count and assign vars accordingly
+    if (itemCount < 1){
+        console.error("Invalid number of items!");
+        res.send(false);
+        return;
+    } else if (itemCount == 1){ //to avoid a single string being read as an array of characters
+        itemsDataArray = [1];
+        itemsDataArray[0] = itemsDataArrayRaw; 
+    } else {
+        itemsDataArray = itemsDataArrayRaw;
+    }
 
     //convert data variables into email script lines
     var emailStringLines = [itemsDataArray.length];
@@ -101,7 +117,7 @@ router.post('/', function(req, res, next) {
     for (var j = 0; j < emailStringLines.length; j++){
         emailString = emailString + emailStringLines[j];
     }
-    emailString = emailString + "\nNote: Logged-in user currently cannot be read. We're working to fix this. Thank you for your patience.\nSent automatically by the rental site. Please do not respond to this email."
+    emailString = emailString + "\nSent automatically by the rental site. Please do not respond to this email."
 
     console.log("\nFinal email string:\n-");
     console.log(emailString);
@@ -111,7 +127,7 @@ router.post('/', function(req, res, next) {
     sendEmailViaServer(emailString, requestee);
 
     //report success value
-    res.send(success);
+    res.send({"success": success});
 });
 
 module.exports = router;

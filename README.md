@@ -35,3 +35,10 @@ Uses, Accessories, and Description just take strings. We don't know if strings l
 On a related note, the image and accessories field are not currently being used, as it was too late to implement them for this sprint.
 New items are automatically given an ID and a default reservation length of 0. The image is entered as an empty string by default.
 Love, Javascript Backend Team <3
+
+
+Note: May 3, 2021
+The request email now sends emails directly to av@up.edu, the official email. If you wish to test the request email function without doing this, 
+disable this address by removing it from line 36 of emailOrder.js, which should look like this: 
+"to: 'av@up.edu, UP.AVS.Item.Request.Bot@gmail.com', //to be sent to the official account, av@up.edu, as well as recorded by the email bot"
+Love, Javascript Backend Team <3

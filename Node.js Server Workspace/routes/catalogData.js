@@ -30,7 +30,7 @@ router.post('/', function(req, res, next) {
         orderObj.error = error;
         console.log("Error in receiveProductData: " + orderObj.error);
         orderObj.productData = results;
-        console.log(orderObj.productData);
+        //console.log(orderObj.productData);
         console.log("Finished post request.");
     }
 
@@ -42,7 +42,7 @@ router.post('/', function(req, res, next) {
         console.log("Image error: " + orderObj.error);
         orderObj.imageData = results;
         console.log("Finished post request.");
-        console.log(orderObj.imageData);
+        //console.log(orderObj.imageData);
         res.json(orderObj);
     }
 

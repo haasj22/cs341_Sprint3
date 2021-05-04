@@ -113,9 +113,15 @@ $(document).ready(function()
 
         //send the new data to the server
         productDataNew = { 
-            item_key:itemKey, model_num:brandAndModel[1], brand:brandAndModel[0], picture:null,
-            category:cats, description:savedJsonObj.data[4].Text, reservation_length:null, 
-            uses:savedJsonObj.data[2].Text, accessories:null
+            item_key:itemKey, 
+            model_num:brandAndModel[1], 
+            brand:brandAndModel[0], 
+            picture:null,
+            category:cats, 
+            description:savedJsonObj.data[4].Text, 
+            reservation_length:null, 
+            uses:savedJsonObj.data[2].Text, 
+            accessories:savedJsonObj.data[3].Text
         }
         
         console.log("POST REQUEST: " + JSON.stringify(productDataNew));

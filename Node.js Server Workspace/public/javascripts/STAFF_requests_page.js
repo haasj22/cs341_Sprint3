@@ -31,6 +31,12 @@ $(function()
     requestButton.addEventListener('click', (e) => {
         console.log("pressed request button");
 
+        //check for no items
+        if (requested_item_ids == null || requested_item_ids.length < 1){
+            alert("You have no requested items!");
+            return;
+        }
+
         //get the email entered by the user
         var someEmail = "unknown_user@up.edu";
         someEmail = getEnteredEmail();
@@ -44,10 +50,14 @@ $(function()
         updateComments();
         
         //retrieve and reformat requested item data
-        var itemArray = [requested_item_ids.length];
+        var itemCount = requested_item_ids.length;
+        var itemArray = [itemCount];
         requested_item_ids = JSON.parse(sessionStorage.getItem("requested_item_ids"));
+
+
+
         console.log("Requested Item IDs: " + requested_item_ids)
-        for (var i = 0; i < requested_item_ids.length; i++) {
+        for (var i = 0; i < itemCount; i++) {
             //Find the item in the catalog from its id
             let item = CatalogItemsFull.find(productJson => productJson.itemKey == requested_item_ids[i]);
 
@@ -66,6 +76,7 @@ $(function()
         //construct JSON object
         var requestInfo = {
             "requestee": someEmail,
+            "itemCount": itemCount,
             "itemArray": itemArray
         };
 
@@ -76,6 +87,7 @@ $(function()
         testItemArray = [testItem1, testItem2, testItem3];
         var dummyJson = {
             "requestee": someEmail,
+            "itemCount": 3,
             "itemArray": testItemArray
         };
 

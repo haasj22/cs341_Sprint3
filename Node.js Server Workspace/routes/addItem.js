@@ -25,9 +25,10 @@ router.post('/', function(req, res, next) {
     var picture = ""; //does not currently use pictures, set to an empty string by default
     var category = req.body.category;
     var description = req.body.description;
-    var reservationLength = 0; // inserts reservation length 0 by default
+    var reservationLength = false; // variable not used
     var uses = req.body.uses;
     var accessories = req.body.accessories; //does not use accessories because no accessories column exists in the database
+    var time_deleted = new Date().toISOString().slice(0, 19).replace('T', ' '); //current time, from https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
     serverfunctions.dbquery("SELECT * FROM PRODUCTS ORDER BY item_key DESC LIMIT 1;", recievedKey);
 
 
@@ -35,9 +36,9 @@ router.post('/', function(req, res, next) {
     //swiped from Alex Junkins' HW5 for CS341 Software Engineering
     function recievedKey(error, results){
         item_key = results[0].item_key + 1;
-        serverfunctions.dbquery("INSERT INTO PRODUCTS (item_key, model_num, brand, picture, category, description, reservation_length, uses) " + 
-                            "VALUES ('" + item_key + "', '" + model_num + "', '" + brand + "', '" + picture + "', '" + category + "', '" + description + "', '" 
-                                    + reservationLength + "', '" + uses + "');", receiveData);
+        serverfunctions.dbquery("INSERT INTO PRODUCTS (item_key, model_num, brand, picture, category, description, reservation_length, accessories, uses, time_deleted) " + 
+                            "VALUES ('" + item_key + "', '" + model_num + "', '" + brand + "', '" + picture + "', '" + category + "', '" + description + "', " 
+                                    + reservationLength + ", '" + uses + "', '" + accessories + "', '" + time_deleted + "');", receiveData);
 
     }
 

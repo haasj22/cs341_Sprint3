@@ -206,8 +206,11 @@ $(function () {
             } else {
                 u = "No uses."
             }
-            //temporary line, uncil accessories are added
-            var a = "No accessories."
+            // assigns accessories
+            var a = prodData.accessories;
+            if (a == null) {
+                a = "No accessories.";
+            }
 
             var productjson = {itemKey:k, name:bn, brand:b, model:n, image:img, category:c, uses:u, accessories:a, description:d};
             CatalogItemsFull[i] = productjson;

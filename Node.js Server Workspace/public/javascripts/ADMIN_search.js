@@ -409,6 +409,8 @@ $(document).ready(function()
             closeForm();
             //tell the user to reload the page because doing it here is too fast
             alert("Item added! Reload page to see updated catalog."); 
+        } else {
+            alert("Failed to add item: " + data);
         }
     }
 
